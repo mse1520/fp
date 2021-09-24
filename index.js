@@ -21,6 +21,12 @@ export function* _lRange(start = 0, end, step = 1) {
   while (start < end) yield start, start += step;
 }
 
+export const _split = _curryRight((str, separator) => str.split(separator));
+
+function toIterator(iterable) {
+  return iterable && iterable[Symbol.iterator] ? iterable[Symbol.iterator]() : (function* () { })();
+}
+
 function releasePromise(target, predicate, ...args) {
   return target instanceof Promise ? catchNoop(target.then(target => predicate(target, ...args))) : predicate(target, ...args);
 }
@@ -33,7 +39,10 @@ export function _curry(func, arity = func.length) {
 
 export function _curryRight(func, arity = func.length) {
   return function curried(...args) {
-    return args.length >= arity ? func(...args) : (...args2) => curried(...args2, ...args);
+    return args.length >= arity ? func(...args) : (...args2) => {
+      while (arity - args.length < args2.length) args2.pop();
+      return curried(...args2, ...args);
+    };
   };
 }
 
@@ -47,102 +56,135 @@ function _3To2CurryRight(func) {
   };
 }
 
-export const _lMap = _curryRight(function* (iterator, predicate) {
-  iterator = iterator[Symbol.iterator]();
+export const _mapL = _curryRight(function* (iterator, predicate) {
+  iterator = toIterator(iterator);
 
-  let next = iterator.next();
-  while (!next.done) {
-    yield releasePromise(next.value, predicate);
-    next = iterator.next();
-  }
+  let next, index = -1;
+  while (!(index++, next = iterator.next()).done) yield releasePromise(next.value, predicate, index);
 });
 
-export const _map = _curryRight((iterator, predicate) => _takeAll(_lMap(iterator, predicate)));
+export const _map = _curryRight((iterator, predicate) => _takeAll(_mapL(iterator, predicate)));
 
-export const _cMap = _curryRight((iterator, predicate) => _cTakeAll(_lMap(iterator, predicate)));
+export const _mapC = _curryRight((iterator, predicate) => _takeAllC(_mapL(iterator, predicate)));
 
-export const _forEach = _curryRight((iterator, predicate) => _map(iterator, value => (predicate(value), value)));
+export const _forEachL = _curryRight((iterator, predicate) => _mapL(iterator, (value, index) => (predicate(value, index), value)));
 
-export const _cForEach = _curryRight((iterator, predicate) => _cMap(iterator, value => (predicate(value), value)));
+export const _forEach = _curryRight((iterator, predicate) => _map(iterator, (value, index) => (predicate(value, index), value)));
 
-export const _lFilter = _curryRight(function* (iterator, predicate) {
-  iterator = iterator[Symbol.iterator]();
+export const _forEachC = _curryRight((iterator, predicate) => _mapC(iterator, (value, index) => (predicate(value, index), value)));
 
-  let next = iterator.next();
-  while (!next.done) {
+export const _filterL = _curryRight(function* (iterator, predicate) {
+  iterator = toIterator(iterator);
+
+  let next, index = -1;
+  while (!(index++, next = iterator.next()).done) {
     next.value instanceof Promise
-      ? yield catchNoop(next.value.then(value => predicate(value) ? value : Promise.reject(errorNoop)))
-      : predicate(next.value) ? yield next.value : undefined;
-
-    next = iterator.next();
+      ? yield catchNoop(next.value.then(value => predicate(value, index) ? value : Promise.reject(errorNoop)))
+      : predicate(next.value, index) ? yield next.value : undefined;
   }
 });
 
-export const _filter = _curryRight((iterator, predicate) => _takeAll(_lFilter(iterator, predicate)));
+export const _filter = _curryRight((iterator, predicate) => _takeAll(_filterL(iterator, predicate)));
 
-export const _cFilter = _curryRight((iterator, predicate) => _cTakeAll(_lFilter(iterator, predicate)));
+export const _filterC = _curryRight((iterator, predicate) => _takeAllC(_filterL(iterator, predicate)));
+
+export const _rejectL = _curryRight((iterator, predicate) => _filterL(iterator, (value, index) => !predicate(value, index)));
+
+export const _reject = _curryRight((iterator, predicate) => _takeAll(_filterL(iterator, (value, index) => !predicate(value, index))));
+
+export const _rejectC = _curryRight((iterator, predicate) => _takeAllC(_filterL(iterator, (value, index) => !predicate(value, index))));
 
 export const _reduce = _3To2CurryRight(function (iterator, predicate, accumulate) {
-  if (arguments.length < 3) iterator = iterator[Symbol.iterator](), accumulate = _head(iterator);
+  if (arguments.length < 3) iterator = toIterator(iterator), accumulate = _head(iterator);
 
-  iterator = iterator[Symbol.iterator]();
+  iterator = toIterator(iterator);
 
-  return releasePromise(accumulate, function recursive(accumulate, value) {
-    if (arguments.length > 1) accumulate = predicate(accumulate, value);
+  return releasePromise(accumulate, function recursive(accumulate, value, index) {
+    if (arguments.length > 1) accumulate = predicate(accumulate, value, index);
 
-    let next = iterator.next();
-    while (!next.done) {
+    let next, _index = -1;
+    while (!(_index++, next = iterator.next()).done) {
       if (next.value instanceof Promise)
-        return noopHandler(next.value.then(value => recursive(accumulate, value)), () => recursive(accumulate));
-
-      accumulate = predicate(accumulate, next.value);
-
+        return noopHandler(next.value.then(value => recursive(accumulate, value, _index)), () => recursive(accumulate));
+      accumulate = predicate(accumulate, next.value, _index);
       if (accumulate instanceof Promise) return accumulate.then(recursive);
-
-      next = iterator.next();
     }
 
     return accumulate;
   });
 });
 
-export const _cReduce = _3To2CurryRight(function (iterator, predicate, accumulate) {
+export const _reduceC = _3To2CurryRight(function (iterator, predicate, accumulate) {
   let _iterator = [...iterator];
-  if (arguments.length < 3) _iterator = _iterator[Symbol.iterator](), accumulate = _head(_iterator);
+  if (arguments.length < 3) _iterator = toIterator(_iterator), accumulate = _head(_iterator);
   return _reduce(_iterator, predicate, accumulate);
 });
 
+export const _join = _curryRight((iterator, separator) =>
+  _reduce(iterator, (accumulate, value) => `${accumulate}${separator}${value}`));
+
+export const _joinC = _curryRight((iterator, separator) =>
+  _reduceC(iterator, (accumulate, value) => `${accumulate}${separator}${value}`));
+
+export function _object(list, values) {
+  return arguments.length > 1
+    ? _reduce(list, (object, key, index) => (object[key] = values[index], object), {})
+    : _reduce(list, (object, [key, value]) => (object[key] = value, object), {})
+};
+
+export function _objectC(list, values) {
+  return arguments.length > 1
+    ? _reduceC(list, (object, key, index) => (object[key] = values[index], object), {})
+    : _reduceC(list, (object, [key, value]) => (object[key] = value, object), {})
+};
+
 export function _go(first, ...args) { return _reduce(args, (acc, func) => func(acc), first); }
 
-export function _pipe(...funcs) { return arg => _go(arg, ...funcs); }
+export function _pipe(func, ...funcs) { return (...args) => _go(func(...args), ...funcs); }
 
 export const _take = _curryRight((iterator, length) => {
   const result = [];
-  iterator = iterator[Symbol.iterator]();
+  iterator = toIterator(iterator);
 
   return function recursive() {
-    let next = iterator.next();
-    while (!next.done) {
+    let next;
+    while (!(next = iterator.next()).done) {
       if (next.value instanceof Promise) return noopHandler(
         next.value.then(value => (result.push(value), result).length === length ? result : recursive()),
-        recursive
-      );
+        recursive);
+
       result.push(next.value);
       if (result.length === length) return result;
-
-      next = iterator.next();
     }
 
     return result;
   }();
 });
 
-export const _cTake = _curryRight((iterator, predicate) => _take([...iterator], predicate));
+export const _takeC = _curryRight((iterator, predicate) => _take([...iterator], predicate));
 
 export function _takeAll(iterator) { return _take(iterator, Infinity); };
 
-export function _cTakeAll(iterator) { return _take([...iterator], Infinity); };
+export function _takeAllC(iterator) { return _take([...iterator], Infinity); };
 
 export function _head(iterator) { return releasePromise(_take(iterator, 1), ([value]) => value); }
 
-export function _cHead(iterator) { return releasePromise(_cTake(iterator, 1), ([value]) => value); }
+export function _headC(iterator) { return releasePromise(_takeC(iterator, 1), ([value]) => value); }
+
+export function* _valuesL(object) { for (let key in object) yield object[key]; }
+
+export function _values(object) { return _takeAll(_valuesL(object)) }
+
+export function _valuesC(object) { return _takeAllC(_valuesL(object)) }
+
+export function* _entriesL(object) { for (let key in object) yield [key, object[key]]; }
+
+export function _entries(object) { return _takeAll(_entriesL(object)); }
+
+export function _entriesC(object) { return _takeAllC(_entriesL(object)); }
+
+export function* _keysL(object) { for (let key in object) yield key; }
+
+export function _keys(object) { return _takeAll(_keysL(object)); }
+
+export function _keysC(object) { return _takeAllC(_keysL(object)); }
