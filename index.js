@@ -1,60 +1,19 @@
-const errorNoop = Symbol('fp.error.noop');
+import errorNoop from './internal/errorNoop.js';
+import catchNoop from './internal/catchNoop.js';
+import noopHandler from './internal/noopHandler.js';
+import toIterator from './internal/toiterator.js';
+import releasePromise from './internal/releasePromise.js';
 
-function noop() { }
+import _curryRight from './basic/_curryRight.js';
+import _3To2CurryRight from './basic/_3To2CurryRight.js';
 
-function catchNoop(target) { return (target.catch(noop), target); }
+export { default as _split } from './basic/_split.js';
+export { default as _range } from './basic/_range.js';
+export { default as _curry } from './basic/_curry.js';
+export { default as _curryRight } from './basic/_curryRight.js';
+export { default as _identity } from './basic/_identity.js';
 
-function noopHandler(target, predicate) {
-  return target.catch(error => error === errorNoop ? predicate() : Promise.reject(error));
-}
-
-export function _range(start = 0, end, step = 1) {
-  if (arguments.length === 1) end = start, start = 0;
-
-  const result = [];
-  while (start < end) result.push(start), start += step;
-  return result;
-}
-
-export function* _lRange(start = 0, end, step = 1) {
-  if (arguments.length === 1) end = start, start = 0;
-  while (start < end) yield start, start += step;
-}
-
-export const _split = _curryRight((str, separator) => str.split(separator));
-
-function toIterator(iterable) {
-  return iterable && iterable[Symbol.iterator] ? iterable[Symbol.iterator]() : (function* () { })();
-}
-
-function releasePromise(target, predicate, ...args) {
-  return target instanceof Promise ? catchNoop(target.then(target => predicate(target, ...args))) : predicate(target, ...args);
-}
-
-export function _curry(func, arity = func.length) {
-  return function curried(...args) {
-    return args.length >= arity ? func(...args) : (...args2) => curried(...args, ...args2);
-  };
-}
-
-export function _curryRight(func, arity = func.length) {
-  return function curried(...args) {
-    return args.length >= arity ? func(...args) : (...args2) => {
-      while (arity - args.length < args2.length) args2.pop();
-      return curried(...args2, ...args);
-    };
-  };
-}
-
-function _3To2CurryRight(func) {
-  return (first, ...args) => {
-    return args.length < 1
-      ? iterator => func(iterator, first, ...args)
-      : typeof first === 'function'
-        ? iterator => func(iterator, first, ...args)
-        : func(first, ...args);
-  };
-}
+export { default as _rangeL } from './lazy/_rangeL.js';
 
 export const _mapL = _curryRight(function* (iterator, predicate) {
   iterator = toIterator(iterator);
@@ -69,9 +28,19 @@ export const _mapC = _curryRight((iterator, predicate) => _takeAllC(_mapL(iterat
 
 export const _forEachL = _curryRight((iterator, predicate) => _mapL(iterator, (value, index) => (predicate(value, index), value)));
 
-export const _forEach = _curryRight((iterator, predicate) => _map(iterator, (value, index) => (predicate(value, index), value)));
+export const _forEach = _curryRight((iterator, predicate) =>
+  _takeAll(_mapL(iterator, (value, index) => (predicate(value, index), value))));
 
-export const _forEachC = _curryRight((iterator, predicate) => _mapC(iterator, (value, index) => (predicate(value, index), value)));
+export const _forEachC = _curryRight((iterator, predicate) =>
+  _takeAllC(_mapL(iterator, (value, index) => (predicate(value, index), value))));
+
+export const _mapEntriesL = _curryRight((entries, predicate) => _mapL(entries, ([key, value], index) => [key, predicate(value, index)]));
+
+export const _mapEntries = _curryRight((entries, predicate) =>
+  _takeAll(_mapL(entries, ([key, value], index) => [key, predicate(value, index)])));
+
+export const _mapEntriesC = _curryRight((entries, predicate) =>
+  _takeAllC(_mapL(entries, ([key, value], index) => [key, predicate(value, index)])));
 
 export const _filterL = _curryRight(function* (iterator, predicate) {
   iterator = toIterator(iterator);
@@ -93,6 +62,14 @@ export const _rejectL = _curryRight((iterator, predicate) => _filterL(iterator, 
 export const _reject = _curryRight((iterator, predicate) => _takeAll(_filterL(iterator, (value, index) => !predicate(value, index))));
 
 export const _rejectC = _curryRight((iterator, predicate) => _takeAllC(_filterL(iterator, (value, index) => !predicate(value, index))));
+
+export const _rejectEntriesL = _curryRight((entries, predicate) => _filterL(entries, ([_, value], index) => !predicate(value, index)));
+
+export const _rejectEntries = _curryRight((entries, predicate) =>
+  _takeAll(_filterL(entries, ([_, value], index) => !predicate(value, index))));
+
+export const _rejectEntriesC = _curryRight((entries, predicate) =>
+  _takeAllC(_filterL(entries, ([_, value], index) => !predicate(value, index))));
 
 export const _reduce = _3To2CurryRight(function (iterator, predicate, accumulate) {
   if (arguments.length < 3) iterator = toIterator(iterator), accumulate = _head(iterator);
@@ -138,6 +115,11 @@ export function _objectC(list, values) {
     : _reduceC(list, (object, [key, value]) => (object[key] = value, object), {})
 };
 
+export const _mapObject = _curryRight((object, predicate) => _object(_mapEntriesL(_entriesL(object), predicate)));
+
+export const _pick = _curryRight((object, keys) =>
+  _object(_rejectEntriesL(_mapL(keys, key => [key, object[key]]), value => value === undefined)));
+
 export function _go(first, ...args) { return _reduce(args, (acc, func) => func(acc), first); }
 
 export function _pipe(func, ...funcs) { return (...args) => _go(func(...args), ...funcs); }
@@ -177,14 +159,17 @@ export function _values(object) { return _takeAll(_valuesL(object)) }
 
 export function _valuesC(object) { return _takeAllC(_valuesL(object)) }
 
-export function* _entriesL(object) { for (let key in object) yield [key, object[key]]; }
-
-export function _entries(object) { return _takeAll(_entriesL(object)); }
-
-export function _entriesC(object) { return _takeAllC(_entriesL(object)); }
-
 export function* _keysL(object) { for (let key in object) yield key; }
 
 export function _keys(object) { return _takeAll(_keysL(object)); }
 
 export function _keysC(object) { return _takeAllC(_keysL(object)); }
+
+export function* _entriesL(object) {
+  for (const key in object)
+    yield object[key] instanceof Promise ? object[key].then(value => [key, value]) : [key, object[key]];
+}
+
+export function _entries(object) { return _takeAll(_entriesL(object)); }
+
+export function _entriesC(object) { return _takeAllC(_entriesL(object)); }
