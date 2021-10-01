@@ -20,10 +20,7 @@ module.exports = {
   output: {
     path: path.resolve('dist'),
     filename: '[name].min.js',
-    library: {
-      name: '_',
-      type: 'umd',
-    },
+    library: { type: 'umd' },
     globalObject: 'this'
   },
   plugins: [new CleanWebpackPlugin()]

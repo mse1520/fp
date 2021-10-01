@@ -1,97 +1,97 @@
-exports.split = require('./basic/split.js');
+exports._split = require('./basic/_split.js');
 
-exports.range = require('./basic/range.js');
+exports._range = require('./basic/_range.js');
 
-exports.values = require('./basic/values.js');
+exports._values = require('./basic/_values.js');
 
-exports.keys = require('./basic/keys.js');
+exports._keys = require('./basic/_keys.js');
 
-exports.entries = require('./basic/entries.js');
+exports._entries = require('./basic/_entries.js');
 
-exports.curry = require('./basic/curry.js');
+exports._curry = require('./basic/_curry.js');
 
-exports.curryRight = require('./basic/curryRight.js');
+exports._curryRight = require('./basic/_curryRight.js');
 
-exports.identity = require('./basic/identity.js');
+exports._identity = require('./basic/_identity.js');
 
-exports.take = require('./basic/take.js');
+exports._take = require('./basic/_take.js');
 
-exports.takeAll = require('./basic/takeAll.js');
+exports._takeAll = require('./basic/_takeAll.js');
 
-exports.head = require('./basic/head.js');
+exports._head = require('./basic/_head.js');
 
-exports.map = require('./basic/map.js');
+exports._map = require('./basic/_map.js');
 
-exports.forEach = require('./basic/forEach.js');
+exports._forEach = require('./basic/_forEach.js');
 
-exports.mapEntries = require('./basic/mapEntries.js');
+exports._mapEntries = require('./basic/_mapEntries.js');
 
-exports.filter = require('./basic/filter.js');
+exports._filter = require('./basic/_filter.js');
 
-exports.reject = require('./basic/reject.js');
+exports._reject = require('./basic/_reject.js');
 
-exports.rejectEntries = require('./basic/rejectEntries.js');
+exports._rejectEntries = require('./basic/_rejectEntries.js');
 
-exports.reduce = require('./basic/reduce.js');
+exports._reduce = require('./basic/_reduce.js');
 
-exports.join = require('./basic/join.js');
+exports._join = require('./basic/_join.js');
 
-exports.indexBy = require('./basic/indexBy.js');
+exports._indexBy = require('./basic/_indexBy.js');
 
-exports.go = require('./basic/go.js');
+exports._go = require('./basic/_go.js');
 
-exports.pipe = require('./basic/pipe.js');
+exports._pipe = require('./basic/_pipe.js');
 
-exports.object = require('./basic/object.js');
+exports._object = require('./basic/_object.js');
 
-exports.mapObject = require('./basic/mapObject.js');
+exports._mapObject = require('./basic/_mapObject.js');
 
-exports.pick = require('./basic/pick.js');
+exports._pick = require('./basic/_pick.js');
 
-exports.rangeL = require('./lazy/rangeL.js');
+exports._rangeL = require('./lazy/_rangeL.js');
 
-exports.valuesL = require('./lazy/valuesL.js');
+exports._valuesL = require('./lazy/_valuesL.js');
 
-exports.keysL = require('./lazy/keysL.js');
+exports._keysL = require('./lazy/_keysL.js');
 
-exports.entriesL = require('./lazy/entriesL.js');
+exports._entriesL = require('./lazy/_entriesL.js');
 
-exports.mapL = require('./lazy/mapL.js');
+exports._mapL = require('./lazy/_mapL.js');
 
-exports.forEachL = require('./lazy/forEachL.js');
+exports._forEachL = require('./lazy/_forEachL.js');
 
-exports.mapEntriesL = require('./lazy/mapEntriesL.js');
+exports._mapEntriesL = require('./lazy/_mapEntriesL.js');
 
-exports.filterL = require('./lazy/filterL.js');
+exports._filterL = require('./lazy/_filterL.js');
 
-exports.rejectL = require('./lazy/rejectL.js');
+exports._rejectL = require('./lazy/_rejectL.js');
 
-exports.rejectEntriesL = require('./lazy/rejectEntriesL.js');
+exports._rejectEntriesL = require('./lazy/_rejectEntriesL.js');
 
-exports.valuesC = require('./concurrency/valuesC.js');
+exports._valuesC = require('./concurrency/_valuesC.js');
 
-exports.keysC = require('./concurrency/keysC.js');
+exports._keysC = require('./concurrency/_keysC.js');
 
-exports.entriesC = require('./concurrency/entriesC.js');
+exports._entriesC = require('./concurrency/_entriesC.js');
 
-exports.takeC = require('./concurrency/takeC.js');
+exports._takeC = require('./concurrency/_takeC.js');
 
-exports.takeAllC = require('./concurrency/takeAllC.js');
+exports._takeAllC = require('./concurrency/_takeAllC.js');
 
-exports.headC = require('./concurrency/headC.js');
+exports._headC = require('./concurrency/_headC.js');
 
-exports.forEachC = require('./concurrency/forEachC.js');
+exports._forEachC = require('./concurrency/_forEachC.js');
 
-exports.mapEntriesC = require('./concurrency/mapEntriesC.js');
+exports._mapEntriesC = require('./concurrency/_mapEntriesC.js');
 
-exports.filterC = require('./concurrency/filterC.js');
+exports._filterC = require('./concurrency/_filterC.js');
 
-exports.rejectC = require('./concurrency/rejectC.js');
+exports._rejectC = require('./concurrency/_rejectC.js');
 
-exports.rejectEntriesC = require('./concurrency/rejectEntriesC.js');
+exports._rejectEntriesC = require('./concurrency/_rejectEntriesC.js');
 
-exports.reduceC = require('./concurrency/reduceC.js');
+exports._reduceC = require('./concurrency/_reduceC.js');
 
-exports.joinC = require('./concurrency/joinC.js');
+exports._joinC = require('./concurrency/_joinC.js');
 
-exports.objectC = require('./concurrency/objectC.js');
+exports._objectC = require('./concurrency/_objectC.js');
