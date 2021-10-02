@@ -1,4 +1,5 @@
 import catchNoop from '../internal/catchNoop.js';
+import errorNoop from '../internal/errorNoop.js';
 import toIterator from '../internal/toiterator.js';
 import _curryRight from '../basic/_curryRight.js';
 
