@@ -12,10 +12,7 @@ function _take(iterator, length) {
 
     while (!(next = iterator.next()).done) {
       if (next.value instanceof Promise) {
-        return noopHandler(next.value.then(value => {
-          result.push(value);
-          return result.length === length ? result : recursive();
-        }), recursive);
+        return noopHandler(next.value.then(value => (result.push(value), result).length === length ? result : recursive()), recursive);
       }
 
       result.push(next.value);

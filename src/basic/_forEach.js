@@ -8,5 +8,4 @@ function _forEach(iterator, predicate) {
   );
 }
 
-
 export default _curryRight(_forEach);

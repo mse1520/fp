@@ -1,5 +1,7 @@
 const catchNoop = require('../internal/catchNoop.js');
 
+const errorNoop = require('../internal/errorNoop.js');
+
 const toIterator = require('../internal/toiterator.js');
 
 const _curryRight = require('../basic/_curryRight.js');

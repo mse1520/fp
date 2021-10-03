@@ -4,9 +4,11 @@
   "description": "",
   "main": "cjs/index.js",
   "scripts": {
-    "bundle-min-js": "webpack",
+    "test": "node ./script/indexGenerator.mjs",
+    "generate-index": "node ./script/indexGenerator.mjs",
     "transpile-cjs": "babel src --out-dir cjs",
-    "build": "npm run bundle-min-js && npm run transpile-cjs"
+    "bundle-min-js": "webpack",
+    "build": "npm run generate-index && npm run bundle-min-js && npm run transpile-cjs"
   },
   "repository": {
     "type": "git",
