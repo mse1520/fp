@@ -1,8 +1,9 @@
+import _curry1AndOption from '../basic/_curry1AndOption.js';
+import _takeAll from '../basic/_takeAll.js';
 import _flatL from '../lazy/_flatL.js';
-import _takeAllC from './_takeAllC.js';
 
-function _flatC(iterator) {
-  return _takeAllC(_flatL(iterator));
+function _flatC(iterator, depth = 1) {
+  return _takeAll(_flatL([...iterator], depth));
 }
 
-export default _flatC;
+export default _curry1AndOption(_flatC);

@@ -1,5 +1,7 @@
 exports._curry = require('./basic/_curry.js');
 
+exports._curry1AndOption = require('./basic/_curry1AndOption.js');
+
 exports._curryRight = require('./basic/_curryRight.js');
 
 exports._curryRight3To2 = require('./basic/_curryRight3To2.js');
@@ -9,6 +11,8 @@ exports._entries = require('./basic/_entries.js');
 exports._filter = require('./basic/_filter.js');
 
 exports._flat = require('./basic/_flat.js');
+
+exports._flatDeep = require('./basic/_flatDeep.js');
 
 exports._forEach = require('./basic/_forEach.js');
 
@@ -90,21 +94,11 @@ exports._takeWhileC = require('./concurrency/_takeWhileC.js');
 
 exports._valuesC = require('./concurrency/_valuesC.js');
 
-exports.catchNoop = require('./internal/catchNoop.js');
-
-exports.errorNoop = require('./internal/errorNoop.js');
-
-exports.noop = require('./internal/noop.js');
-
-exports.noopHandler = require('./internal/noopHandler.js');
-
-exports.releasePromise = require('./internal/releasePromise.js');
-
-exports.toIterator = require('./internal/toIterator.js');
-
 exports._entriesL = require('./lazy/_entriesL.js');
 
 exports._filterL = require('./lazy/_filterL.js');
+
+exports._flatDeepL = require('./lazy/_flatDeepL.js');
 
 exports._flatL = require('./lazy/_flatL.js');
 

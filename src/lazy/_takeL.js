@@ -5,6 +5,7 @@ function* takeL(iterator, length) {
   if (length < 1) return;
 
   iterator = toIterator(iterator);
+  
   let next;
   while (!(next = iterator.next()).done) {
     yield next.value;
