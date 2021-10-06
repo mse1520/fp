@@ -4,7 +4,7 @@ import _mapL from '../lazy/_mapL.js';
 
 function mapEntries(entries, predicate) {
   return _takeAll(
-    _mapL(entries, ([key, value], index) => [key, predicate(value, index)])
+    _mapL(entries, ([key, value], index) => [key, predicate(value, key, index)])
   );
 }
 

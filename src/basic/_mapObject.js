@@ -6,7 +6,7 @@ import _entriesL from '../lazy/_entriesL.js';
 function _mapObject(object, predicate) {
   return _object(_mapL(
     _entriesL(object),
-    ([key, value], index) => [key, predicate(value, index)]
+    ([key, value], index) => [key, predicate(value, key, index)]
   ));
 };
 

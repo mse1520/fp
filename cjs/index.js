@@ -14,6 +14,8 @@ exports._flat = require('./basic/_flat.js');
 
 exports._flatDeep = require('./basic/_flatDeep.js');
 
+exports._flatMap = require('./basic/_flatMap.js');
+
 exports._forEach = require('./basic/_forEach.js');
 
 exports._go = require('./basic/_go.js');
@@ -66,6 +68,10 @@ exports._filterC = require('./concurrency/_filterC.js');
 
 exports._flatC = require('./concurrency/_flatC.js');
 
+exports._flatDeepC = require('./concurrency/_flatDeepC.js');
+
+exports._flatMapC = require('./concurrency/_flatMapC.js');
+
 exports._forEachC = require('./concurrency/_forEachC.js');
 
 exports._headC = require('./concurrency/_headC.js');
@@ -101,6 +107,8 @@ exports._filterL = require('./lazy/_filterL.js');
 exports._flatDeepL = require('./lazy/_flatDeepL.js');
 
 exports._flatL = require('./lazy/_flatL.js');
+
+exports._flatMapL = require('./lazy/_flatMapL.js');
 
 exports._forEachL = require('./lazy/_forEachL.js');
 
