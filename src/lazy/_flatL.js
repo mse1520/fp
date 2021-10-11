@@ -1,7 +1,7 @@
 import catchNoop from '../internal/catchNoop.js';
 import errorNoop from '../internal/errorNoop.js';
 import toIterator from '../internal/toiterator.js';
-import _curry1AndOption from '../basic/_curry1AndOption.js';
+import curryRightFlat from '../internal/curryRightFlat.js';
 import _last from '../basic/_last.js';
 
 function* _flatL(iterator, depth = 1) {
@@ -37,4 +37,4 @@ function* _flatL(iterator, depth = 1) {
   }
 }
 
-export default _curry1AndOption(_flatL);
+export default curryRightFlat(_flatL);

@@ -1,5 +1,5 @@
 import toIterator from '../internal/toiterator.js';
-import _curryRight3To2 from '../basic/_curryRight3To2.js';
+import curryRightReduce from '../internal/curryRightReduce.js';
 import _head from '../basic/_head.js';
 import _reduce from '../basic/_reduce.js';
 
@@ -12,4 +12,4 @@ function _reduceC(iterator, predicate, accumulate) {
   return _reduce(_iterator, predicate, accumulate);
 };
 
-export default _curryRight3To2(_reduceC);
+export default curryRightReduce(_reduceC);

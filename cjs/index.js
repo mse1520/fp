@@ -58,6 +58,8 @@ exports._take = require('./basic/_take.js');
 
 exports._takeAll = require('./basic/_takeAll.js');
 
+exports._takeUntil = require('./basic/_takeUntil.js');
+
 exports._takeWhile = require('./basic/_takeWhile.js');
 
 exports._values = require('./basic/_values.js');
@@ -96,6 +98,8 @@ exports._takeAllC = require('./concurrency/_takeAllC.js');
 
 exports._takeC = require('./concurrency/_takeC.js');
 
+exports._takeUntilC = require('./concurrency/_takeUntilC.js');
+
 exports._takeWhileC = require('./concurrency/_takeWhileC.js');
 
 exports._valuesC = require('./concurrency/_valuesC.js');
@@ -125,6 +129,8 @@ exports._rejectEntriesL = require('./lazy/_rejectEntriesL.js');
 exports._rejectL = require('./lazy/_rejectL.js');
 
 exports._takeL = require('./lazy/_takeL.js');
+
+exports._takeUntilL = require('./lazy/_takeUntilL.js');
 
 exports._takeWhileL = require('./lazy/_takeWhileL.js');
 

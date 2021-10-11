@@ -4,31 +4,26 @@ npm init > 패키지 초기화
 license는 MIT로 설정해줍니다
 MIT -> 오픈소스
 
-2. webpack 설치하기
-npm i -D webpack webpack-cli
-webpack은 여러파일을 하나의 파일로 합쳐주는 번들러입니다
-
-5. babel 설치하기
-npm i -D @babel/core @babel/cli @babel/preset-env babel-loader
+3. babel 설치하기
+npm i -D @babel/core @babel/cli @babel/parser
 babel은 최신문법으로 작성된 javascript 소스를 안정적인 문법으로 변경하는 transcompiler입니다
 '@babel/core'는 babel 기능을 사용시 필요한 필수 기능들의 집합입니다
 '@babel/cli'는 babel을 커맨드라인으로 사용하기 위함입니다
 '@babel/parser'은 텍스트로 작성된 코드를 ast으로 변환해줍니다
 
-6. 웹팩 설정 추가 기능
-npm i -D clean-webpack-plugin copy-webpack-plugin html-webpack-plugin
-'clean-webpack-plugin'은 번들링 할때 이전에 번들링된 파일을 삭제한다
-'html-webpack-plugin'은 제일 기초가 되는 index.html 파일을 번들링 해줍니다
-'copy-webpack-plugin'은 필요한 이미지나 라이브러리 등을 번들링할때 복사해줍니다
+4. webpack 설치하기
+npm i -D webpack webpack-cli
+webpack은 여러파일을 하나의 파일로 합쳐주는 번들러입니다
 
-7. webpack-dev-server 설치하기
-npm i -D webpack-dev-server
-'webpack-dev-server'는 웹팩에서 지원하는 라이브 서버이다 
-버전 정보(webpack >= v5.0.0 & webpack-cli >= v4.7.0)를 참고하여 설치하자
+5. 웹팩 설정 추가 기능
+npm i -D clean-webpack-plugin
+'clean-webpack-plugin'은 번들링 할때 이전에 번들링된 파일을 삭제한다
 
 8. 명령어 정리
+npx babel src --out-dir cjs > 'src'폴더 하위의 파일들을 'cjs'폴더 하위에 transcompile 한다
 npx webpack > 'webpack' 번들링 실행
 npx webpack serve > 'webpack-dev-server' 실행
 
 9. 참고
 https://astexplorer.net/
+ast 분석할때 유용한 사이트

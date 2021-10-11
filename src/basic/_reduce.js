@@ -1,7 +1,7 @@
 import noopHandler from '../internal/noopHandler.js';
 import releasePromise from '../internal/releasePromise.js';
 import toIterator from '../internal/toiterator.js';
-import _curryRight3To2 from './_curryRight3To2.js';
+import curryRightReduce from '../internal/curryRightReduce.js';
 import _head from './_head.js';
 
 function _reduce(iterator, predicate, accumulate) {
@@ -29,4 +29,4 @@ function _reduce(iterator, predicate, accumulate) {
   });
 };
 
-export default _curryRight3To2(_reduce);
+export default curryRightReduce(_reduce);

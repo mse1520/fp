@@ -16,8 +16,7 @@ function toCommonjsPlugin({ types: t }) {
 
         if (t.isIdentifier(declaration)) {
           code = `module.exports = ${declaration.name};`;
-        }
-        else {
+        } else {
           const wrap = declaration.callee.name;
           const name = declaration.arguments[0].name;
           code = `module.exports = ${wrap}(${name});`;
