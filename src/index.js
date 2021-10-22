@@ -1,7 +1,5 @@
 export { default as _curry } from './basic/_curry.js';
-export { default as _curry1AndOption } from './basic/_curry1AndOption.js';
 export { default as _curryRight } from './basic/_curryRight.js';
-export { default as _curryRight3To2 } from './basic/_curryRight3To2.js';
 export { default as _entries } from './basic/_entries.js';
 export { default as _filter } from './basic/_filter.js';
 export { default as _flat } from './basic/_flat.js';

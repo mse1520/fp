@@ -4,7 +4,7 @@ const errorNoop = require('../internal/errorNoop.js');
 
 const toIterator = require('../internal/toiterator.js');
 
-const _curry1AndOption = require('../basic/_curry1AndOption.js');
+const curryRightFlat = require('../internal/curryRightFlat.js');
 
 const _last = require('../basic/_last.js');
 
@@ -40,4 +40,4 @@ function* _flatL(iterator, depth = 1) {
   }
 }
 
-module.exports = _curry1AndOption(_flatL);
+module.exports = curryRightFlat(_flatL);

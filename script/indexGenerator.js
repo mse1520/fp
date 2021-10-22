@@ -37,5 +37,5 @@ _go(
   _flatMapC(makeExportSyntax),
   _reduce((acc, value) => `${acc}\n${value}`),
   writeFileIndex,
-  console.log
+  _ => console.log('Generate index')
 );

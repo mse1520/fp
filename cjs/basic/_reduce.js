@@ -4,7 +4,7 @@ const releasePromise = require('../internal/releasePromise.js');
 
 const toIterator = require('../internal/toiterator.js');
 
-const _curryRight3To2 = require('./_curryRight3To2.js');
+const curryRightReduce = require('../internal/curryRightReduce.js');
 
 const _head = require('./_head.js');
 
@@ -31,4 +31,4 @@ function _reduce(iterator, predicate, accumulate) {
 }
 
 ;
-module.exports = _curryRight3To2(_reduce);
+module.exports = curryRightReduce(_reduce);

@@ -1,4 +1,4 @@
-const _curry1AndOption = require('./_curry1AndOption.js');
+const curryrightFlat = require('../internal/curryRightFlat.js');
 
 const _takeAll = require('./_takeAll.js');
 
@@ -8,4 +8,4 @@ function _flat(iterator, depth = 1) {
   return _takeAll(_flatL(iterator, depth));
 }
 
-module.exports = _curry1AndOption(_flat);
+module.exports = curryrightFlat(_flat);

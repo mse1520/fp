@@ -1,10 +1,6 @@
 exports._curry = require('./basic/_curry.js');
 
-exports._curry1AndOption = require('./basic/_curry1AndOption.js');
-
 exports._curryRight = require('./basic/_curryRight.js');
-
-exports._curryRight3To2 = require('./basic/_curryRight3To2.js');
 
 exports._entries = require('./basic/_entries.js');
 

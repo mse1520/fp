@@ -1,6 +1,6 @@
 const toIterator = require('../internal/toiterator.js');
 
-const _curryRight3To2 = require('../basic/_curryRight3To2.js');
+const curryRightReduce = require('../internal/curryRightReduce.js');
 
 const _head = require('../basic/_head.js');
 
@@ -13,4 +13,4 @@ function _reduceC(iterator, predicate, accumulate) {
 }
 
 ;
-module.exports = _curryRight3To2(_reduceC);
+module.exports = curryRightReduce(_reduceC);
