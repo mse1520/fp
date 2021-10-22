@@ -2,7 +2,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  name: 'webpack-config-fp',
+  name: 'webpack-config-frp',
   // 실서비스: production, 개발: development
   mode: 'production',
   // eval-cheap-module-source-map
@@ -14,7 +14,7 @@ module.exports = {
   // 합쳐질 파일의 시작점
   // 파일이 서로 연결된경우 알아서 찾아준다
   entry: {
-    fp: path.resolve('src')
+    frp: path.resolve('src')
   },
   // 하나로 합쳐실 출력 파일의 설정입니다
   output: {

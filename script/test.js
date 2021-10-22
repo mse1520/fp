@@ -57,4 +57,4 @@ _go(
   paths => console.log('Ready to generate index:', paths)
 );
 
-runProcess('npx.cmd', 'live-server');
+runProcess('npx.cmd', 'live-server', '--open=./test');

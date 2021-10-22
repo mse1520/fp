@@ -1,3 +1,5 @@
+exports._concat = require('./basic/_concat.js');
+
 exports._curry = require('./basic/_curry.js');
 
 exports._curryRight = require('./basic/_curryRight.js');
@@ -40,6 +42,8 @@ exports._pick = require('./basic/_pick.js');
 
 exports._pipe = require('./basic/_pipe.js');
 
+exports._push = require('./basic/_push.js');
+
 exports._range = require('./basic/_range.js');
 
 exports._reduce = require('./basic/_reduce.js');
@@ -59,6 +63,8 @@ exports._takeUntil = require('./basic/_takeUntil.js');
 exports._takeWhile = require('./basic/_takeWhile.js');
 
 exports._values = require('./basic/_values.js');
+
+exports._concatC = require('./concurrency/_concatC.js');
 
 exports._entriesC = require('./concurrency/_entriesC.js');
 
@@ -84,6 +90,8 @@ exports._mapEntriesC = require('./concurrency/_mapEntriesC.js');
 
 exports._objectC = require('./concurrency/_objectC.js');
 
+exports._pushC = require('./concurrency/_pushC.js');
+
 exports._reduceC = require('./concurrency/_reduceC.js');
 
 exports._rejectC = require('./concurrency/_rejectC.js');
@@ -99,6 +107,8 @@ exports._takeUntilC = require('./concurrency/_takeUntilC.js');
 exports._takeWhileC = require('./concurrency/_takeWhileC.js');
 
 exports._valuesC = require('./concurrency/_valuesC.js');
+
+exports._concatL = require('./lazy/_concatL.js');
 
 exports._entriesL = require('./lazy/_entriesL.js');
 
@@ -117,6 +127,8 @@ exports._keysL = require('./lazy/_keysL.js');
 exports._mapEntriesL = require('./lazy/_mapEntriesL.js');
 
 exports._mapL = require('./lazy/_mapL.js');
+
+exports._pushL = require('./lazy/_pushL.js');
 
 exports._rangeL = require('./lazy/_rangeL.js');
 
