@@ -1,7 +1,7 @@
 import _reduce from './_reduce.js';
 
-function go(first, ...args) {
-  return _reduce(args, (accumulate, func) => func(accumulate), first);
+function _go(arg, ...funcs) {
+  return _reduce(funcs, (accumulate, func) => func(accumulate), arg);
 }
 
-export default go;
+export default _go;

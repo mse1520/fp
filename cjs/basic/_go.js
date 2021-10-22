@@ -1,7 +1,7 @@
 const _reduce = require('./_reduce.js');
 
-function go(first, ...args) {
-  return _reduce(args, (accumulate, func) => func(accumulate), first);
+function _go(arg, ...funcs) {
+  return _reduce(funcs, (accumulate, func) => func(accumulate), arg);
 }
 
-module.exports = go;
+module.exports = _go;

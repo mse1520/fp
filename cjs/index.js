@@ -62,6 +62,8 @@ exports._takeUntil = require('./basic/_takeUntil.js');
 
 exports._takeWhile = require('./basic/_takeWhile.js');
 
+exports._tap = require('./basic/_tap.js');
+
 exports._values = require('./basic/_values.js');
 
 exports._concatC = require('./concurrency/_concatC.js');

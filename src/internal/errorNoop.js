@@ -1,3 +1,3 @@
-const errorNoop = Symbol('fp.error.noop');
+const errorNoop = Symbol('underbarjs.error.noop');
 
 export default errorNoop;
