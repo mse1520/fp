@@ -1,6 +1,8 @@
 {
-  "name": "frp-js",
-  "version": "1.0.0",
+  "name": "underbarjs",
+  "version": "1.0.1",
+  "author": "kyh",
+  "license": "MIT",
   "description": "",
   "main": "cjs/index.js",
   "scripts": {
@@ -12,14 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mse1520/fp.git"
+    "url": "git+https://github.com/mse1520/underbarjs.git"
   },
-  "author": "kyh",
-  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mse1520/fp/issues"
+    "url": "https://github.com/mse1520/underbarjs/issues"
   },
-  "homepage": "https://github.com/mse1520/fp#readme",
+  "homepage": "https://github.com/mse1520/underbarjs#readme",
   "devDependencies": {
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.5",
@@ -29,6 +29,11 @@
     "webpack": "^5.54.0",
     "webpack-cli": "^4.8.0"
   },
+  "files": [
+    "cjs",
+    "src",
+    "dist"
+  ],
   "exports": {
     ".": {
       "require": "./cjs/index.js",
