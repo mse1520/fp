@@ -8,7 +8,6 @@ import { SRC_PATH } from './common.js';
 import _curryRight from '../src/basic/_curryRight.js';
 import _last from '../src/basic/_last.js';
 import _go from '../src/basic/_go.js';
-import _join from '../src/basic/_join.js';
 import _mapL from '../src/lazy/_mapL.js';
 import _rejectL from '../src/lazy/_rejectL.js';
 import _forEachC from '../src/concurrency/_forEachC.js';

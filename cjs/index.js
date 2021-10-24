@@ -64,6 +64,8 @@ exports._takeWhile = require('./basic/_takeWhile.js');
 
 exports._tap = require('./basic/_tap.js');
 
+exports._unshift = require('./basic/_unshift.js');
+
 exports._values = require('./basic/_values.js');
 
 exports._concatC = require('./concurrency/_concatC.js');
@@ -108,6 +110,8 @@ exports._takeUntilC = require('./concurrency/_takeUntilC.js');
 
 exports._takeWhileC = require('./concurrency/_takeWhileC.js');
 
+exports._unshiftC = require('./concurrency/_unshiftC.js');
+
 exports._valuesC = require('./concurrency/_valuesC.js');
 
 exports._concatL = require('./lazy/_concatL.js');
@@ -143,5 +147,7 @@ exports._takeL = require('./lazy/_takeL.js');
 exports._takeUntilL = require('./lazy/_takeUntilL.js');
 
 exports._takeWhileL = require('./lazy/_takeWhileL.js');
+
+exports._unshiftL = require('./lazy/_unshiftL.js');
 
 exports._valuesL = require('./lazy/_valuesL.js');
