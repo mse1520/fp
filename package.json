@@ -1,6 +1,6 @@
 {
   "name": "underbarjs",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "author": "kyh",
   "license": "MIT",
   "description": "",
@@ -32,7 +32,8 @@
   "files": [
     "cjs",
     "src",
-    "dist"
+    "dist",
+    "utility.js"
   ],
   "exports": {
     ".": {
@@ -40,8 +41,8 @@
       "import": "./src/index.js"
     },
     "./utility": {
-      "require": "./cjs/utility/index.js",
-      "import": "./src/utility/index.js"
+      "require": "./cjs/utility.js",
+      "import": "./src/utility.js"
     }
   }
 }
