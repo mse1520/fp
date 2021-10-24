@@ -1,0 +1,1 @@
+export { default as checkRegex } from './utility/checkRegex.js';

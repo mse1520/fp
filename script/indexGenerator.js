@@ -1,20 +1,26 @@
-import path from 'path';
+import { resolve } from 'path';
 import { readdir, writeFile } from 'fs/promises';
 
+import { SRC_PATH } from './common.js';
+
+import _curry from '../src/basic/_curry.js';
 import _go from '../src/basic/_go.js';
 import _split from '../src/basic/_split.js';
 import _head from '../src/basic/_head.js';
 import _reduce from '../src/basic/_reduce.js';
 import _mapL from '../src/lazy/_mapL.js';
+import _filterL from '../src/lazy/_filterL.js';
 import _rejectL from '../src/lazy/_rejectL.js';
 import _flatMapC from '../src/concurrency/_flatMapC.js';
+import checkRegex from '../src/utility/checkRegex.js';
 
-const ROOT_PATH = path.resolve('src');
-const INDEX_PATH = path.resolve(ROOT_PATH, 'index.js');
-const FILE_REGEX = /(internal|.j(s|son)$)/;
+const EXCEPT_REGEX = /(utility|internal|.j(s|son)$)/;
+const UTILITY_REGEX = /utility/;
+const INDEX_PATH = resolve(SRC_PATH, 'index.js');
+const UTILITY_PATH = resolve(SRC_PATH, 'utility.js');
 
 function getFiles(dir) {
-  return readdir(path.resolve(ROOT_PATH, dir));
+  return readdir(resolve(SRC_PATH, dir));
 }
 
 function makeExportSyntax([dir, files]) {
@@ -25,17 +31,27 @@ function makeExportSyntax([dir, files]) {
   );
 }
 
-function writeFileIndex(text) {
-  writeFile(INDEX_PATH, text);
+const _writeFile = _curry((path, text) => {
+  writeFile(path, text);
   return text;
-}
+});
 
 _go(
-  readdir(ROOT_PATH),
-  _rejectL(file => FILE_REGEX.test(file)),
+  readdir(SRC_PATH),
+  _rejectL(checkRegex(EXCEPT_REGEX)),
   _mapL(dir => [dir, getFiles(dir)]),
   _flatMapC(makeExportSyntax),
   _reduce((acc, value) => `${acc}\n${value}`),
-  writeFileIndex,
+  _writeFile(INDEX_PATH),
   _ => console.log('Generate index')
+);
+
+_go(
+  readdir(SRC_PATH),
+  _filterL(checkRegex(UTILITY_REGEX)),
+  _mapL(dir => [dir, getFiles(dir)]),
+  _flatMapC(makeExportSyntax),
+  _reduce((acc, value) => `${acc}\n${value}`),
+  _writeFile(UTILITY_PATH),
+  _ => console.log('Generate utility index')
 );

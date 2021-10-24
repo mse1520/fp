@@ -1,0 +1,1 @@
+exports.checkRegex = require('./utility/checkRegex.js');

@@ -3,6 +3,8 @@ import { watch } from 'fs';
 import { readdir } from 'fs/promises';
 import { spawn } from 'child_process';
 
+import { SRC_PATH } from './common.js';
+
 import _curryRight from '../src/basic/_curryRight.js';
 import _last from '../src/basic/_last.js';
 import _go from '../src/basic/_go.js';
@@ -10,9 +12,9 @@ import _join from '../src/basic/_join.js';
 import _mapL from '../src/lazy/_mapL.js';
 import _rejectL from '../src/lazy/_rejectL.js';
 import _forEachC from '../src/concurrency/_forEachC.js';
+import checkRegex from '../src/utility/checkRegex.js';
 
-const SRC_PATH = resolve('src');
-const FILE_REGEX = /(internal|.j(s|son)$)/;
+const EXCEPT_REGEX = /(internal|.j(s|son)$)/;
 const GENERATE_INDEX_COMMAND = ['npm.cmd', 'run', 'generate-index'];
 const LIVE_SERVER_COMMAND = ['npx.cmd', 'live-server', '--open=./test'];
 
@@ -54,7 +56,7 @@ watchAndRun = _curryRight(watchAndRun, 4);
 
 _go(
   readdir(SRC_PATH),
-  _rejectL(file => FILE_REGEX.test(file)),
+  _rejectL(checkRegex(EXCEPT_REGEX)),
   _mapL(dir => resolve(SRC_PATH, dir)),
   _forEachC(watchAndRun(...GENERATE_INDEX_COMMAND)),
   paths => console.log('Ready to generate index:', paths)

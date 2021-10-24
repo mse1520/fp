@@ -38,6 +38,10 @@
     ".": {
       "require": "./cjs/index.js",
       "import": "./src/index.js"
+    },
+    "./utility": {
+      "require": "./cjs/utility/index.js",
+      "import": "./src/utility/index.js"
     }
   }
 }
