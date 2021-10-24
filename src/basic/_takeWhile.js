@@ -21,6 +21,6 @@ function _takeWhile(iterator, predicate) {
 
     return result;
   })();
-};
+}
 
 export default _curryRight(_takeWhile);

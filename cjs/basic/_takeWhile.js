@@ -24,5 +24,4 @@ function _takeWhile(iterator, predicate) {
   }();
 }
 
-;
 module.exports = _curryRight(_takeWhile);

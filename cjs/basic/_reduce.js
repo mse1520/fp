@@ -30,5 +30,4 @@ function _reduce(iterator, predicate, accumulate) {
   });
 }
 
-;
 module.exports = curryRightReduce(_reduce);

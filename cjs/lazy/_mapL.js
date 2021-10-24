@@ -12,5 +12,4 @@ function* _mapL(iterator, predicate) {
   while (!(index++, next = iterator.next()).done) yield releasePromise(next.value, predicate, index);
 }
 
-;
 module.exports = _curryRight(_mapL);

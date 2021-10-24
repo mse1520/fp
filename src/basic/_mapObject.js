@@ -8,6 +8,6 @@ function _mapObject(object, predicate) {
     _entriesL(object),
     ([key, value], index) => [key, predicate(value, key, index)]
   ));
-};
+}
 
 export default _curryRight(_mapObject);

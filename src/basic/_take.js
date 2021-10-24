@@ -20,6 +20,6 @@ function _take(iterator, length) {
 
     return result;
   }();
-};
+}
 
 export default _curryRight(_take);

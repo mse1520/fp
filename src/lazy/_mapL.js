@@ -8,6 +8,6 @@ function* _mapL(iterator, predicate) {
   let next, index = -1;
   while (!(index++, next = iterator.next()).done)
     yield releasePromise(next.value, predicate, index);
-};
+}
 
 export default _curryRight(_mapL);

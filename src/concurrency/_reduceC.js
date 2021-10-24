@@ -10,6 +10,6 @@ function _reduceC(iterator, predicate, accumulate) {
     _iterator = toIterator(_iterator), accumulate = _head(_iterator);
 
   return _reduce(_iterator, predicate, accumulate);
-};
+}
 
 export default curryRightReduce(_reduceC);

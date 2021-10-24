@@ -16,5 +16,4 @@ function* _filterL(iterator, predicate) {
   }
 }
 
-;
 module.exports = _curryRight(_filterL);

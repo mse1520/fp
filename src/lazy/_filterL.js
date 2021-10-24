@@ -13,6 +13,6 @@ function* _filterL(iterator, predicate) {
       : predicate(next.value, index)
         ? yield next.value : undefined;
   }
-};
+}
 
 export default _curryRight(_filterL);

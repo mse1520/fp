@@ -12,5 +12,4 @@ function _reduceC(iterator, predicate, accumulate) {
   return _reduce(_iterator, predicate, accumulate);
 }
 
-;
 module.exports = curryRightReduce(_reduceC);

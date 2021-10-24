@@ -27,6 +27,6 @@ function _reduce(iterator, predicate, accumulate) {
 
     return accumulate;
   });
-};
+}
 
 export default curryRightReduce(_reduce);

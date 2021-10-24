@@ -23,5 +23,4 @@ function _take(iterator, length) {
   }();
 }
 
-;
 module.exports = _curryRight(_take);

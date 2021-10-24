@@ -8,5 +8,4 @@ function _mapC(iterator, predicate) {
   return _takeAllC(_mapL(iterator, predicate));
 }
 
-;
 module.exports = _curryRight(_mapC);
