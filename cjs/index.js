@@ -4,6 +4,8 @@ exports._curry = require('./basic/_curry.js');
 
 exports._curryRight = require('./basic/_curryRight.js');
 
+exports._delay = require('./basic/_delay.js');
+
 exports._entries = require('./basic/_entries.js');
 
 exports._filter = require('./basic/_filter.js');

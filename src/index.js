@@ -1,6 +1,7 @@
 export { default as _concat } from './basic/_concat.js';
 export { default as _curry } from './basic/_curry.js';
 export { default as _curryRight } from './basic/_curryRight.js';
+export { default as _delay } from './basic/_delay.js';
 export { default as _entries } from './basic/_entries.js';
 export { default as _filter } from './basic/_filter.js';
 export { default as _flat } from './basic/_flat.js';
