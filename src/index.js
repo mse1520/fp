@@ -9,6 +9,7 @@ export { default as _flatDeep } from './basic/_flatDeep.js';
 export { default as _flatMap } from './basic/_flatMap.js';
 export { default as _forEach } from './basic/_forEach.js';
 export { default as _go } from './basic/_go.js';
+export { default as _groupBy } from './basic/_groupBy.js';
 export { default as _head } from './basic/_head.js';
 export { default as _identity } from './basic/_identity.js';
 export { default as _indexBy } from './basic/_indexBy.js';

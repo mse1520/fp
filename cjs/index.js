@@ -20,6 +20,8 @@ exports._forEach = require('./basic/_forEach.js');
 
 exports._go = require('./basic/_go.js');
 
+exports._groupBy = require('./basic/_groupBy.js');
+
 exports._head = require('./basic/_head.js');
 
 exports._identity = require('./basic/_identity.js');
