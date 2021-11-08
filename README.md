@@ -9,7 +9,7 @@ underbarjs는 함수형 프로그래밍을 연습하면서 만들게 된 라이�
 ## 시작하기
 #### 브라우저
 ```html
-<script src="https://github.com/mse1520/underbarjs/tree/master/dist/underbar.min.js"></script>
+<script src="https://mse1520.github.io/underbarjs/dist/underbarjs.min.js"></script>
 ```
 - 사용법
   ```html
