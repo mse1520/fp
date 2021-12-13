@@ -19,10 +19,32 @@ webpack은 여러파일을 하나의 파일로 합쳐주는 번들러입니다
 npm i -D clean-webpack-plugin
 'clean-webpack-plugin'은 번들링 할때 이전에 번들링된 파일을 삭제한다
 
-8. 명령어 정리
-npx babel src --out-dir cjs > 'src'폴더 하위의 파일들을 'cjs'폴더 하위에 transcompile 한다
-npx webpack > 'webpack' 번들링 실행
-npx webpack serve > 'webpack-dev-server' 실행
+6. 라이브러리 명령어 정리
+npx babel src --out-dir cjs 
+  > 'src'폴더 하위의 파일들을 'cjs'폴더 하위에 transcompile 한다
+npx webpack 
+  > 'webpack' 번들링 실행
+npx webpack serve 
+  > 'webpack-dev-server' 실행
+
+7. npm 배포
+npm publish 
+  > 내 프로젝트를 npm repository에 업로드 합니다
+  업로드할 때는 version의 변경이 있어야 합니다
+
+8. 패키지 명령어 정리
+npm test, npm run build 배포에 있어 두 가지의 명령어를 사용하면 됩니다
+  npm test
+    > src 하위 파일의 내용 변경 시 src/index.js 파일을 생성한다
+    test 파일 내의 index.html 파일을 라이브 서버로 바로바로 테스트해 볼 수 있는 환경의 명령어
+  npm run build
+    > src 폴더를 기준으로 dist 파일과 cjs 파일을 생성한다
+  npm run generate-index
+    > src/index.js 파일을 생성한다
+  npm run transpile-cjs
+    > src 폴더를 기준으로 cjs 폴더로 트랜스컴파일 한다
+  npm run bundle-min-js
+    > src 폴더를 기준으로 dist 파일로 번들 파일을 생성한다
 
 9. 참고
 https://astexplorer.net/
