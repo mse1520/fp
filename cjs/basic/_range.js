@@ -1,10 +1,9 @@
-function _range(start = 0, end, step = 1) {
-  if (arguments.length === 1) end = start, start = 0;
-  const result = [];
+const _takeAll = require('./_takeAll.js');
 
-  while (start < end) result.push(start), start += step;
+const _rangeL = require('../lazy/_rangeL.js');
 
-  return result;
+function _range(...args) {
+  return _takeAll(_rangeL(...args));
 }
 
 module.exports = _range;
