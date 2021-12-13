@@ -6,7 +6,8 @@ import {
 } from '../src/index.js';
 
 _go(
-  _rangeL(10),
-  _groupBy(value => value % 2),
+  // _rangeL(10),
+  _range(10),
+  // _takeAll,
   console.log
 );

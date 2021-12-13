@@ -1,9 +1,8 @@
-function _range(start = 0, end, step = 1) {
-  if (arguments.length === 1) end = start, start = 0;
+import _takeAll from './_takeAll.js';
+import _rangeL from '../lazy/_rangeL.js';
 
-  const result = [];
-  while (start < end) result.push(start), start += step;
-  return result;
+function _range(...args) {
+  return _takeAll(_rangeL(...args));
 }
 
 export default _range;
