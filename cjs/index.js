@@ -58,6 +58,8 @@ exports._rejectEntries = require('./basic/_rejectEntries.js');
 
 exports._replace = require('./basic/_replace.js');
 
+exports._replaceAll = require('./basic/_replaceAll.js');
+
 exports._split = require('./basic/_split.js');
 
 exports._take = require('./basic/_take.js');
