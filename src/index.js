@@ -27,6 +27,7 @@ export { default as _range } from './basic/_range.js';
 export { default as _reduce } from './basic/_reduce.js';
 export { default as _reject } from './basic/_reject.js';
 export { default as _rejectEntries } from './basic/_rejectEntries.js';
+export { default as _replace } from './basic/_replace.js';
 export { default as _split } from './basic/_split.js';
 export { default as _take } from './basic/_take.js';
 export { default as _takeAll } from './basic/_takeAll.js';
