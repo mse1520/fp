@@ -7,6 +7,7 @@ import {
 import { toQueryString } from '../src/utility.js';
 
 _go(
-  _replaceAll('123_123_123', '_', ''),
+  '123_123-123?123',
+  _replaceAll(/_|-/, '?'),
   console.log
 );

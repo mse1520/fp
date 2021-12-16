@@ -1,9 +1,9 @@
 import _curryRight from './_curryRight.js';
-import _join from './_join.js';
+import _reduce from './_reduce.js';
 import _split from './_split.js';
 
-function _replaceAll(str, separator, replacement) {
-  return _join(_split(str, separator), replacement);
+function _replaceAll(str, pattern, replacement) {
+  return _reduce(_split(str, pattern), (accumulate, value) => `${accumulate}${replacement}${value}`);
 }
 
 export default _curryRight(_replaceAll);
