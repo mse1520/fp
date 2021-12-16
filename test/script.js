@@ -4,10 +4,7 @@ import {
   _pushC, _pushL, _range, _rangeL, _reduce, _take, _takeAll, _takeAllC, _takeC, _takeL, _takeUntil, _takeUntilC, _takeUntilL,
   _takeWhile, _takeWhileC, _takeWhileL, _tap, _unshift, _unshiftL
 } from '../src/index.js';
+import { toQueryString } from '../src/utility.js';
 
-_go(
-  // _rangeL(10),
-  _range(10),
-  // _takeAll,
-  console.log
-);
+console.log(
+  toQueryString({ test1: 1, test2: 2 }))
