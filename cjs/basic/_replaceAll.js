@@ -1,11 +1,11 @@
 const _curryRight = require('./_curryRight.js');
 
-const _join = require('./_join.js');
+const _reduce = require('./_reduce.js');
 
 const _split = require('./_split.js');
 
-function _replaceAll(str, separator, replacement) {
-  return _join(_split(str, separator), replacement);
+function _replaceAll(str, pattern, replacement) {
+  return _reduce(_split(str, pattern), (accumulate, value) => `${accumulate}${replacement}${value}`);
 }
 
 module.exports = _curryRight(_replaceAll);
