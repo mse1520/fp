@@ -126,7 +126,6 @@ console.log(result); // [1, 2, 3, 4, 5]
 ```
 
 ### _range
-입력인자: ([start=0], end, [step=1])
 첫 번째 인자 값부터 두 번째 인자 값까지 세 번째 인자 값의 단계만큼 이동하면서 범위 값을 리턴합니다.
 ```javascript
 console.log(_range(5)); // [0, 1, 2, 3, 4]
