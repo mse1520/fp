@@ -21,13 +21,13 @@
   },
   "homepage": "https://github.com/mse1520/underbarjs#readme",
   "devDependencies": {
-    "@babel/cli": "^7.15.7",
-    "@babel/core": "^7.15.5",
-    "@babel/parser": "^7.15.7",
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.5",
+    "@babel/parser": "^7.16.6",
     "clean-webpack-plugin": "^4.0.0",
     "live-server": "^1.2.1",
-    "webpack": "^5.54.0",
-    "webpack-cli": "^4.8.0"
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
   },
   "files": [
     "cjs",
