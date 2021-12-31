@@ -25,6 +25,8 @@ export { default as _pipe } from './basic/_pipe.js';
 export { default as _push } from './basic/_push.js';
 export { default as _range } from './basic/_range.js';
 export { default as _reduce } from './basic/_reduce.js';
+export { default as _regexMatch } from './basic/_regexMatch.js';
+export { default as _regexTest } from './basic/_regexTest.js';
 export { default as _reject } from './basic/_reject.js';
 export { default as _rejectEntries } from './basic/_rejectEntries.js';
 export { default as _replace } from './basic/_replace.js';

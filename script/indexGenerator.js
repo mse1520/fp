@@ -8,11 +8,11 @@ import _go from '../src/basic/_go.js';
 import _split from '../src/basic/_split.js';
 import _head from '../src/basic/_head.js';
 import _reduce from '../src/basic/_reduce.js';
+import _regexTest from '../src/basic/_regexTest.js';
 import _mapL from '../src/lazy/_mapL.js';
 import _filterL from '../src/lazy/_filterL.js';
 import _rejectL from '../src/lazy/_rejectL.js';
 import _flatMapC from '../src/concurrency/_flatMapC.js';
-import checkRegex from '../src/utility/checkRegex.js';
 
 const EXCEPT_REGEX = /(utility|internal|.j(s|son)$)/;
 const UTILITY_REGEX = /utility/;
@@ -38,7 +38,7 @@ const _writeFile = _curry((path, text) => {
 
 _go(
   readdir(SRC_PATH),
-  _rejectL(checkRegex(EXCEPT_REGEX)),
+  _rejectL(_regexTest(EXCEPT_REGEX)),
   _mapL(dir => [dir, getFiles(dir)]),
   _flatMapC(makeExportSyntax),
   _reduce((acc, value) => `${acc}\n${value}`),
@@ -48,7 +48,7 @@ _go(
 
 _go(
   readdir(SRC_PATH),
-  _filterL(checkRegex(UTILITY_REGEX)),
+  _filterL(_regexTest(UTILITY_REGEX)),
   _mapL(dir => [dir, getFiles(dir)]),
   _flatMapC(makeExportSyntax),
   _reduce((acc, value) => `${acc}\n${value}`),

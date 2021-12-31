@@ -52,6 +52,10 @@ exports._range = require('./basic/_range.js');
 
 exports._reduce = require('./basic/_reduce.js');
 
+exports._regexMatch = require('./basic/_regexMatch.js');
+
+exports._regexTest = require('./basic/_regexTest.js');
+
 exports._reject = require('./basic/_reject.js');
 
 exports._rejectEntries = require('./basic/_rejectEntries.js');
