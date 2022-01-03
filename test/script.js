@@ -119,3 +119,13 @@ import { toQueryString, ipFormatter } from '../src/utility.js';
   console.log('_range:', _range(10, 5));
   console.log('_range:', _range(0, 5, 2));
 })();
+
+// ipFormatter 사용법
+(() => {
+  document.querySelector('#ip-formatter').addEventListener('input', e => {
+    e.target.value = ipFormatter(e.target.value);
+  });
+
+  console.log('Utility ipFormatter:', ipFormatter('12323.23.23ddd.22223.23'));
+  console.log('Utility ipFormatter:', ipFormatter('12323.23.23ddd2222323'));
+})();
