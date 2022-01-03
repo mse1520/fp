@@ -11,11 +11,10 @@ import _reduce from '../src/basic/_reduce.js';
 import _regexTest from '../src/basic/_regexTest.js';
 import _mapL from '../src/lazy/_mapL.js';
 import _filterL from '../src/lazy/_filterL.js';
-import _rejectL from '../src/lazy/_rejectL.js';
 import _flatMapC from '../src/concurrency/_flatMapC.js';
 
-const EXCEPT_REGEX = /(utility|internal|.j(s|son)$)/;
-const UTILITY_REGEX = /utility/;
+const INDEX_REGEX = /basic|lazy|concurrency/;
+const UTILITY_REGEX = /utility$/;
 const INDEX_PATH = resolve(SRC_PATH, 'index.js');
 const UTILITY_PATH = resolve(SRC_PATH, 'utility.js');
 
@@ -36,22 +35,17 @@ const _writeFile = _curry((path, text) => {
   return text;
 });
 
-_go(
-  readdir(SRC_PATH),
-  _rejectL(_regexTest(EXCEPT_REGEX)),
-  _mapL(dir => [dir, getFiles(dir)]),
-  _flatMapC(makeExportSyntax),
-  _reduce((acc, value) => `${acc}\n${value}`),
-  _writeFile(INDEX_PATH),
-  _ => console.log('Generate index')
-);
+function generteIndex(regex, path, message) {
+  return _go(
+    readdir(SRC_PATH),
+    _filterL(_regexTest(regex)),
+    _mapL(dir => [dir, getFiles(dir)]),
+    _flatMapC(makeExportSyntax),
+    _reduce((acc, value) => `${acc}\n${value}`),
+    _writeFile(path),
+    _ => console.log(message)
+  );
+}
 
-_go(
-  readdir(SRC_PATH),
-  _filterL(_regexTest(UTILITY_REGEX)),
-  _mapL(dir => [dir, getFiles(dir)]),
-  _flatMapC(makeExportSyntax),
-  _reduce((acc, value) => `${acc}\n${value}`),
-  _writeFile(UTILITY_PATH),
-  _ => console.log('Generate utility index')
-);
+generteIndex(INDEX_REGEX, INDEX_PATH, 'Generate index');
+generteIndex(UTILITY_REGEX, UTILITY_PATH, 'Generate utility index');
