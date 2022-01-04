@@ -7,7 +7,7 @@ import _curry from '../src/basic/_curry.js';
 import _go from '../src/basic/_go.js';
 import _split from '../src/basic/_split.js';
 import _head from '../src/basic/_head.js';
-import _reduce from '../src/basic/_reduce.js';
+import _join from '../src/basic/_join.js';
 import _regexTest from '../src/basic/_regexTest.js';
 import _mapL from '../src/lazy/_mapL.js';
 import _filterL from '../src/lazy/_filterL.js';
@@ -41,7 +41,7 @@ function generteIndex(regex, path, message) {
     _filterL(_regexTest(regex)),
     _mapL(dir => [dir, getFiles(dir)]),
     _flatMapC(makeExportSyntax),
-    _reduce((acc, value) => `${acc}\n${value}`),
+    _join('\n'),
     _writeFile(path),
     _ => console.log(message)
   );
