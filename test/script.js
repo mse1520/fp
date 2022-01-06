@@ -1,10 +1,10 @@
 import {
   _concat, _concatC, _concatL, _curry, _curryRight, _delay, _filter, _filterL, _flat, _flatC, _flatDeep, _flatDeepC, _flatDeepL,
-  _flatL, _flatMapC, _forEach, _forEachC, _forEachL, _go, _groupBy, _identity, _last, _map, _mapL, _mapObject, _pipe, _push,
+  _flatL, _flatMapC, _forEach, _forEachC, _forEachL, _go, _groupBy, _head, _identity, _join, _last, _map, _mapL, _mapObject, _pipe, _push,
   _pushC, _pushL, _range, _rangeL, _reduce, _replace, _replaceAll, _take, _takeAll, _takeAllC, _takeC, _takeL, _takeUntil, _takeUntilC, _takeUntilL,
   _takeWhile, _takeWhileC, _takeWhileL, _tap, _unshift, _unshiftL
 } from '../src/index.js';
-import { toQueryString, ipFormatter, numFormatter } from '../src/utility.js';
+import { toQueryString, ipFormatter, numFormatter, intFormatter } from '../src/utility.js';
 
 // _go 사용법
 (() => {
@@ -138,4 +138,13 @@ import { toQueryString, ipFormatter, numFormatter } from '../src/utility.js';
 
   console.log('Utility numFormatter:', numFormatter('+++---.12323.23.23ddd.22223.23'));
   console.log('Utility numFormatter:', numFormatter('---+12323.'));
+})();
+
+// intFormatter 사용법
+(() => {
+  document.querySelector('#int-formatter').addEventListener('input', e => {
+    e.target.value = intFormatter(e.target.value);
+  });
+
+  console.log('Utility intFormatter:', intFormatter('+++---.12323.23.23ddd.22223.23'));
 })();
