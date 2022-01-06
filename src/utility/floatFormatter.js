@@ -26,7 +26,7 @@ const findPointIndex = _curryRight((iterator, predicate) => {
   return iterator;
 });
 
-function numFormatter(value) {
+function floatFormatter(value) {
   let pointIndex = -1;
 
   return _go(
@@ -40,4 +40,4 @@ function numFormatter(value) {
   );
 }
 
-export default numFormatter;
+export default floatFormatter;

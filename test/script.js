@@ -4,7 +4,7 @@ import {
   _pushC, _pushL, _range, _rangeL, _reduce, _replace, _replaceAll, _take, _takeAll, _takeAllC, _takeC, _takeL, _takeUntil, _takeUntilC, _takeUntilL,
   _takeWhile, _takeWhileC, _takeWhileL, _tap, _unshift, _unshiftL
 } from '../src/index.js';
-import { toQueryString, ipFormatter, numFormatter, intFormatter } from '../src/utility.js';
+import { toQueryString, ipFormatter, intFormatter, floatFormatter } from '../src/utility.js';
 
 // _go 사용법
 (() => {
@@ -130,14 +130,14 @@ import { toQueryString, ipFormatter, numFormatter, intFormatter } from '../src/u
   console.log('Utility ipFormatter:', ipFormatter('12323.23.23ddd2222323'));
 })();
 
-// numFormatter 사용법
+// floatFormatter 사용법
 (() => {
   document.querySelector('#num-formatter').addEventListener('input', e => {
-    e.target.value = numFormatter(e.target.value);
+    e.target.value = floatFormatter(e.target.value);
   });
 
-  console.log('Utility numFormatter:', numFormatter('+++---.12323.23.23ddd.22223.23'));
-  console.log('Utility numFormatter:', numFormatter('---+12323.'));
+  console.log('Utility floatFormatter:', floatFormatter('+++---.12323.23.23ddd.22223.23'));
+  console.log('Utility floatFormatter:', floatFormatter('---+12323.'));
 })();
 
 // intFormatter 사용법

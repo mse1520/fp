@@ -31,9 +31,9 @@ const findPointIndex = _curryRight((iterator, predicate) => {
   return iterator;
 });
 
-function numFormatter(value) {
+function floatFormatter(value) {
   let pointIndex = -1;
   return _go(value, _replace(/[^0-9|+|\-|.]/g, ''), _map(replaceHead), findPointIndex(i => pointIndex = i), _reject((v, i) => pointIndex !== i && v === '.'), _join(''), _replace(undefined, ''));
 }
 
-module.exports = numFormatter;
+module.exports = floatFormatter;

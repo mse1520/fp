@@ -15,7 +15,7 @@
 - [Concurrency](#concurrency)
 - [Utility](#utility)
   - [ipFormatter](#ipformatter)
-  - [numFormatter](#numformatter)
+  - [floatFormatter](#floatformatter)
   - [intFormatter](#intformatter)
 
 ## Basic
@@ -150,11 +150,11 @@ console.log(ipFormatter('12323.23.23ddd2222323')); // 123.23.232.
 console.log(ipFormatter('12323.23.23ddd.22223.23')); // 123.23.23.222
 ```
 
-### numFormatter
+### floatFormatter
 첫 번째 인자로 입력된 값을 실수의 형태를 벗어나지 않는 값으로 리턴합니다.
 ```javascript
-console.log(numFormatter('+++---.12323.23.23ddd.22223.23')); // +12323.23232222323
-console.log(numFormatter('---+12323.')); // -12323.
+console.log(floatFormatter('+++---.12323.23.23ddd.22223.23')); // +12323.23232222323
+console.log(floatFormatter('---+12323.')); // -12323.
 ```
 
 ### intFormatter
