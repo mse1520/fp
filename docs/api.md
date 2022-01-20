@@ -11,6 +11,7 @@
   - [_take](#take)
   - [_takeAll](#takeall)
   - [_identity](#identity)
+  - [_split](#split)
 - [Lazy](#lazy)
 - [Concurrency](#concurrency)
 - [Utility](#utility)
@@ -137,6 +138,12 @@ console.log(_range(-5)); // [0, -1, -2, -3, -4]
 console.log(_range(5, 10)); // [5, 6, 7, 8, 9]
 console.log(_range(10, 5)); // [10, 9, 8, 7, 6]
 console.log(_range(0, 5, 2)); // [0, 2, 4]
+```
+
+### _split
+첫 번째 인자를 두 번째 인자 값을 기준으로 나눈 배열을 리턴합니다.
+```javascript
+console.log(_split('1-2-3', '-')); // [1, 2, 3]
 ```
 
 ## Lazy

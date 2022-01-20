@@ -18,9 +18,10 @@ underbarjs는 함수형 프로그래밍을 연습하면서 만들게 된 라이�
   _go(
     _range(5),
     _map(a => a * a),
-    _takeAll,
     console.log
   );
+
+  U.ipFormatter('12323.23.23ddd2222323');
   </script>
   ```
 
@@ -31,22 +32,22 @@ npm install underbarjs
 - CommonJS
   ```javascript
   const { _go, _range, _map, _takeAll } = require('uderbarjs');
+  const { ipFormatter } = require('uderbarjs/utility');
   
   _go(
     _range(5),
     _map(a => a * a),
-    _takeAll,
     console.log
   );
   ```
 - ES6 Module
   ```javascript
   import { _go, _range, _map, _takeAll } from 'uderbarjs';
+  import { ipFormatter } = from 'uderbarjs/utility';
   
   _go(
     _range(5),
     _map(a => a * a),
-    _takeAll,
     console.log
   );
   ```

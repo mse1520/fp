@@ -1,7 +1,7 @@
 import {
   _concat, _concatC, _concatL, _curry, _curryRight, _delay, _filter, _filterL, _flat, _flatC, _flatDeep, _flatDeepC, _flatDeepL,
   _flatL, _flatMapC, _forEach, _forEachC, _forEachL, _go, _groupBy, _head, _identity, _join, _last, _map, _mapL, _mapObject, _pipe, _push,
-  _pushC, _pushL, _range, _rangeL, _reduce, _replace, _replaceAll, _take, _takeAll, _takeAllC, _takeC, _takeL, _takeUntil, _takeUntilC, _takeUntilL,
+  _pushC, _pushL, _range, _rangeL, _reduce, _replace, _replaceAll, _split, _take, _takeAll, _takeAllC, _takeC, _takeL, _takeUntil, _takeUntilC, _takeUntilL,
   _takeWhile, _takeWhileC, _takeWhileL, _tap, _unshift, _unshiftL
 } from '../src/index.js';
 import { toQueryString, ipFormatter, intFormatter, floatFormatter } from '../src/utility.js';
@@ -118,6 +118,11 @@ import { toQueryString, ipFormatter, intFormatter, floatFormatter } from '../src
   console.log('_range:', _range(5, 10));
   console.log('_range:', _range(10, 5));
   console.log('_range:', _range(0, 5, 2));
+})();
+
+// _split 사용법
+(() => {
+  console.log('_split:', _split('1-2-3', '-'));
 })();
 
 // ipFormatter 사용법
