@@ -37,6 +37,8 @@ export { default as _takeAll } from './basic/_takeAll.js';
 export { default as _takeUntil } from './basic/_takeUntil.js';
 export { default as _takeWhile } from './basic/_takeWhile.js';
 export { default as _tap } from './basic/_tap.js';
+export { default as _toUpperCase } from './basic/_toUpperCase.js';
+export { default as _toUpperCaseFirst } from './basic/_toUpperCaseFirst.js';
 export { default as _unshift } from './basic/_unshift.js';
 export { default as _values } from './basic/_values.js';
 export { default as _concatC } from './concurrency/_concatC.js';

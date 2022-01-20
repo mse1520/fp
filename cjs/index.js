@@ -76,6 +76,10 @@ exports._takeWhile = require('./basic/_takeWhile.js');
 
 exports._tap = require('./basic/_tap.js');
 
+exports._toUpperCase = require('./basic/_toUpperCase.js');
+
+exports._toUpperCaseFirst = require('./basic/_toUpperCaseFirst.js');
+
 exports._unshift = require('./basic/_unshift.js');
 
 exports._values = require('./basic/_values.js');

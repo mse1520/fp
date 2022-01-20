@@ -12,6 +12,9 @@
   - [_takeAll](#takeall)
   - [_identity](#identity)
   - [_split](#split)
+  - [_toUpperCase](#touppercase)
+  - [_toUpperCaseFirst](#touppercasefirst)
+  
 - [Lazy](#lazy)
 - [Concurrency](#concurrency)
 - [Utility](#utility)
@@ -144,6 +147,18 @@ console.log(_range(0, 5, 2)); // [0, 2, 4]
 첫 번째 인자를 두 번째 인자 값을 기준으로 나눈 배열을 리턴합니다.
 ```javascript
 console.log(_split('1-2-3', '-')); // [1, 2, 3]
+```
+
+### _toUpperCase
+첫 번째 인자로 들어온 문자열을 모두 대문자로 변환하여 리턴한다.
+```javascript
+console.log(_toUpperCase('abc'));
+```
+
+### _toUpperCaseFirst
+첫 번째 인자로 들어온 문자열의 첫번째 문자만을 대문자로 변환하여 리턴한다.
+```javascript
+console.log(_toUpperCaseFirst('abc'));
 ```
 
 ## Lazy
