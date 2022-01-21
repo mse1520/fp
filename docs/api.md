@@ -14,7 +14,8 @@
   - [_split](#split)
   - [_toUpperCase](#touppercase)
   - [_toUpperCaseFirst](#touppercasefirst)
-  
+  - [_toArray](#toarray)
+  - [_includes](#includes)
 - [Lazy](#lazy)
 - [Concurrency](#concurrency)
 - [Utility](#utility)
@@ -159,6 +160,21 @@ console.log(_toUpperCase('abc'));
 첫 번째 인자로 들어온 문자열의 첫번째 문자만을 대문자로 변환하여 리턴한다.
 ```javascript
 console.log(_toUpperCaseFirst('abc'));
+```
+
+### _toArray
+첫 번째 인자로 들어온 iterator를 배열로 리턴한다.
+```javascript
+console.log(_toArray('abc')); // ['a', 'b', 'c']
+console.log(_toArray(123)); // []
+console.log(_toArray()); // []
+```
+
+### _includes
+첫 번째 인자로 들어온 값에 두 번째 인자로 들어온 값이 있는지를 판단하여 true, false를 리턴한다.
+```javascript
+console.log(_includes('abc', 'a')); // true
+console.log(_includes('abc', 'd')); // false
 ```
 
 ## Lazy

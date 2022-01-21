@@ -1,8 +1,8 @@
 import {
   _concat, _concatC, _concatL, _curry, _curryRight, _delay, _filter, _filterL, _flat, _flatC, _flatDeep, _flatDeepC, _flatDeepL,
-  _flatL, _flatMapC, _forEach, _forEachC, _forEachL, _go, _groupBy, _head, _identity, _join, _last, _map, _mapL, _mapObject, _pipe, _push,
+  _flatL, _flatMapC, _forEach, _forEachC, _forEachL, _go, _groupBy, _head, _identity, _includes, _join, _last, _map, _mapL, _mapObject, _pipe, _push,
   _pushC, _pushL, _range, _rangeL, _reduce, _replace, _replaceAll, _split, _take, _takeAll, _takeAllC, _takeC, _takeL, _takeUntil, _takeUntilC, _takeUntilL,
-  _takeWhile, _takeWhileC, _takeWhileL, _tap, _toUpperCase, _toUpperCaseFirst, _unshift, _unshiftL
+  _takeWhile, _takeWhileC, _takeWhileL, _tap, _toArray, _toUpperCase, _toUpperCaseFirst, _unshift, _unshiftL
 } from '../src/index.js';
 import { toQueryString, ipFormatter, intFormatter, floatFormatter } from '../src/utility.js';
 
@@ -134,6 +134,19 @@ console.log('----------basic---------');
 // _toUpperCaseFirst 사용법
 (() => {
   console.log('_toUpperCase:', _toUpperCaseFirst('abc'));
+})();
+
+// _toArray 사용법
+(() => {
+  console.log('_toArray:', _toArray('abc'));
+  console.log('_toArray:', _toArray(123));
+  console.log('_toArray:', _toArray());
+})();
+
+// _includes 사용법
+(() => {
+  console.log('_includes:', _includes('abc', 'a'));
+  console.log('_includes:', _includes('abc', 'd'));
 })();
 
 console.log('----------Utility---------');

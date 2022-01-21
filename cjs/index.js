@@ -26,6 +26,8 @@ exports._head = require('./basic/_head.js');
 
 exports._identity = require('./basic/_identity.js');
 
+exports._includes = require('./basic/_includes.js');
+
 exports._indexBy = require('./basic/_indexBy.js');
 
 exports._join = require('./basic/_join.js');
@@ -75,6 +77,8 @@ exports._takeUntil = require('./basic/_takeUntil.js');
 exports._takeWhile = require('./basic/_takeWhile.js');
 
 exports._tap = require('./basic/_tap.js');
+
+exports._toArray = require('./basic/_toArray.js');
 
 exports._toUpperCase = require('./basic/_toUpperCase.js');
 
