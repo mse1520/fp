@@ -149,6 +149,11 @@ console.log('----------basic---------');
   console.log('_includes:', _includes('abc', 'd'));
 })();
 
+// _push 사용법
+(() => {
+  console.log('_push:', _push([1, 2, 3], [4, 5, 6]));
+})();
+
 console.log('----------Utility---------');
 // ipFormatter 사용법
 (() => {

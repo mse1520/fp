@@ -16,6 +16,7 @@
   - [_toUpperCaseFirst](#touppercasefirst)
   - [_toArray](#toarray)
   - [_includes](#includes)
+  - [_push](#push)
 - [Lazy](#lazy)
 - [Concurrency](#concurrency)
 - [Utility](#utility)
@@ -175,6 +176,12 @@ console.log(_toArray()); // []
 ```javascript
 console.log(_includes('abc', 'a')); // true
 console.log(_includes('abc', 'd')); // false
+```
+
+### _push
+첫 번째 인자로 들어온 배열에 두 번째 인자로 들어온 값을 첫번째 인자의 배열뒤에 추가합니다.
+```javascript
+console.log(_push([1, 2, 3], [4, 5, 6])); // [1, 2, 3, 4, 5, 6]
 ```
 
 ## Lazy
