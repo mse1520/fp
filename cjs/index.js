@@ -42,6 +42,8 @@ exports._mapEntries = require('./basic/_mapEntries.js');
 
 exports._mapObject = require('./basic/_mapObject.js');
 
+exports._match = require('./basic/_match.js');
+
 exports._object = require('./basic/_object.js');
 
 exports._pick = require('./basic/_pick.js');
@@ -53,10 +55,6 @@ exports._push = require('./basic/_push.js');
 exports._range = require('./basic/_range.js');
 
 exports._reduce = require('./basic/_reduce.js');
-
-exports._regexMatch = require('./basic/_regexMatch.js');
-
-exports._regexTest = require('./basic/_regexTest.js');
 
 exports._reject = require('./basic/_reject.js');
 
@@ -77,6 +75,8 @@ exports._takeUntil = require('./basic/_takeUntil.js');
 exports._takeWhile = require('./basic/_takeWhile.js');
 
 exports._tap = require('./basic/_tap.js');
+
+exports._test = require('./basic/_test.js');
 
 exports._toArray = require('./basic/_toArray.js');
 

@@ -1,6 +1,6 @@
 import {
   _concat, _concatC, _concatL, _curry, _curryRight, _delay, _filter, _filterL, _flat, _flatC, _flatDeep, _flatDeepC, _flatDeepL,
-  _flatL, _flatMapC, _forEach, _forEachC, _forEachL, _go, _groupBy, _head, _identity, _includes, _join, _last, _map, _mapL, _mapObject, _pipe, _push,
+  _flatL, _flatMapC, _forEach, _forEachC, _forEachL, _go, _groupBy, _head, _identity, _includes, _join, _joinC, _last, _map, _mapL, _mapObject, _match, _pipe, _push,
   _pushC, _pushL, _range, _rangeL, _reduce, _replace, _replaceAll, _split, _take, _takeAll, _takeAllC, _takeC, _takeL, _takeUntil, _takeUntilC, _takeUntilL,
   _takeWhile, _takeWhileC, _takeWhileL, _tap, _toArray, _toUpperCase, _toUpperCaseFirst, _unshift, _unshiftL
 } from '../src/index.js';
@@ -145,13 +145,15 @@ console.log('----------basic---------');
 
 // _includes 사용법
 (() => {
-  console.log('_includes:', _includes('abc', 'a'));
+  console.log('_includes:', _includes('abc', 'ab'));
   console.log('_includes:', _includes('abc', 'd'));
+  console.log('_includes:', _includes(['abc', 'd', 'fg'], 'fg'));
+  console.log('_includes:', _includes(['abc', 'd', 'fg'], 'z'));
 })();
 
 // _push 사용법
 (() => {
-  console.log('_push:', _push([1, 2, 3], [4, 5, 6]));
+  console.log('_push:', _push([1, 2, 3], 4));
 })();
 
 console.log('----------Utility---------');
@@ -182,4 +184,9 @@ console.log('----------Utility---------');
   });
 
   console.log('Utility intFormatter:', intFormatter('+++---.12323.23.23ddd.22223.23'));
+})();
+
+// toQueryString 사용법
+(() => {
+  console.log('Utility toQueryString:', toQueryString({ arg1: 1, arg2: 2, arg3: 3 }));
 })();

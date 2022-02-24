@@ -5,11 +5,10 @@ function* takeL(iterator, length) {
   if (length < 1) return;
 
   iterator = toIterator(iterator);
-  
-  let next;
-  while (!(next = iterator.next()).done) {
-    yield next.value;
-    if (!--length) break;
+
+  for (const value of iterator) {
+    yield value;
+    if (!--length) return;
   }
 }
 

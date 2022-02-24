@@ -8,7 +8,7 @@ import _go from '../src/basic/_go.js';
 import _split from '../src/basic/_split.js';
 import _head from '../src/basic/_head.js';
 import _join from '../src/basic/_join.js';
-import _regexTest from '../src/basic/_regexTest.js';
+import _test from '../src/basic/_test.js';
 import _mapL from '../src/lazy/_mapL.js';
 import _filterL from '../src/lazy/_filterL.js';
 import _flatMapC from '../src/concurrency/_flatMapC.js';
@@ -38,7 +38,7 @@ const _writeFile = _curry((path, text) => {
 function generteIndex(regex, path, message) {
   return _go(
     readdir(SRC_PATH),
-    _filterL(_regexTest(regex)),
+    _filterL(_test(regex)),
     _mapL(dir => [dir, getFiles(dir)]),
     _flatMapC(makeExportSyntax),
     _join('\n'),

@@ -4,8 +4,8 @@ const _concatL = require('../lazy/_concatL.js');
 
 const _takeAllC = require('./_takeAllC.js');
 
-function _concatC(iterator, others) {
-  return _takeAllC(_concatL(iterator, others));
+function _concatC(iterator1, iterator2) {
+  return _takeAllC(_concatL(iterator1, iterator2));
 }
 
 module.exports = _curryRight(_concatC);

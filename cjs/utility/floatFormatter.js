@@ -10,7 +10,7 @@ const _join = require('../basic/_join.js');
 
 const _replace = require('../basic/_replace.js');
 
-const _regexTest = require('../basic/_regexTest.js');
+const _test = require('../basic/_test.js');
 
 function replaceHead(value, index) {
   return index === 0 ? value === '.' ? '' : value : value === '+' || value === '-' ? '' : value;
@@ -20,7 +20,7 @@ const findPointIndex = _curryRight((iterator, predicate) => {
   let index = 0;
 
   for (let value of iterator) {
-    if (value === '.' && _regexTest(/[0-9]/, iterator[index - 1])) {
+    if (value === '.' && _test(/[0-9]/, iterator[index - 1])) {
       predicate(index);
       break;
     }

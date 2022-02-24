@@ -23,6 +23,7 @@
   - [ipFormatter](#ipformatter)
   - [floatFormatter](#floatformatter)
   - [intFormatter](#intformatter)
+  - [toQueryString](#toquerystring)
 
 ## Basic
 ### _go
@@ -174,8 +175,10 @@ console.log(_toArray()); // []
 ### _includes
 첫 번째 인자로 들어온 값에 두 번째 인자로 들어온 값이 있는지를 판단하여 true, false를 리턴한다.
 ```javascript
-console.log(_includes('abc', 'a')); // true
-console.log(_includes('abc', 'd')); // false
+console.log('_includes:', _includes('abc', 'ab')); // true
+console.log('_includes:', _includes('abc', 'd')); // false
+console.log('_includes:', _includes(['abc', 'd', 'fg'], 'fg')); // true
+console.log('_includes:', _includes(['abc', 'd', 'fg'], 'z')); // false
 ```
 
 ### _push
@@ -206,6 +209,12 @@ console.log(floatFormatter('---+12323.')); // -12323.
 첫 번째 인자로 입력된 값을 정수의 형태를 벗어나지 않는 값으로 리턴합니다.
 ```javascript
 console.log(intFormatter('+++---.12323.23.23ddd.22223.23')); // +1232323232222323
+```
+
+### toQueryString
+인자로 받은 객체를 URL query string 파라미터로 변경한 값을 리턴합니다.
+```javascript
+console.log(toQueryString({ arg1: 1, arg2: 2, arg3: 3 })); // arg1=1&arg2=2&arg3=3
 ```
 
 [목차](#api)

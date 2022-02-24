@@ -4,7 +4,7 @@ import _curryRight from '../basic/_curryRight.js';
 import _go from '../basic/_go.js';
 import _join from '../basic/_join.js';
 import _replace from '../basic/_replace.js';
-import _regexTest from '../basic/_regexTest.js';
+import _test from '../basic/_test.js';
 
 function replaceHead(value, index) {
   return index === 0
@@ -15,7 +15,7 @@ function replaceHead(value, index) {
 const findPointIndex = _curryRight((iterator, predicate) => {
   let index = 0;
   for (let value of iterator) {
-    if (value === '.' && _regexTest(/[0-9]/, iterator[index - 1])) {
+    if (value === '.' && _test(/[0-9]/, iterator[index - 1])) {
       predicate(index);
       break;
     }

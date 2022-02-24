@@ -1,12 +1,12 @@
 import _pipe from '../basic/_pipe.js';
-import _entries from '../basic/_entries.js';
-import _map from '../basic/_map.js';
-import _join from '../basic/_join.js';
+import _entriesL from '../lazy/_entriesL.js';
+import _mapL from '../lazy/_mapL.js';
+import _joinC from '../concurrency/_joinC.js';
 
 const toQueryString = _pipe(
-  _entries,
-  _map(_join('=')),
-  _join('&')
+  _entriesL,
+  _mapL(_joinC('=')),
+  _joinC('&')
 );
 
 export default toQueryString;

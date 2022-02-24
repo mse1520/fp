@@ -6,10 +6,12 @@ const _curryRight = require('../basic/_curryRight.js');
 
 function* _mapL(iterator, predicate) {
   iterator = toIterator(iterator);
-  let next,
-      index = -1;
+  let index = 0;
 
-  while (!(index++, next = iterator.next()).done) yield releasePromise(next.value, predicate, index);
+  for (const value of iterator) {
+    yield releasePromise(value, predicate, index);
+    index++;
+  }
 }
 
 module.exports = _curryRight(_mapL);

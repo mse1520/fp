@@ -1,17 +1,8 @@
-import toIterator from '../internal/toiterator.js';
 import _curryRight from '../basic/_curryRight.js';
 
-function* _concatL(iterator, others) {
-  iterator = toIterator(iterator);
-  others = toIterator(others);
-
-  yield* iterator;
-
-  let next;
-  while (!(next = others.next()).done) {
-    next.value = toIterator(next.value);
-    yield* next.value;
-  }
+function* _concatL(iterator1, iterator2) {
+  yield* iterator1;
+  yield* iterator2;
 }
 
 export default _curryRight(_concatL);

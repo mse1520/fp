@@ -1,11 +1,11 @@
 const _pipe = require('../basic/_pipe.js');
 
-const _entries = require('../basic/_entries.js');
+const _entriesL = require('../lazy/_entriesL.js');
 
-const _map = require('../basic/_map.js');
+const _mapL = require('../lazy/_mapL.js');
 
-const _join = require('../basic/_join.js');
+const _joinC = require('../concurrency/_joinC.js');
 
-const toQueryString = _pipe(_entries, _map(_join('=')), _join('&'));
+const toQueryString = _pipe(_entriesL, _mapL(_joinC('=')), _joinC('&'));
 
 module.exports = toQueryString;
