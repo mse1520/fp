@@ -3,12 +3,12 @@ import _takeAll from './_takeAll';
 import _mapL from '@lazy/_mapL';
 
 interface Map {
-  <T1, T2>(predicate: (value: T1, index: number) => T2): (Iterator: Iterable<T1 | Promise<T1>>) => (T2 | undefined)[] | Promise<(T2 | undefined)[]>;
-  <T1, T2 = any>(iterator: Iterable<T1 | Promise<T1>>, predicate: (value: T1, index: number) => T2): (T2 | undefined)[] | Promise<(T2 | undefined)[]>;
+  <T, U>(predicate: (value: T, index: number) => U): (Iterator: Iterable<T | Promise<T>>) => (U | undefined)[] | Promise<(U | undefined)[]>;
+  <T, U = any>(iterator: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => U): (U | undefined)[] | Promise<(U | undefined)[]>;
 }
 
-function map<T1, T2>(iterator: Iterable<T1 | Promise<T1>>, predicate: (value: T1, index: number) => T2) {
-  return _takeAll(_mapL<T1, T2>(iterator, predicate));
+function map<T, U>(iterator: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => U) {
+  return _takeAll(_mapL<T, U>(iterator, predicate));
 }
 
 const _map: Map = _curryRight(map)
