@@ -1,8 +1,10 @@
 import _curryRight from '@basic/_curryRight';
+import _filter from '@basic/_filter';
 import _forEach from '@basic/_forEach';
 import _map from '@basic/_map';
 import _take from '@basic/_take';
 import _takeAll from '@basic/_takeAll';
+import _filterL from '@lazy/_filterL';
 import _forEachL from '@lazy/_forEachL';
 import _mapL from '@lazy/_mapL';
 
@@ -17,6 +19,22 @@ import _mapL from '@lazy/_mapL';
   console.log(curring(3)(1, 2));
   console.log(curring(3)(2)(1));
   console.log('------- _curryRight --------');
+})();
+
+// _take
+(() => {
+  const data = [1, 2, 3, 4, 5];
+  const result = _take(data, 3);
+
+  console.log('_take', result);
+})();
+
+// _takeAll
+(() => {
+  const data = [1, 2, 3, 4, 5];
+  const result = _takeAll(_filterL(data, v => (console.log(v), v % 2)));
+
+  console.log('_takeAll', result);
 })();
 
 // _map
@@ -35,6 +53,14 @@ import _mapL from '@lazy/_mapL';
   const result = _forEach(data, v => console.log(v + 1));
   console.log(result);
   console.log('------- _forEach --------');
+})();
+
+// _filter
+(() => {
+  const data = [1, 2, 3, 4, 5];
+  const result = _filter(data, v => v % 2);
+
+  console.log('_filter', result);
 })();
 
 // _mapL
@@ -59,4 +85,12 @@ import _mapL from '@lazy/_mapL';
   result.next();
   console.log(result);
   console.log('------- _forEachL --------');
+})();
+
+// _filterL
+(() => {
+  const data = [1, 2, 3, 4, 5];
+  const result = _filterL(data, v => v % 2);
+
+  console.log('_filterL', ...result);
 })();
