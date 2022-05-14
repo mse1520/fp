@@ -1,7 +1,9 @@
 import _curryRight from '@basic/_curryRight';
 import _filter from '@basic/_filter';
 import _forEach from '@basic/_forEach';
+import _head from '@basic/_head';
 import _map from '@basic/_map';
+import _reduce from '@basic/_reduce';
 import _take from '@basic/_take';
 import _takeAll from '@basic/_takeAll';
 import _filterL from '@lazy/_filterL';
@@ -29,10 +31,18 @@ import _mapL from '@lazy/_mapL';
   console.log('_take', result);
 })();
 
+// _head
+(() => {
+  const data = [1, 2, 3, 4, 5];
+  const result = _head(data);
+
+  console.log('_head', result);
+})();
+
 // _takeAll
 (() => {
   const data = [1, 2, 3, 4, 5];
-  const result = _takeAll(_filterL(data, v => (console.log(v), v % 2)));
+  const result = _takeAll(_filterL(data, v => v % 2));
 
   console.log('_takeAll', result);
 })();
@@ -40,7 +50,7 @@ import _mapL from '@lazy/_mapL';
 // _map
 (() => {
   const data = [1, 2, 3, 4, 5];
-  const result = _map(data, v => v + 1);
+  const result = _map(data, (v: any) => v + 1);
 
   console.log('_map:', result);
 })();
@@ -61,6 +71,14 @@ import _mapL from '@lazy/_mapL';
   const result = _filter(data, v => v % 2);
 
   console.log('_filter', result);
+})();
+
+// _reduce
+(() => {
+  const data = [1, 2, 3, 4, 5];
+  const result = _reduce(data, (acc, cur) => acc + cur);
+
+  console.log('_reduce', result);
 })();
 
 // _mapL

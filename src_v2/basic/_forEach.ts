@@ -3,13 +3,13 @@ import _takeAll from './_takeAll';
 import _mapL from '@lazy/_mapL';
 
 interface ForEach {
-  <T>(predicate: (value: T, index: number) => void): (Iterator: Iterable<T | Promise<T>>) => (T | undefined)[] | Promise<(T | undefined)[]>;
-  <T>(iterator: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => void): (T | undefined)[] | Promise<(T | undefined)[]>;
+  <T>(predicate: (value: T, index: number) => void): (iterable: Iterable<T | Promise<T>>) => T[] | Promise<T[]>;
+  <T>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => void): T[] | Promise<T[]>;
 }
 
-function forEach<T>(iterator: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => void) {
+function forEach<T>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => void) {
   return _takeAll(
-    _mapL(iterator, (value, index) => (predicate(value, index), value))
+    _mapL(iterable, (value, index) => (predicate(value, index), value))
   );
 }
 
