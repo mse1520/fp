@@ -1,6 +1,7 @@
 import _curryRight from '@basic/_curryRight';
 import _filter from '@basic/_filter';
 import _forEach from '@basic/_forEach';
+import _go from '@basic/_go';
 import _head from '@basic/_head';
 import _map from '@basic/_map';
 import _reduce from '@basic/_reduce';
@@ -50,7 +51,7 @@ import _mapL from '@lazy/_mapL';
 // _map
 (() => {
   const data = [1, 2, 3, 4, 5];
-  const result = _map(data, (v: any) => v + 1);
+  const result = _map(data, v => v + 1);
 
   console.log('_map:', result);
 })();
@@ -77,6 +78,18 @@ import _mapL from '@lazy/_mapL';
 (() => {
   const data = [1, 2, 3, 4, 5];
   const result = _reduce(data, (acc, cur) => acc + cur);
+
+  console.log('_reduce', result);
+})();
+
+// _go
+(() => {
+  const data = [1, 2, 3, 4, 5];
+  const result = _go(
+    data,
+    _filterL((v: number) => v % 2),
+    _map((v: number) => v.toString())
+  );
 
   console.log('_reduce', result);
 })();
