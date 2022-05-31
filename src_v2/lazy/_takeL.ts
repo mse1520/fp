@@ -2,7 +2,7 @@ import _curryRight from '@basic/_curryRight';
 import toIterator from '@internal/toIterator';
 
 interface TakeL {
-  <T>(length: number): (iterable: Iterable<T | Promise<T>>) => Generator<T | Promise<T>, void>;
+  (length: number): <T>(iterable: Iterable<T | Promise<T>>) => Generator<T | Promise<T>, void>;
   <T>(iterable: Iterable<T | Promise<T>>, length: number): Generator<T | Promise<T>, void>;
 }
 
