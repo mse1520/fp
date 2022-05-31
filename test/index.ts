@@ -7,12 +7,18 @@ import _go from '@basic/_go';
 import _head from '@basic/_head';
 import _identity from '@basic/_identity';
 import _map from '@basic/_map';
+import _pipe from '@basic/_pipe';
 import _range from '@basic/_range';
 import _reduce from '@basic/_reduce';
 import _reject from '@basic/_reject';
 import _take from '@basic/_take';
 import _takeAll from '@basic/_takeAll';
+import _tap from '@basic/_tap';
+import _filterC from '@concurrency/_filterC';
+import _forEachC from '@concurrency/_forEachC';
 import _mapC from '@concurrency/_mapC';
+import _reduceC from '@concurrency/_reduceC';
+import _rejectC from '@concurrency/_rejectC';
 import _takeAllC from '@concurrency/_takeAllC';
 import _takeC from '@concurrency/_takeC';
 import _filterL from '@lazy/_filterL';
@@ -127,6 +133,34 @@ import _takeL from '@lazy/_takeL';
     console.log('_go', result);
   })();
 
+  // _pipe
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result: (data: number[]) => string[] = _pipe(
+      _filterL((v: number) => v % 2),
+      _map((v: number) => v.toString())
+    );
+
+    console.log('_pipe', result(data));
+  })();
+
+  // _tap
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+
+    console.log('------- _tap --------');
+    _go(
+      data,
+      _tap(
+        _filter((v: number) => v % 2),
+        (v: any) => console.log(v)
+      ),
+      _reject((v: number) => v % 2),
+      (v: any) => console.log(v)
+    );
+    console.log('------- _tap --------');
+  })();
+
   // _identity
   (() => {
     const data = 'data!!';
@@ -149,7 +183,7 @@ import _takeL from '@lazy/_takeL';
 
   // _delay
   await (async () => {
-    const value = await _delay('data!!', 1000);
+    const value = await _delay('data!!', 500);
 
     console.log('_delay', value);
   })();
@@ -216,8 +250,6 @@ import _takeL from '@lazy/_takeL';
 
   // _takeC
   await (async () => {
-
-
     console.log('------- _takeC --------');
     await testC('_take', _take(Infinity));
     await testC('_takeC', _takeC(Infinity));
@@ -240,6 +272,38 @@ import _takeL from '@lazy/_takeL';
     await testC('_map', _map((v: number) => v + 1));
     await testC('_mapC', _mapC((v: number) => v + 1));
     console.log('------- _mapC --------');
+  })();
+
+  // _forEachC
+  await (async () => {
+    console.log('------- _forEachC --------');
+    await testC('_forEach', _forEach(_identity));
+    await testC('_forEachC', _forEachC(_identity));
+    console.log('------- _forEachC --------');
+  })();
+
+  // _filterC
+  await (async () => {
+    console.log('------- _filterC --------');
+    await testC('_filter', _filter((v: number) => v % 2));
+    await testC('_filterC', _filterC((v: number) => v % 2));
+    console.log('------- _filterC --------');
+  })();
+
+  // _rejectC
+  await (async () => {
+    console.log('------- _rejectC --------');
+    await testC('_reject', _reject((v: number) => v % 2));
+    await testC('_rejectC', _rejectC((v: number) => v % 2));
+    console.log('------- _rejectC --------');
+  })();
+
+  // _reduceC
+  await (async () => {
+    console.log('------- _reduceC --------');
+    await testC('_reduce', _reduce((acc: number, cur: number) => acc + cur));
+    await testC('_reduceC', _reduceC((acc: number, cur: number) => acc + cur));
+    console.log('------- _reduceC --------');
   })();
 })();
 
