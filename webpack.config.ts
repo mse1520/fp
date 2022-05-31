@@ -41,11 +41,11 @@ const config: GameWebpackConfig = {
   // 합쳐질 파일의 시작점
   // 파일이 서로 연결된경우 알아서 찾아준다
   entry: {
-    renderer: resolve('test_v2', 'index.ts')
+    renderer: resolve('test', 'index.ts')
   },
   // 하나로 합쳐실 출력 파일의 설정입니다
   output: {
-    path: resolve('test_v2', 'dist'),
+    path: resolve('test', 'dist'),
     filename: '[name].js',
     clean: true
   },
@@ -60,7 +60,7 @@ const config: GameWebpackConfig = {
     // html 파일을 번들링 파일과 연결하여 ouput 해준다
     new HtmlWebpackPlugin({
       cache: false, // 변경된 경우에만 파일을 내보냅니다
-      template: resolve('test_v2', 'index.html') // 번들링 파일과 연결할 파일의 경로
+      template: resolve('test', 'index.html') // 번들링 파일과 연결할 파일의 경로
     })
   ],
   // devServer 관련 설정

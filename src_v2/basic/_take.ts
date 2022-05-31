@@ -1,4 +1,5 @@
 import noopHandler from '@internal/noopHandler';
+import toIterator from '@internal/toIterator';
 import _curryRight from './_curryRight';
 
 interface Take {
@@ -8,14 +9,14 @@ interface Take {
 
 function take<T>(iterable: Iterable<T | Promise<T>>, length: number): T[] | Promise<T[]> {
   const result: T[] = [];
-  const iter = iterable[Symbol.iterator]();
+  const iter = toIterator(iterable);
   let next;
 
   return function recur(): T[] | Promise<T[]> {
     while (!(next = iter.next()).done) {
       if (next.value instanceof Promise) {
         return next.value
-          .then((value: T) => (result.push(value), result))
+          .then(value => (result.push(value), result))
           .then(result => result.length === length ? result : recur())
           .catch(noopHandler(recur));
       }
