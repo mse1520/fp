@@ -1,5 +1,4 @@
 import _curryRight from '@basic/_curryRight';
-import toIterator from '@internal/toIterator';
 
 interface TakeL {
   (length: number): <T>(iterable: Iterable<T | Promise<T>>) => Generator<T | Promise<T>, void>;
@@ -9,7 +8,7 @@ interface TakeL {
 function* takeL<T>(iterable: Iterable<T | Promise<T>>, length: number) {
   if (length < 1) return console.warn('In _takeL function, length parameter is not allowed to be less than 1!!');
 
-  for (const value of toIterator(iterable)) {
+  for (const value of iterable) {
     yield value;
     if (!--length) return;
   }

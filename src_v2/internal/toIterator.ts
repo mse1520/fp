@@ -3,8 +3,8 @@ function isIterable<T>(target: Iterator<T>): target is IterableIterator<T> {
 }
 
 function toIterator<T>(iterable: Iterable<T>) {
-  const iterator = iterable[Symbol.iterator]();
-  return isIterable(iterator) ? iterator : (console.warn('is not IterableIterator!!'), (function* () { })());
+  const iter = iterable[Symbol.iterator]();
+  return isIterable(iter) ? iter : (console.warn('is not IterableIterator!!'), (function* () { })());
 }
 
 export default toIterator;

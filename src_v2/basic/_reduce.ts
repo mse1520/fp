@@ -4,18 +4,18 @@ import releasePromise from '@internal/releasePromise';
 import toIterator from '@internal/toIterator';
 
 interface Reduce {
-  <T, R>(predicate: (acc: R, cur: T, idx: number) => R | Promise<R>): (iterable: Iterable<T | Promise<T>>) => R | Promise<R>;
-  <T, R>(predicate: (acc: R, cur: T, idx: number) => R | Promise<R>, acc: R | Promise<R>): (iterable: Iterable<T | Promise<T>>) => R | Promise<R>;
-  <T, R = any>(iterable: Iterable<T | Promise<T>>, predicate: (acc: R, cur: T, idx: number) => R | Promise<R>): R | Promise<R>;
-  <T, R>(iterable: Iterable<T | Promise<T>>, predicate: (acc: R, cur: T, idx: number) => R | Promise<R>, acc: R | Promise<R>): R | Promise<R>;
+  <T, U>(predicate: (acc: U, cur: T, idx: number) => U | Promise<U>): (iterable: Iterable<T | Promise<T>>) => U | Promise<U>;
+  <T, U>(predicate: (acc: U, cur: T, idx: number) => U | Promise<U>, acc: U | Promise<U>): (iterable: Iterable<T | Promise<T>>) => U | Promise<U>;
+  <T, U = any>(iterable: Iterable<T | Promise<T>>, predicate: (acc: U, cur: T, idx: number) => U | Promise<U>): U | Promise<U>;
+  <T, U>(iterable: Iterable<T | Promise<T>>, predicate: (acc: U, cur: T, idx: number) => U | Promise<U>, acc: U | Promise<U>): U | Promise<U>;
 }
 
-function reduce<T, R>(iterable: Iterable<T | Promise<T>>, predicate: (acc: R, cur: T, idx: number) => R | Promise<R>, acc: R | Promise<R>) {
+function reduce<T, U>(iterable: Iterable<T | Promise<T>>, predicate: (acc: U, cur: T, idx: number) => U | Promise<U>, acc: U | Promise<U>) {
   const iter = toIterator(iterable);
   let next;
   let idx = -1;
 
-  const recur = (iter: Iterator<T | Promise<T>>, acc: R): R | Promise<R> => {
+  const recur = (iter: Iterator<T | Promise<T>>, acc: U): U | Promise<U> => {
     while (!(idx++, next = iter.next()).done) {
       if (next.value instanceof Promise) {
         return next.value

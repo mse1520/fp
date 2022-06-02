@@ -20,7 +20,7 @@ function curryReduce(reduce: Reduce) {
         } else {
           return <T>(iterable: Iterable<T | Promise<T>>) => reduce(iterable, args[0], args[1]);
         }
-      case 3:
+      default:
         return reduce(args[0], args[1], args[2]);
     }
   };

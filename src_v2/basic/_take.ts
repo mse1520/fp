@@ -7,7 +7,7 @@ interface Take {
   <T>(iterable: Iterable<T | Promise<T>>, length: number): T[] | Promise<T[]>;
 }
 
-function take<T>(iterable: Iterable<T | Promise<T>>, length: number): T[] | Promise<T[]> {
+function take<T>(iterable: Iterable<T | Promise<T>>, length: number) {
   const result: T[] = [];
   const iter = toIterator(iterable);
   let next;

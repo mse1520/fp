@@ -1,11 +1,14 @@
 import _curry from '@basic/_curry';
 import _curryRight from '@basic/_curryRight';
+import _deepFlat from '@basic/_deepFlat';
 import _delay from '@basic/_delay';
 import _filter from '@basic/_filter';
+import _flat from '@basic/_flat';
 import _forEach from '@basic/_forEach';
 import _go from '@basic/_go';
 import _head from '@basic/_head';
 import _identity from '@basic/_identity';
+import _last from '@basic/_last';
 import _map from '@basic/_map';
 import _pipe from '@basic/_pipe';
 import _range from '@basic/_range';
@@ -21,7 +24,9 @@ import _reduceC from '@concurrency/_reduceC';
 import _rejectC from '@concurrency/_rejectC';
 import _takeAllC from '@concurrency/_takeAllC';
 import _takeC from '@concurrency/_takeC';
+import _deepFlatL from '@lazy/_deepFlatL';
 import _filterL from '@lazy/_filterL';
+import _flatL from '@lazy/_flatL';
 import _forEachL from '@lazy/_forEachL';
 import _mapL from '@lazy/_mapL';
 import _rangeL from '@lazy/_rangeL';
@@ -161,6 +166,14 @@ import _takeL from '@lazy/_takeL';
     console.log('------- _tap --------');
   })();
 
+  // _last
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result = _last(data);
+
+    console.log('_last', result);
+  })();
+
   // _identity
   (() => {
     const data = 'data!!';
@@ -186,6 +199,24 @@ import _takeL from '@lazy/_takeL';
     const value = await _delay('data!!', 500);
 
     console.log('_delay', value);
+  })();
+
+  // _flat
+  (() => {
+    const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
+
+    console.log('------- _flat --------');
+    console.log(_flat(data));
+    console.log(_flat(data, 2));
+    console.log('------- _flat --------');
+  })();
+
+  // _deepFlat
+  (() => {
+    const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
+    const result = _deepFlat(data);
+
+    console.log('_deepFlat', result);
   })();
 
   // _takeL
@@ -246,6 +277,24 @@ import _takeL from '@lazy/_takeL';
     console.log(..._rangeL(0, -10));
     console.log(..._rangeL(0, -10, 2));
     console.log('------- _rangeL --------');
+  })();
+
+  // _flatL
+  (() => {
+    const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
+
+    console.log('------- _flatL --------');
+    console.log(..._flatL(data));
+    console.log(..._flatL(data, 2));
+    console.log('------- _flatL --------');
+  })();
+
+  // deepFlatL
+  (() => {
+    const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
+    const result = _deepFlatL(data);
+
+    console.log('_deepFlatL', ...result);
   })();
 
   // _takeC
