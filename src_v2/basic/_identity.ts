@@ -1,4 +1,4 @@
-function _identity(value: any) {
+function _identity<T>(value: T) {
   return value;
 }
 

@@ -2,12 +2,15 @@ import _curry from '@basic/_curry';
 import _curryRight from '@basic/_curryRight';
 import _deepFlat from '@basic/_deepFlat';
 import _delay from '@basic/_delay';
+import _entries from '@basic/_entries';
 import _filter from '@basic/_filter';
 import _flat from '@basic/_flat';
+import _flatMap from '@basic/_flatMap';
 import _forEach from '@basic/_forEach';
 import _go from '@basic/_go';
 import _head from '@basic/_head';
 import _identity from '@basic/_identity';
+import _keys from '@basic/_keys';
 import _last from '@basic/_last';
 import _map from '@basic/_map';
 import _pipe from '@basic/_pipe';
@@ -17,6 +20,7 @@ import _reject from '@basic/_reject';
 import _take from '@basic/_take';
 import _takeAll from '@basic/_takeAll';
 import _tap from '@basic/_tap';
+import _values from '@basic/_values';
 import _filterC from '@concurrency/_filterC';
 import _forEachC from '@concurrency/_forEachC';
 import _mapC from '@concurrency/_mapC';
@@ -25,13 +29,17 @@ import _rejectC from '@concurrency/_rejectC';
 import _takeAllC from '@concurrency/_takeAllC';
 import _takeC from '@concurrency/_takeC';
 import _deepFlatL from '@lazy/_deepFlatL';
+import _entriesL from '@lazy/_entriesL';
 import _filterL from '@lazy/_filterL';
 import _flatL from '@lazy/_flatL';
+import _flatMapL from '@lazy/_flatMapL';
 import _forEachL from '@lazy/_forEachL';
+import _keysL from '@lazy/_keysL';
 import _mapL from '@lazy/_mapL';
 import _rangeL from '@lazy/_rangeL';
 import _rejectL from '@lazy/_rejectL';
 import _takeL from '@lazy/_takeL';
+import _valuesL from '@lazy/_valuesL';
 
 (async () => {
   // _curry
@@ -219,6 +227,35 @@ import _takeL from '@lazy/_takeL';
     console.log('_deepFlat', result);
   })();
 
+  // _flatMap
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result = _flatMap(data, v => [v, v * 2]);
+
+    console.log('_flatMap', result);
+  })();
+
+  // _entries
+  (() => {
+    const data = { arg1: 1, arg2: 2 };
+    const result = _entries(data);
+    console.log('_entries', result);
+  })();
+
+  // _keys
+  (() => {
+    const data = { arg1: 1, arg2: 2 };
+    const result = _keys(data);
+    console.log('_keys', result);
+  })();
+
+  // _values
+  (() => {
+    const data = { arg1: 1, arg2: 2 };
+    const result = _values(data);
+    console.log('_values', result);
+  })();
+
   // _takeL
   (() => {
     const data = [1, 2, 3, 4, 5];
@@ -295,6 +332,35 @@ import _takeL from '@lazy/_takeL';
     const result = _deepFlatL(data);
 
     console.log('_deepFlatL', ...result);
+  })();
+
+  // _flatMapL
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result = _flatMapL(data, v => [v, v * 2]);
+
+    console.log('_flatMapL', ...result);
+  })();
+
+  // _entriesL
+  (() => {
+    const data = { arg1: 1, arg2: 2 };
+    const result = _entriesL(data);
+    console.log('_entriesL', ...result);
+  })();
+
+  // _keysL
+  (() => {
+    const data = { arg1: 1, arg2: 2 };
+    const result = _keysL(data);
+    console.log('_keysL', ...result);
+  })();
+
+  // _valuesL
+  (() => {
+    const data = { arg1: 1, arg2: 2 };
+    const result = _valuesL(data);
+    console.log('_valuesL', ...result);
   })();
 
   // _takeC
