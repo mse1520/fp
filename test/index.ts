@@ -8,11 +8,13 @@ import _flat from '@basic/_flat';
 import _flatMap from '@basic/_flatMap';
 import _forEach from '@basic/_forEach';
 import _go from '@basic/_go';
+import _groupBy from '@basic/_groupBy';
 import _head from '@basic/_head';
 import _identity from '@basic/_identity';
 import _keys from '@basic/_keys';
 import _last from '@basic/_last';
 import _map from '@basic/_map';
+import _object from '@basic/_object';
 import _pipe from '@basic/_pipe';
 import _range from '@basic/_range';
 import _reduce from '@basic/_reduce';
@@ -24,6 +26,7 @@ import _values from '@basic/_values';
 import _filterC from '@concurrency/_filterC';
 import _forEachC from '@concurrency/_forEachC';
 import _mapC from '@concurrency/_mapC';
+import _objectC from '@concurrency/_objectC';
 import _reduceC from '@concurrency/_reduceC';
 import _rejectC from '@concurrency/_rejectC';
 import _takeAllC from '@concurrency/_takeAllC';
@@ -235,13 +238,6 @@ import _valuesL from '@lazy/_valuesL';
     console.log('_flatMap', result);
   })();
 
-  // _entries
-  (() => {
-    const data = { arg1: 1, arg2: 2 };
-    const result = _entries(data);
-    console.log('_entries', result);
-  })();
-
   // _keys
   (() => {
     const data = { arg1: 1, arg2: 2 };
@@ -254,6 +250,27 @@ import _valuesL from '@lazy/_valuesL';
     const data = { arg1: 1, arg2: 2 };
     const result = _values(data);
     console.log('_values', result);
+  })();
+
+  // _entries
+  (() => {
+    const data = { arg1: 1, arg2: 2 };
+    const result = _entries(data);
+    console.log('_entries', result);
+  })();
+
+  // _object
+  (() => {
+    const data: [string, number][] = [['arg1', 1], ['arg2', 2]];
+    const result = _object(data);
+    console.log('_object', result);
+  })();
+
+  // _groupBy
+  (() => {
+    const data: [string, number][] = [['arg1', 1], ['arg2', 1], ['arg3', 2]];
+    const result = _groupBy(data, ([, v]) => v);
+    console.log('_groupBy', result);
   })();
 
   // _takeL
@@ -342,13 +359,6 @@ import _valuesL from '@lazy/_valuesL';
     console.log('_flatMapL', ...result);
   })();
 
-  // _entriesL
-  (() => {
-    const data = { arg1: 1, arg2: 2 };
-    const result = _entriesL(data);
-    console.log('_entriesL', ...result);
-  })();
-
   // _keysL
   (() => {
     const data = { arg1: 1, arg2: 2 };
@@ -361,6 +371,13 @@ import _valuesL from '@lazy/_valuesL';
     const data = { arg1: 1, arg2: 2 };
     const result = _valuesL(data);
     console.log('_valuesL', ...result);
+  })();
+
+  // _entriesL
+  (() => {
+    const data = { arg1: 1, arg2: 2 };
+    const result = _entriesL(data);
+    console.log('_entriesL', ...result);
   })();
 
   // _takeC
@@ -419,6 +436,26 @@ import _valuesL from '@lazy/_valuesL';
     await testC('_reduce', _reduce((acc: number, cur: number) => acc + cur));
     await testC('_reduceC', _reduceC((acc: number, cur: number) => acc + cur));
     console.log('------- _reduceC --------');
+  })();
+
+  // _objectC
+  await (async () => {
+    function test(key: string, func: Function) {
+      console.time(key);
+      return _go(
+        _rangeL(5),
+        _mapL((v: number) => [`arg${v}`, v]),
+        _mapL(_delay(500)),
+        func,
+        (v: any) => console.log(key, v),
+        () => console.timeEnd(key)
+      );
+    }
+
+    console.log('------- _objectC --------');
+    await test('_object', _object);
+    await test('_objectC', _objectC);
+    console.log('------- _objectC --------');
   })();
 })();
 
