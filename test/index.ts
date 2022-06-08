@@ -11,6 +11,7 @@ import _go from '@basic/_go';
 import _groupBy from '@basic/_groupBy';
 import _head from '@basic/_head';
 import _identity from '@basic/_identity';
+import _join from '@basic/_join';
 import _keys from '@basic/_keys';
 import _last from '@basic/_last';
 import _map from '@basic/_map';
@@ -175,6 +176,14 @@ import _valuesL from '@lazy/_valuesL';
       (v: any) => console.log(v)
     );
     console.log('------- _tap --------');
+  })();
+
+  // _join
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result = _join(data, ',');
+
+    console.log('_join', result);
   })();
 
   // _last

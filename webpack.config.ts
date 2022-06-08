@@ -1,21 +1,8 @@
 import { resolve } from 'path';
 import { Configuration as WebpackConfiguration, EnvironmentPlugin } from 'webpack';
-import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
-
-const tsLoader = { test: /\.ts$/, use: 'ts-loader', exclude: /node_modules/ };
-const bableLoader = {
-  // test는 어떤 파일이 함쳐지는지에 대한 내용입니다
-  test: /\.ts$/, //정규 표현식
-  // 다수의 loader를 사용할 시 use 배열로 객체를 정의할 수 있다
-  // style loader를 참고 자료로 검색해볼 것
-  // use: [{}, {}],
-  loader: 'babel-loader',
-  exclude: /node_modules/,
-  options: {
-    presets: ['@babel/preset-typescript']
-  }
-};
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 interface GameWebpackConfig extends WebpackConfiguration {
   devServer: DevServerConfiguration
@@ -51,7 +38,19 @@ const config: GameWebpackConfig = {
   },
   // loader 설정
   module: {
-    rules: [tsLoader]
+    rules: [{
+      // test는 어떤 파일이 함쳐지는지에 대한 내용입니다
+      test: /\.ts$/, //정규 표현식
+      exclude: /node_modules/,
+      // 다수의 loader를 사용할 시 use 배열로 객체를 정의할 수 있다
+      // style loader를 참고 자료로 검색해볼 것
+      // use: [{}, {}],
+      loader: 'babel-loader',
+      options: {
+        presets: ['@babel/preset-env', '@babel/preset-typescript'],
+        plugins: [['@babel/plugin-transform-runtime', { corejs: 3 }]]
+      }
+    }]
   },
   // plugin은 번들링 된 파일에 작업이 필요할 때
   plugins: [
@@ -61,7 +60,9 @@ const config: GameWebpackConfig = {
     new HtmlWebpackPlugin({
       cache: false, // 변경된 경우에만 파일을 내보냅니다
       template: resolve('test', 'index.html') // 번들링 파일과 연결할 파일의 경로
-    })
+    }),
+    // typescript 검사
+    new ForkTsCheckerWebpackPlugin()
   ],
   // devServer 관련 설정
   devServer: {
