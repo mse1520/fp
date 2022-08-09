@@ -2,11 +2,11 @@ import releasePromise from '@internal/releasePromise';
 import _curryRight from '@basic/_curryRight';
 
 interface MapL {
-  <T, R>(predicate: (value: T, index: number) => R): (iterable: Iterable<T | Promise<T>>) => Generator<R | Promise<R>, void>;
-  <T, R = any>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => R): Generator<R | Promise<R>, void>;
+  <T, U>(predicate: (value: T, index: number) => U): (iterable: Iterable<T | Promise<T>>) => Generator<U | Promise<U>, void>;
+  <T, U = any>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => U): Generator<U | Promise<U>, void>;
 }
 
-function* mapL<T, R>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => R) {
+function* mapL<T, U>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => U) {
   let index = 0;
   for (const value of iterable) {
     yield releasePromise(value, predicate, index);

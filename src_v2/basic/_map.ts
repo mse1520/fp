@@ -3,11 +3,11 @@ import _takeAll from './_takeAll';
 import _mapL from '@lazy/_mapL';
 
 interface Map {
-  <T, R>(predicate: (value: T, index: number) => R): (iterable: Iterable<T | Promise<T>>) => (R | undefined)[] | Promise<(R | undefined)[]>;
-  <T, R = any>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => R): (R | undefined)[] | Promise<(R | undefined)[]>;
+  <T, U>(predicate: (value: T, index: number) => U): (iterable: Iterable<T | Promise<T>>) => U[] | Promise<U[]>;
+  <T, U = any>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => U): U[] | Promise<U[]>;
 }
 
-function map<T, R>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => R) {
+function map<T, U>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => U) {
   return _takeAll(_mapL(iterable, predicate));
 }
 

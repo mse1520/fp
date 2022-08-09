@@ -2,6 +2,7 @@ import _curryRight from './_curryRight';
 import _reduce from './_reduce';
 
 interface Join {
+  (separator: string): <T>(iterable: Iterable<T | Promise<T>>) => string | Promise<string>;
   <T>(iterable: Iterable<T | Promise<T>>, separator: string): string | Promise<string>;
 }
 
@@ -11,4 +12,4 @@ function join<T>(iterable: Iterable<T | Promise<T>>, separator: string) {
 
 const _join: Join = _curryRight(join);
 
-export default join;
+export default _join;

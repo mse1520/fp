@@ -2,13 +2,13 @@ import _reduce from '@basic/_reduce';
 import curryReduce from '@internal/curryReduce';
 
 interface ReduceC {
-  <T, R>(predicate: (acc: R, cur: T, idx: number) => R | Promise<R>): (iterable: Iterable<T | Promise<T>>) => R | Promise<R>;
-  <T, R>(predicate: (acc: R, cur: T, idx: number) => R | Promise<R>, acc: R | Promise<R>): (iterable: Iterable<T | Promise<T>>) => R | Promise<R>;
-  <T, R = any>(iterable: Iterable<T | Promise<T>>, predicate: (acc: R, cur: T, idx: number) => R | Promise<R>): R | Promise<R>;
-  <T, R>(iterable: Iterable<T | Promise<T>>, predicate: (acc: R, cur: T, idx: number) => R | Promise<R>, acc: R | Promise<R>): R | Promise<R>;
+  <T, U>(predicate: (acc: U, cur: T, idx: number) => U | Promise<U>): (iterable: Iterable<T | Promise<T>>) => U | Promise<U>;
+  <T, U>(predicate: (acc: U, cur: T, idx: number) => U | Promise<U>, acc: U | Promise<U>): (iterable: Iterable<T | Promise<T>>) => U | Promise<U>;
+  <T, U = any>(iterable: Iterable<T | Promise<T>>, predicate: (acc: U, cur: T, idx: number) => U | Promise<U>): U | Promise<U>;
+  <T, U>(iterable: Iterable<T | Promise<T>>, predicate: (acc: U, cur: T, idx: number) => U | Promise<U>, acc: U | Promise<U>): U | Promise<U>;
 }
 
-function reduceC<T, R>(iterable: Iterable<T | Promise<T>>, predicate: (acc: R, cur: T, idx: number) => R | Promise<R>, acc: R | Promise<R>) {
+function reduceC<T, U>(iterable: Iterable<T | Promise<T>>, predicate: (acc: U, cur: T, idx: number) => U | Promise<U>, acc: U | Promise<U>) {
   return _reduce([...iterable], predicate, acc);
 }
 
