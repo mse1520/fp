@@ -1,17 +1,17 @@
 import { resolve } from 'path';
 import { readdir, writeFile } from 'fs/promises';
-import _filterL from '@lazy/_filterL';
-import _takeAllC from '@concurrency/_takeAllC';
-import _go from '@basic/_go';
-import _mapL from '@lazy/_mapL';
-import _flatL from '@lazy/_flatL';
-import _takeAll from '@basic/_takeAll';
-import _flatMapL from '@lazy/_flatMapL';
-import _head from '@basic/_head';
-import _join from '@basic/_join';
-import _curry from '@basic/_curry';
+import _filterL from 'src/lazy/_filterL';
+import _takeAllC from 'src/concurrency/_takeAllC';
+import _go from 'src/basic/_go';
+import _mapL from 'src/lazy/_mapL';
+import _flatL from 'src/lazy/_flatL';
+import _takeAll from 'src/basic/_takeAll';
+import _flatMapL from 'src/lazy/_flatMapL';
+import _head from 'src/basic/_head';
+import _join from 'src/basic/_join';
+import _curry from 'src/basic/_curry';
 
-const SRC_PATH = resolve('src_v2');
+const SRC_PATH = resolve('src');
 const INDEX_REGEX = /basic|lazy|concurrency/;
 const INDEX_PATH = resolve(SRC_PATH, 'index.ts');
 
