@@ -1,6 +1,6 @@
 {
   "name": "underbarjs",
-  "version": "2.0.0",
+  "version": "2.0.0-beta.0",
   "author": "kyh",
   "license": "MIT",
   "description": "",
@@ -45,9 +45,7 @@
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.9.0"
   },
-  "files": [
-    "lib"
-  ],
+  "files": [ "lib", "dist" ],
   "exports": {
     ".": {
       "require": "./lib/cjs/index.js",
