@@ -1,10 +1,10 @@
 {
   "name": "underbarjs",
-  "version": "2.0.0-beta.0",
+  "version": "2.0.0-beta.2",
   "author": "kyh",
   "license": "MIT",
   "description": "",
-  "main": "lib/cjs/index.js",
+  "main": "lib/cjs/entry.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev concurrently \"npm run watch:generate-index\" \"webpack serve\"",
     "build": "npm run build-cjs & npm run build-mjs & webpack",
@@ -48,8 +48,8 @@
   "files": [ "lib", "dist" ],
   "exports": {
     ".": {
-      "require": "./lib/cjs/index.js",
-      "import": "./lib/mjs/index.js"
+      "require": "./lib/cjs/entry.js",
+      "import": "./lib/mjs/entry.js"
     }
   }
 }

@@ -23,7 +23,7 @@ function makeExportSyntax([dir, files]: [string, Promise<string[]>]): Generator<
   return _go(
     files,
     _mapL((file: string) => _head(file.split('.'))),
-    _mapL(name => `export { default as ${name} } from '@${dir}/${name}';`)
+    _mapL((name: string) => `export { default as ${name} } from '@${dir}/${name}';`)
   );
 }
 

@@ -41,7 +41,7 @@ const config: GameWebpackConfig = {
   // 합쳐질 파일의 시작점
   // 파일이 서로 연결된경우 알아서 찾아준다
   entry: {
-    underbarjs: IS_DEV ? resolve('test', 'index.ts') : resolve('src', 'index.ts')
+    underbarjs: IS_DEV ? resolve('test', 'index.ts') : resolve('src', 'entry.ts')
   },
   // 하나로 합쳐실 출력 파일의 설정입니다
   output: {
@@ -49,7 +49,7 @@ const config: GameWebpackConfig = {
     filename: '[name].min.js',
     clean: true,
     // 라이브러리 cdn 옵션
-    library: { type: 'umd' },
+    library: { name: '_', type: 'umd' },
     globalObject: 'this'
   },
   // loader 설정
