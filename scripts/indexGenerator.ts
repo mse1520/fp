@@ -7,7 +7,7 @@ import _flatL from 'src/lazy/_flatL';
 import _flatMapL from '@lazy/flatMapL';
 import head from '@basic/head';
 import _join from 'src/basic/_join';
-import _curry from 'src/basic/_curry';
+import curry from '@basic/curry';
 
 const SRC_PATH = resolve('src');
 const INDEX_REGEX = /basic|lazy|concurrency/;
@@ -25,7 +25,7 @@ function makeExportSyntax([dir, files]: [string, Promise<string[]>]): Generator<
   );
 }
 
-const _writeFile = _curry((path: string, text: string) => {
+const _writeFile = curry((path: string, text: string) => {
   writeFile(path, text);
   return text;
 });

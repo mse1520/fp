@@ -1,4 +1,4 @@
-import _curryRight from '@basic/_curryRight';
+import curryRight from '@basic/curryRight';
 import filterL from '@lazy/filterL';
 import takeAllC from './takeAllC';
 
@@ -11,6 +11,6 @@ function rejectC<T>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, in
   return takeAllC(filterL(iterable, (value, index) => !predicate(value, index)));
 }
 
-const _rejectC: RejectC = _curryRight(rejectC);
+const _rejectC: RejectC = curryRight(rejectC);
 
 export default _rejectC;

@@ -1,4 +1,4 @@
-import _curryRight from '@basic/_curryRight';
+import curryRight from '@basic/curryRight';
 import mapL from './mapL';
 
 interface ForEachL {
@@ -17,6 +17,6 @@ function _forEachL<T>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, 
   return mapL(iterable, (value, index) => (predicate(value, index), value));
 }
 
-const forEachL: ForEachL = _curryRight(_forEachL);
+const forEachL: ForEachL = curryRight(_forEachL);
 
 export default forEachL;

@@ -1,4 +1,4 @@
-import _curryRight from '@basic/_curryRight';
+import curryRight from '@basic/curryRight';
 import mapL from '@lazy/mapL';
 import takeAllC from './takeAllC';
 
@@ -19,6 +19,6 @@ function _mapC<T, U>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, i
   return takeAllC(mapL(iterable, predicate));
 }
 
-const mapC: MapC = _curryRight(_mapC);
+const mapC: MapC = curryRight(_mapC);
 
 export default mapC;

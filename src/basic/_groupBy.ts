@@ -1,4 +1,4 @@
-import _curryRight from './_curryRight';
+import curryRight from './curryRight';
 import _reduce from './_reduce';
 
 interface GroupBy {
@@ -16,6 +16,6 @@ function groupBy<T>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, in
   }, {});
 }
 
-const _groupBy: GroupBy = _curryRight(groupBy);
+const _groupBy: GroupBy = curryRight(groupBy);
 
 export default _groupBy;

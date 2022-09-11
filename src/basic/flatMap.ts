@@ -1,6 +1,6 @@
 import _flatL from '@lazy/_flatL';
 import mapL from '@lazy/mapL';
-import _curryRight from './_curryRight';
+import curryRight from './curryRight';
 import takeAll from './takeAll';
 
 interface FlatMapL {
@@ -20,6 +20,6 @@ function _flatMap<T>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, i
   return takeAll(_flatL(mapL(iterable, predicate)));
 }
 
-const flatMap: FlatMapL = _curryRight(_flatMap);
+const flatMap: FlatMapL = curryRight(_flatMap);
 
 export default flatMap;

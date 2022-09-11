@@ -1,4 +1,4 @@
-import _curryRight from './_curryRight';
+import curryRight from './curryRight';
 import takeAll from './takeAll';
 import mapL from '@lazy/mapL';
 
@@ -20,6 +20,6 @@ function _forEach<T>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, i
   );
 }
 
-const forEach: ForEach = _curryRight(_forEach);
+const forEach: ForEach = curryRight(_forEach);
 
 export default forEach;

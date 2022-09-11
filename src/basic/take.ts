@@ -1,6 +1,6 @@
 import noopHandler from '@internal/noopHandler';
 import toIterator from '@internal/toIterator';
-import _curryRight from './_curryRight';
+import curryRight from './curryRight';
 
 interface Take {
   /**
@@ -36,6 +36,6 @@ function _take<T>(iterable: Iterable<T | Promise<T>>, length: number) {
   }();
 }
 
-const take: Take = _curryRight(_take);
+const take: Take = curryRight(_take);
 
 export default take;

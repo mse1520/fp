@@ -1,5 +1,5 @@
 import errorNoop from '@internal/errorNoop';
-import _curryRight from '@basic/_curryRight';
+import curryRight from '@basic/curryRight';
 import catchNoop from '@internal/catchNoop';
 
 interface FilterL {
@@ -26,6 +26,6 @@ function* _filterL<T>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, 
   }
 }
 
-const filterL: FilterL = _curryRight(_filterL);
+const filterL: FilterL = curryRight(_filterL);
 
 export default filterL;

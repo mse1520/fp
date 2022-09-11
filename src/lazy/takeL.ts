@@ -1,4 +1,4 @@
-import _curryRight from '@basic/_curryRight';
+import curryRight from '@basic/curryRight';
 
 interface TakeL {
   /**
@@ -21,6 +21,6 @@ function* _takeL<T>(iterable: Iterable<T | Promise<T>>, length: number) {
   }
 }
 
-const takeL: TakeL = _curryRight(_takeL);
+const takeL: TakeL = curryRight(_takeL);
 
 export default takeL;

@@ -1,9 +1,9 @@
-import _curry from '@basic/_curry';
-import _curryRight from '@basic/_curryRight';
+import curry from '@basic/curry';
+import curryRight from '@basic/curryRight';
 import _deepFlat from '@basic/_deepFlat';
 import _delay from '@basic/_delay';
 import _entries from '@basic/_entries';
-import _filter from '@basic/_filter';
+import filter from '@basic/filter';
 import _flat from '@basic/_flat';
 import flatMap from '@basic/flatMap';
 import forEach from '@basic/forEach';
@@ -19,12 +19,12 @@ import _object from '@basic/_object';
 import _pipe from '@basic/_pipe';
 import _range from '@basic/_range';
 import _reduce from '@basic/_reduce';
-import _reject from '@basic/_reject';
+import reject from '@basic/reject';
 import take from '@basic/take';
 import takeAll from '@basic/takeAll';
 import _tap from '@basic/_tap';
 import _values from '@basic/_values';
-import _filterC from '@concurrency/_filterC';
+import filterC from '@concurrency/filterC';
 import _forEachC from '@concurrency/forEachC';
 import mapC from '@concurrency/mapC';
 import _objectC from '@concurrency/_objectC';
@@ -46,30 +46,30 @@ import takeL from '@lazy/takeL';
 import _valuesL from '@lazy/_valuesL';
 
 (async () => {
-  // _curry
+  // curry
   (() => {
     const add = (a: number, b: number, c: number) => `a: ${a}, b: ${b}, c:${c}`;
-    const curring = _curry(add);
+    const curring = curry(add);
 
-    console.log('------- _curry --------');
+    console.log('------- curry --------');
     console.log(curring(1, 2, 3));
     console.log(curring(1, 2)(3));
     console.log(curring(1)(2, 3));
     console.log(curring(1)(2)(3));
-    console.log('------- _curry --------');
+    console.log('------- curry --------');
   })();
 
-  // _curryRight
+  // curryRight
   (() => {
     const add = (a: number, b: number, c: number) => `a: ${a}, b: ${b}, c:${c}`;
-    const curring = _curryRight(add);
+    const curring = curryRight(add);
 
-    console.log('------- _curryRight --------');
+    console.log('------- curryRight --------');
     console.log(curring(1, 2, 3));
     console.log(curring(2, 3)(1));
     console.log(curring(3)(1, 2));
     console.log(curring(3)(2)(1));
-    console.log('------- _curryRight --------');
+    console.log('------- curryRight --------');
   })();
 
   // take
@@ -114,20 +114,20 @@ import _valuesL from '@lazy/_valuesL';
     console.log('------- forEach --------');
   })();
 
-  // _filter
+  // filter
   (() => {
     const data = [1, 2, 3, 4, 5];
-    const result = _filter(data, v => v % 2);
+    const result = filter(data, v => v % 2);
 
-    console.log('_filter', result);
+    console.log('filter', result);
   })();
 
-  // _reject
+  // reject
   (() => {
     const data = [1, 2, 3, 4, 5];
-    const result = _reject(data, v => v % 2);
+    const result = reject(data, v => v % 2);
 
-    console.log('_reject', result);
+    console.log('reject', result);
   })();
 
   // _reduce
@@ -169,10 +169,10 @@ import _valuesL from '@lazy/_valuesL';
     _go(
       data,
       _tap(
-        _filter((v: number) => v % 2),
+        filter((v: number) => v % 2),
         (v: any) => console.log(v)
       ),
-      _reject((v: number) => v % 2),
+      reject((v: number) => v % 2),
       (v: any) => console.log(v)
     );
     console.log('------- _tap --------');
@@ -423,18 +423,18 @@ import _valuesL from '@lazy/_valuesL';
     console.log('------- _forEachC --------');
   })();
 
-  // _filterC
+  // filterC
   await (async () => {
-    console.log('------- _filterC --------');
-    await testC('_filter', _filter((v: number) => v % 2));
-    await testC('_filterC', _filterC((v: number) => v % 2));
-    console.log('------- _filterC --------');
+    console.log('------- filterC --------');
+    await testC('filter', filter((v: number) => v % 2));
+    await testC('filterC', filterC((v: number) => v % 2));
+    console.log('------- filterC --------');
   })();
 
   // _rejectC
   await (async () => {
     console.log('------- _rejectC --------');
-    await testC('_reject', _reject((v: number) => v % 2));
+    await testC('reject', reject((v: number) => v % 2));
     await testC('_rejectC', _rejectC((v: number) => v % 2));
     console.log('------- _rejectC --------');
   })();

@@ -1,5 +1,5 @@
 import releasePromise from '@internal/releasePromise';
-import _curryRight from '@basic/_curryRight';
+import curryRight from '@basic/curryRight';
 
 interface MapL {
   /**
@@ -21,6 +21,6 @@ function* _mapL<T, U>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, 
   }
 }
 
-const mapL: MapL = _curryRight(_mapL);
+const mapL: MapL = curryRight(_mapL);
 
 export default mapL;

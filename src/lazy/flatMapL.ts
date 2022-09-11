@@ -1,4 +1,4 @@
-import _curryRight from '@basic/_curryRight';
+import curryRight from '@basic/curryRight';
 import _flatL from './_flatL';
 import mapL from './mapL';
 
@@ -19,6 +19,6 @@ function _flatMapL<T>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, 
   return _flatL(mapL(iterable, predicate));
 }
 
-const flatMapL: FlatMapL = _curryRight(_flatMapL);
+const flatMapL: FlatMapL = curryRight(_flatMapL);
 
 export default flatMapL;

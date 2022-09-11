@@ -1,4 +1,4 @@
-import _curryRight from '@basic/_curryRight';
+import curryRight from '@basic/curryRight';
 import take from '@basic/take';
 
 interface TakeC {
@@ -18,6 +18,6 @@ function _takeC<T>(iterable: Iterable<T | Promise<T>>, length: number) {
   return take([...iterable], length);
 }
 
-const takeC: TakeC = _curryRight(_takeC);
+const takeC: TakeC = curryRight(_takeC);
 
 export default takeC;
