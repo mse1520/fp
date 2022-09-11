@@ -8,12 +8,12 @@ import _flat from '@basic/_flat';
 import flatMap from '@basic/flatMap';
 import forEach from '@basic/forEach';
 import go from '@basic/go';
-import _groupBy from '@basic/_groupBy';
+import groupBy from '@basic/groupBy';
 import head from '@basic/head';
 import _identity from '@basic/_identity';
 import join from '@basic/join';
 import _keys from '@basic/_keys';
-import _last from '@basic/_last';
+import last from '@basic/last';
 import map from '@basic/map';
 import _object from '@basic/_object';
 import pipe from '@basic/pipe';
@@ -186,12 +186,12 @@ import _valuesL from '@lazy/_valuesL';
     console.log('join', result);
   })();
 
-  // _last
+  // last
   (() => {
     const data = [1, 2, 3, 4, 5];
-    const result = _last(data);
+    const result = last(data);
 
-    console.log('_last', result);
+    console.log('last', result);
   })();
 
   // _identity
@@ -275,11 +275,11 @@ import _valuesL from '@lazy/_valuesL';
     console.log('_object', result);
   })();
 
-  // _groupBy
+  // groupBy
   (() => {
     const data: [string, number][] = [['arg1', 1], ['arg2', 1], ['arg3', 2]];
-    const result = _groupBy(data, ([, v]) => v);
-    console.log('_groupBy', result);
+    const result = groupBy(data, ([, v]) => v);
+    console.log('groupBy', result);
   })();
 
   // takeL

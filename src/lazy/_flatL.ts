@@ -1,5 +1,4 @@
-import _delay from '@basic/_delay';
-import _last from '@basic/_last';
+import last from '@basic/last';
 import catchNoop from '@internal/catchNoop';
 import curryFlat from '@internal/curryFlat';
 import errorNoop from '@internal/errorNoop';
@@ -25,7 +24,7 @@ function* flatL<T extends Iterable<any>>(iterable: T, depth: number) {
   while (stack.length) {
     if (concur.start !== concur.end) throw new Error('flatL can not be used C function or Spread syntax with Promise!!');
 
-    let next = notPromise(_last(stack)).next();
+    let next = notPromise(last(stack)).next();
 
     if (next.done) {
       stack.pop();
