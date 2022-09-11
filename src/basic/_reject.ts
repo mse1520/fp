@@ -1,5 +1,5 @@
 import _curryRight from '@basic/_curryRight';
-import _filterL from '@lazy/_filterL';
+import filterL from '@lazy/filterL';
 import takeAll from './takeAll';
 
 interface Reject {
@@ -8,7 +8,7 @@ interface Reject {
 }
 
 function reject<T>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => any) {
-  return takeAll(_filterL(iterable, (value, index) => !predicate(value, index)));
+  return takeAll(filterL(iterable, (value, index) => !predicate(value, index)));
 }
 
 const _reject: Reject = _curryRight(reject);

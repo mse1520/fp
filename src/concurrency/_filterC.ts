@@ -1,5 +1,5 @@
 import _curryRight from '@basic/_curryRight';
-import _filterL from '@lazy/_filterL';
+import filterL from '@lazy/filterL';
 import takeAllC from './takeAllC';
 
 interface FilterC {
@@ -8,7 +8,7 @@ interface FilterC {
 }
 
 function filterC<T>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => any) {
-  return takeAllC(_filterL(iterable, predicate));
+  return takeAllC(filterL(iterable, predicate));
 }
 
 const _filterC: FilterC = _curryRight(filterC);

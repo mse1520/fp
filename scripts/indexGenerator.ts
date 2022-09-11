@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { readdir, writeFile } from 'fs/promises';
-import _filterL from 'src/lazy/_filterL';
+import filterL from '@lazy/filterL';
 import _go from 'src/basic/_go';
 import mapL from '@lazy/mapL';
 import _flatL from 'src/lazy/_flatL';
@@ -32,7 +32,7 @@ const _writeFile = _curry((path: string, text: string) => {
 
 _go(
   readdir(SRC_PATH),
-  _filterL((v: string) => INDEX_REGEX.test(v)),
+  filterL((v: string) => INDEX_REGEX.test(v)),
   mapL((dir: string) => [dir, getFiles(dir)]),
   _flatMapL(makeExportSyntax),
   _join('\n'),

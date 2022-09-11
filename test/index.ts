@@ -9,7 +9,7 @@ import flatMap from '@basic/flatMap';
 import forEach from '@basic/forEach';
 import _go from '@basic/_go';
 import _groupBy from '@basic/_groupBy';
-import _head from '@basic/head';
+import head from '@basic/head';
 import _identity from '@basic/_identity';
 import _join from '@basic/_join';
 import _keys from '@basic/_keys';
@@ -21,7 +21,7 @@ import _range from '@basic/_range';
 import _reduce from '@basic/_reduce';
 import _reject from '@basic/_reject';
 import take from '@basic/take';
-import _takeAll from '@basic/takeAll';
+import takeAll from '@basic/takeAll';
 import _tap from '@basic/_tap';
 import _values from '@basic/_values';
 import _filterC from '@concurrency/_filterC';
@@ -34,14 +34,14 @@ import takeAllC from '@concurrency/takeAllC';
 import takeC from '@concurrency/takeC';
 import _deepFlatL from '@lazy/_deepFlatL';
 import _entriesL from '@lazy/_entriesL';
-import _filterL from '@lazy/_filterL';
+import filterL from '@lazy/filterL';
 import _flatL from '@lazy/_flatL';
 import flatMapL from '@lazy/flatMapL';
 import forEachL from '@lazy/forEachL';
 import _keysL from '@lazy/_keysL';
 import mapL from '@lazy/mapL';
 import _rangeL from '@lazy/_rangeL';
-import _rejectL from '@lazy/_rejectL';
+import rejectL from '@lazy/rejectL';
 import takeL from '@lazy/takeL';
 import _valuesL from '@lazy/_valuesL';
 
@@ -80,20 +80,20 @@ import _valuesL from '@lazy/_valuesL';
     console.log('take', result);
   })();
 
-  // _takeAll
+  // takeAll
   (() => {
     const data = [1, 2, 3, 4, 5];
-    const result = _takeAll(_filterL(data, v => v % 2));
+    const result = takeAll(filterL(data, v => v % 2));
 
-    console.log('_takeAll', result);
+    console.log('takeAll', result);
   })();
 
-  // _head
+  // head
   (() => {
     const data = [1, 2, 3, 4, 5];
-    const result = _head(data);
+    const result = head(data);
 
-    console.log('_head', result);
+    console.log('head', result);
   })();
 
   // map
@@ -143,7 +143,7 @@ import _valuesL from '@lazy/_valuesL';
     const data = [1, 2, 3, 4, 5];
     const result = _go(
       data,
-      _filterL((v: number) => v % 2),
+      filterL((v: number) => v % 2),
       map((v: number) => v.toString())
     );
 
@@ -154,7 +154,7 @@ import _valuesL from '@lazy/_valuesL';
   (() => {
     const data = [1, 2, 3, 4, 5];
     const result: (data: number[]) => string[] = _pipe(
-      _filterL((v: number) => v % 2),
+      filterL((v: number) => v % 2),
       map((v: number) => v.toString())
     );
 
@@ -314,20 +314,20 @@ import _valuesL from '@lazy/_valuesL';
     console.log('------- forEachL --------');
   })();
 
-  // _filterL
+  // filterL
   (() => {
     const data = [1, 2, 3, 4, 5];
-    const result = _filterL(data, v => v % 2);
+    const result = filterL(data, v => v % 2);
 
-    console.log('_filterL', ...result);
+    console.log('filterL', ...result);
   })();
 
-  // _rejectL
+  // rejectL
   (() => {
     const data = [1, 2, 3, 4, 5];
-    const result = _rejectL(data, v => v % 2);
+    const result = rejectL(data, v => v % 2);
 
-    console.log('_rejectL', ...result);
+    console.log('rejectL', ...result);
   })();
 
   // _rangeL
