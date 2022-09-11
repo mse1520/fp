@@ -1,5 +1,5 @@
 import curryRight from './curryRight';
-import _reduce from './_reduce';
+import reduce from './reduce';
 
 interface GroupBy {
   <T>(predicate: (value: T, index: number) => string | number): (iterable: Iterable<T | Promise<T>>) => { [key: string]: T[] };
@@ -7,7 +7,7 @@ interface GroupBy {
 }
 
 function groupBy<T>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => string | number) {
-  return _reduce<T, { [key: string]: T[]; }>(iterable, (acc, cur, index) => {
+  return reduce<T, { [key: string]: T[]; }>(iterable, (acc, cur, index) => {
     const key = predicate(cur, index);
     if (acc[key] === undefined) acc[key] = [];
     acc[key].push(cur);

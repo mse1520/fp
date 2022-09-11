@@ -7,18 +7,18 @@ import filter from '@basic/filter';
 import _flat from '@basic/_flat';
 import flatMap from '@basic/flatMap';
 import forEach from '@basic/forEach';
-import _go from '@basic/_go';
+import go from '@basic/go';
 import _groupBy from '@basic/_groupBy';
 import head from '@basic/head';
 import _identity from '@basic/_identity';
-import _join from '@basic/_join';
+import join from '@basic/join';
 import _keys from '@basic/_keys';
 import _last from '@basic/_last';
 import map from '@basic/map';
 import _object from '@basic/_object';
-import _pipe from '@basic/_pipe';
-import _range from '@basic/_range';
-import _reduce from '@basic/_reduce';
+import pipe from '@basic/pipe';
+import range from '@basic/range';
+import reduce from '@basic/reduce';
 import reject from '@basic/reject';
 import take from '@basic/take';
 import takeAll from '@basic/takeAll';
@@ -28,8 +28,8 @@ import filterC from '@concurrency/filterC';
 import _forEachC from '@concurrency/forEachC';
 import mapC from '@concurrency/mapC';
 import _objectC from '@concurrency/_objectC';
-import _reduceC from '@concurrency/_reduceC';
-import _rejectC from '@concurrency/_rejectC';
+import reduceC from '@concurrency/reduceC';
+import rejectC from '@concurrency/rejectC';
 import takeAllC from '@concurrency/takeAllC';
 import takeC from '@concurrency/takeC';
 import _deepFlatL from '@lazy/_deepFlatL';
@@ -40,7 +40,7 @@ import flatMapL from '@lazy/flatMapL';
 import forEachL from '@lazy/forEachL';
 import _keysL from '@lazy/_keysL';
 import mapL from '@lazy/mapL';
-import _rangeL from '@lazy/_rangeL';
+import rangeL from '@lazy/rangeL';
 import rejectL from '@lazy/rejectL';
 import takeL from '@lazy/takeL';
 import _valuesL from '@lazy/_valuesL';
@@ -130,35 +130,35 @@ import _valuesL from '@lazy/_valuesL';
     console.log('reject', result);
   })();
 
-  // _reduce
+  // reduce
   (() => {
     const data = [1, 2, 3, 4, 5];
-    const result = _reduce(data, (acc, cur) => acc + cur);
+    const result = reduce(data, (acc, cur) => acc + cur);
 
-    console.log('_reduce', result);
+    console.log('reduce', result);
   })();
 
-  // _go
+  // go
   (() => {
     const data = [1, 2, 3, 4, 5];
-    const result = _go(
+    const result = go(
       data,
       filterL((v: number) => v % 2),
       map((v: number) => v.toString())
     );
 
-    console.log('_go', result);
+    console.log('go', result);
   })();
 
-  // _pipe
+  // pipe
   (() => {
     const data = [1, 2, 3, 4, 5];
-    const result: (data: number[]) => string[] = _pipe(
+    const result: (data: number[]) => string[] = pipe(
       filterL((v: number) => v % 2),
       map((v: number) => v.toString())
     );
 
-    console.log('_pipe', result(data));
+    console.log('pipe', result(data));
   })();
 
   // _tap
@@ -166,7 +166,7 @@ import _valuesL from '@lazy/_valuesL';
     const data = [1, 2, 3, 4, 5];
 
     console.log('------- _tap --------');
-    _go(
+    go(
       data,
       _tap(
         filter((v: number) => v % 2),
@@ -178,12 +178,12 @@ import _valuesL from '@lazy/_valuesL';
     console.log('------- _tap --------');
   })();
 
-  // _join
+  // join
   (() => {
     const data = [1, 2, 3, 4, 5];
-    const result = _join(data, ',');
+    const result = join(data, ',');
 
-    console.log('_join', result);
+    console.log('join', result);
   })();
 
   // _last
@@ -202,16 +202,16 @@ import _valuesL from '@lazy/_valuesL';
     console.log('_identity', result);
   })();
 
-  // _range
+  // range
   (() => {
-    console.log('------- _range --------');
-    console.log(_range(10));
-    console.log(_range(0, 10));
-    console.log(_range(0, 10, 2));
-    console.log(_range(-10));
-    console.log(_range(0, -10));
-    console.log(_range(0, -10, 2));
-    console.log('------- _range --------');
+    console.log('------- range --------');
+    console.log(range(10));
+    console.log(range(0, 10));
+    console.log(range(0, 10, 2));
+    console.log(range(-10));
+    console.log(range(0, -10));
+    console.log(range(0, -10, 2));
+    console.log('------- range --------');
   })();
 
   // _delay
@@ -330,16 +330,16 @@ import _valuesL from '@lazy/_valuesL';
     console.log('rejectL', ...result);
   })();
 
-  // _rangeL
+  // rangeL
   (() => {
-    console.log('------- _rangeL --------');
-    console.log(..._rangeL(10));
-    console.log(..._rangeL(0, 10));
-    console.log(..._rangeL(0, 10, 2));
-    console.log(..._rangeL(-10));
-    console.log(..._rangeL(0, -10));
-    console.log(..._rangeL(0, -10, 2));
-    console.log('------- _rangeL --------');
+    console.log('------- rangeL --------');
+    console.log(...rangeL(10));
+    console.log(...rangeL(0, 10));
+    console.log(...rangeL(0, 10, 2));
+    console.log(...rangeL(-10));
+    console.log(...rangeL(0, -10));
+    console.log(...rangeL(0, -10, 2));
+    console.log('------- rangeL --------');
   })();
 
   // _flatL
@@ -431,28 +431,28 @@ import _valuesL from '@lazy/_valuesL';
     console.log('------- filterC --------');
   })();
 
-  // _rejectC
+  // rejectC
   await (async () => {
-    console.log('------- _rejectC --------');
+    console.log('------- rejectC --------');
     await testC('reject', reject((v: number) => v % 2));
-    await testC('_rejectC', _rejectC((v: number) => v % 2));
-    console.log('------- _rejectC --------');
+    await testC('rejectC', rejectC((v: number) => v % 2));
+    console.log('------- rejectC --------');
   })();
 
-  // _reduceC
+  // reduceC
   await (async () => {
-    console.log('------- _reduceC --------');
-    await testC('_reduce', _reduce((acc: number, cur: number) => acc + cur));
-    await testC('_reduceC', _reduceC((acc: number, cur: number) => acc + cur));
-    console.log('------- _reduceC --------');
+    console.log('------- reduceC --------');
+    await testC('reduce', reduce((acc: number, cur: number) => acc + cur));
+    await testC('reduceC', reduceC((acc: number, cur: number) => acc + cur));
+    console.log('------- reduceC --------');
   })();
 
   // _objectC
   await (async () => {
     function test(key: string, func: Function) {
       console.time(key);
-      return _go(
-        _rangeL(5),
+      return go(
+        rangeL(5),
         mapL((v: number) => [`arg${v}`, v]),
         mapL(_delay(500)),
         func,
@@ -470,8 +470,8 @@ import _valuesL from '@lazy/_valuesL';
 
 function testC(key: string, func: Function, delay = 500) {
   console.time(key);
-  return _go(
-    _rangeL(5),
+  return go(
+    rangeL(5),
     mapL(_delay(delay)),
     func,
     (v: any) => console.log(key, v),

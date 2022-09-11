@@ -1,7 +1,7 @@
-import _reduce from './_reduce';
+import reduce from './reduce';
 
 function _tap(func: Function, ...funcs: Function[]) {
-  return (arg: any) => (_reduce(funcs, (acc, func) => func(acc), func(arg)), arg);
+  return (arg: any) => (reduce(funcs, (acc, func) => func(acc), func(arg)), arg);
 }
 
 export default _tap;
