@@ -3,11 +3,18 @@ import toIterator from '@internal/toIterator';
 import _curryRight from './_curryRight';
 
 interface Take {
+  /**
+   * Creates a slice of array with n elements taken from the beginning.
+   * This function has currying applied. For more information about currying, visit 'https://github.com/mse1520/underbarjs#readme'.
+   * @param iterable conforms to the iterable protocol.
+   * @param length The number of elements to take.
+   * @returns Returns the slice of array.
+   */
   (length: number): <T>(iterable: Iterable<T | Promise<T>>) => T[] | Promise<T[]>;
   <T>(iterable: Iterable<T | Promise<T>>, length: number): T[] | Promise<T[]>;
 }
 
-function take<T>(iterable: Iterable<T | Promise<T>>, length: number) {
+function _take<T>(iterable: Iterable<T | Promise<T>>, length: number) {
   const result: T[] = [];
   const iter = toIterator(iterable);
   let next;
@@ -29,6 +36,6 @@ function take<T>(iterable: Iterable<T | Promise<T>>, length: number) {
   }();
 }
 
-const _take: Take = _curryRight(take);
+const take: Take = _curryRight(_take);
 
-export default _take;
+export default take;

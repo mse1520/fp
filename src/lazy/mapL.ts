@@ -3,8 +3,8 @@ import _curryRight from '@basic/_curryRight';
 
 interface MapL {
   /**
-   * This function has currying applied. For more information about currying, visit 'https://github.com/mse1520/underbarjs#readme'.
    * The mapL method creates a Generator populated with the results of calling a provided function on every element in the calling Iterable.
+   * This function has currying applied. For more information about currying, visit 'https://github.com/mse1520/underbarjs#readme'.
    * @param iterable conforms to the iterable protocol
    * @param predicate Function that is called for every element of iterable. Each time callbackFn executes, the returned value is added to new Generator.
    * @returns Generator

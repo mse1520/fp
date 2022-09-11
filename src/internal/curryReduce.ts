@@ -1,4 +1,4 @@
-import _head from '@basic/_head';
+import head from '@basic/head';
 import toIterator from './toIterator';
 
 type Predicate<T, R> = (acc: R, cur: T, idx: number) => R | Promise<R>;
@@ -11,12 +11,12 @@ function curryReduce(reduce: Reduce) {
       case 1:
         return <T>(iterable: Iterable<T | Promise<T>>) => {
           const iter = toIterator(iterable);
-          return reduce(iter, args[0], _head(iter));
+          return reduce(iter, args[0], head(iter));
         };
       case 2:
         if (Symbol.iterator in args[0]) {
           const iter = toIterator(args[0]);
-          return reduce(iter, args[1], _head(iter));
+          return reduce(iter, args[1], head(iter));
         } else {
           return <T>(iterable: Iterable<T | Promise<T>>) => reduce(iterable, args[0], args[1]);
         }

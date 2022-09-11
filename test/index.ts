@@ -9,7 +9,7 @@ import flatMap from '@basic/flatMap';
 import forEach from '@basic/forEach';
 import _go from '@basic/_go';
 import _groupBy from '@basic/_groupBy';
-import _head from '@basic/_head';
+import _head from '@basic/head';
 import _identity from '@basic/_identity';
 import _join from '@basic/_join';
 import _keys from '@basic/_keys';
@@ -20,8 +20,8 @@ import _pipe from '@basic/_pipe';
 import _range from '@basic/_range';
 import _reduce from '@basic/_reduce';
 import _reject from '@basic/_reject';
-import _take from '@basic/_take';
-import _takeAll from '@basic/_takeAll';
+import take from '@basic/take';
+import _takeAll from '@basic/takeAll';
 import _tap from '@basic/_tap';
 import _values from '@basic/_values';
 import _filterC from '@concurrency/_filterC';
@@ -30,8 +30,8 @@ import mapC from '@concurrency/mapC';
 import _objectC from '@concurrency/_objectC';
 import _reduceC from '@concurrency/_reduceC';
 import _rejectC from '@concurrency/_rejectC';
-import _takeAllC from '@concurrency/_takeAllC';
-import _takeC from '@concurrency/_takeC';
+import takeAllC from '@concurrency/takeAllC';
+import takeC from '@concurrency/takeC';
 import _deepFlatL from '@lazy/_deepFlatL';
 import _entriesL from '@lazy/_entriesL';
 import _filterL from '@lazy/_filterL';
@@ -42,7 +42,7 @@ import _keysL from '@lazy/_keysL';
 import mapL from '@lazy/mapL';
 import _rangeL from '@lazy/_rangeL';
 import _rejectL from '@lazy/_rejectL';
-import _takeL from '@lazy/_takeL';
+import takeL from '@lazy/takeL';
 import _valuesL from '@lazy/_valuesL';
 
 (async () => {
@@ -72,12 +72,12 @@ import _valuesL from '@lazy/_valuesL';
     console.log('------- _curryRight --------');
   })();
 
-  // _take
+  // take
   (() => {
     const data = [1, 2, 3, 4, 5];
-    const result = _take(data, 5);
+    const result = take(data, 5);
 
-    console.log('_take', result);
+    console.log('take', result);
   })();
 
   // _takeAll
@@ -282,12 +282,12 @@ import _valuesL from '@lazy/_valuesL';
     console.log('_groupBy', result);
   })();
 
-  // _takeL
+  // takeL
   (() => {
     const data = [1, 2, 3, 4, 5];
-    const result = _takeL(data, 3);
+    const result = takeL(data, 3);
 
-    console.log('_takeL', ...result);
+    console.log('takeL', ...result);
   })();
 
   // mapL
@@ -389,22 +389,22 @@ import _valuesL from '@lazy/_valuesL';
     console.log('_entriesL', ...result);
   })();
 
-  // _takeC
+  // takeC
   await (async () => {
-    console.log('------- _takeC --------');
-    await testC('_take', _take(Infinity));
-    await testC('_takeC', _takeC(Infinity));
-    console.log('------- _takeC --------');
+    console.log('------- takeC --------');
+    await testC('take', take(Infinity));
+    await testC('takeC', takeC(Infinity));
+    console.log('------- takeC --------');
   })();
 
-  // _takeAllC
+  // takeAllC
   (() => {
     const data = [1, 2, 3, 4, 5];
 
-    console.log('------- _takeAllC --------');
-    console.log('_takeC', _takeC(data, 3));
-    console.log('_takeAllC', _takeAllC(data));
-    console.log('------- _takeAllC --------');
+    console.log('------- takeAllC --------');
+    console.log('takeC', takeC(data, 3));
+    console.log('takeAllC', takeAllC(data));
+    console.log('------- takeAllC --------');
   })();
 
   // mapC

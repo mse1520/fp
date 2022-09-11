@@ -1,6 +1,6 @@
 import curryFlat from '@internal/curryFlat';
 import _flatL from '@lazy/_flatL';
-import _takeAll from './_takeAll';
+import takeAll from './takeAll';
 
 interface Flat {
   (): <T extends Iterable<any>>(iterable: T) => any[] | Promise<any[]>;
@@ -10,7 +10,7 @@ interface Flat {
 }
 
 function flat<T extends Iterable<any>>(iterable: T, depth: number) {
-  return _takeAll(_flatL(iterable, depth));
+  return takeAll(_flatL(iterable, depth));
 }
 
 const _flat: Flat = curryFlat(flat);
