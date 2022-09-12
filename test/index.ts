@@ -1,7 +1,7 @@
 import curry from '@basic/curry';
 import curryRight from '@basic/curryRight';
 import _deepFlat from '@basic/_deepFlat';
-import _delay from '@basic/_delay';
+import delay from '@basic/delay';
 import _entries from '@basic/_entries';
 import filter from '@basic/filter';
 import _flat from '@basic/_flat';
@@ -10,7 +10,7 @@ import forEach from '@basic/forEach';
 import go from '@basic/go';
 import groupBy from '@basic/groupBy';
 import head from '@basic/head';
-import _identity from '@basic/_identity';
+import identity from '@basic/identity';
 import join from '@basic/join';
 import _keys from '@basic/_keys';
 import last from '@basic/last';
@@ -22,7 +22,7 @@ import reduce from '@basic/reduce';
 import reject from '@basic/reject';
 import take from '@basic/take';
 import takeAll from '@basic/takeAll';
-import _tap from '@basic/_tap';
+import tap from '@basic/tap';
 import _values from '@basic/_values';
 import filterC from '@concurrency/filterC';
 import _forEachC from '@concurrency/forEachC';
@@ -161,21 +161,21 @@ import _valuesL from '@lazy/_valuesL';
     console.log('pipe', result(data));
   })();
 
-  // _tap
+  // tap
   (() => {
     const data = [1, 2, 3, 4, 5];
 
-    console.log('------- _tap --------');
+    console.log('------- tap --------');
     go(
       data,
-      _tap(
+      tap(
         filter((v: number) => v % 2),
         (v: any) => console.log(v)
       ),
       reject((v: number) => v % 2),
       (v: any) => console.log(v)
     );
-    console.log('------- _tap --------');
+    console.log('------- tap --------');
   })();
 
   // join
@@ -194,12 +194,12 @@ import _valuesL from '@lazy/_valuesL';
     console.log('last', result);
   })();
 
-  // _identity
+  // identity
   (() => {
     const data = 'data!!';
-    const result = _identity(data);
+    const result = identity(data);
 
-    console.log('_identity', result);
+    console.log('identity', result);
   })();
 
   // range
@@ -214,11 +214,11 @@ import _valuesL from '@lazy/_valuesL';
     console.log('------- range --------');
   })();
 
-  // _delay
+  // delay
   await (async () => {
-    const value = await _delay('data!!', 500);
+    const value = await delay('data!!', 500);
 
-    console.log('_delay', value);
+    console.log('delay', value);
   })();
 
   // _flat
@@ -418,8 +418,8 @@ import _valuesL from '@lazy/_valuesL';
   // _forEachC
   await (async () => {
     console.log('------- _forEachC --------');
-    await testC('forEach', forEach(_identity));
-    await testC('_forEachC', _forEachC(_identity));
+    await testC('forEach', forEach(identity));
+    await testC('_forEachC', _forEachC(identity));
     console.log('------- _forEachC --------');
   })();
 
@@ -454,7 +454,7 @@ import _valuesL from '@lazy/_valuesL';
       return go(
         rangeL(5),
         mapL((v: number) => [`arg${v}`, v]),
-        mapL(_delay(500)),
+        mapL(delay(500)),
         func,
         (v: any) => console.log(key, v),
         () => console.timeEnd(key)
@@ -468,11 +468,11 @@ import _valuesL from '@lazy/_valuesL';
   })();
 })();
 
-function testC(key: string, func: Function, delay = 500) {
+function testC(key: string, func: Function, time = 500) {
   console.time(key);
   return go(
     rangeL(5),
-    mapL(_delay(delay)),
+    mapL(delay(time)),
     func,
     (v: any) => console.log(key, v),
     () => console.timeEnd(key)
