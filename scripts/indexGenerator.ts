@@ -3,7 +3,6 @@ import { readdir, writeFile } from 'fs/promises';
 import filterL from '@lazy/filterL';
 import go from '@basic/go';
 import mapL from '@lazy/mapL';
-import _flatL from 'src/lazy/_flatL';
 import flatMapL from '@lazy/flatMapL';
 import head from '@basic/head';
 import join from '@basic/join';

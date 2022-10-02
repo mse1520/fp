@@ -1,5 +1,5 @@
 import curryRight from '@basic/curryRight';
-import _flatL from './_flatL';
+import flatL from './flatL';
 import mapL from './mapL';
 
 interface FlatMapL {
@@ -16,7 +16,7 @@ interface FlatMapL {
 }
 
 function _flatMapL<T>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => any) {
-  return _flatL(mapL(iterable, predicate));
+  return flatL(mapL(iterable, predicate));
 }
 
 const flatMapL: FlatMapL = curryRight(_flatMapL);

@@ -1,10 +1,10 @@
 import curry from '@basic/curry';
 import curryRight from '@basic/curryRight';
-import _deepFlat from '@basic/_deepFlat';
+import deepFlat from '@basic/deepFlat';
 import delay from '@basic/delay';
 import _entries from '@basic/_entries';
 import filter from '@basic/filter';
-import _flat from '@basic/_flat';
+import flat from '@basic/flat';
 import flatMap from '@basic/flatMap';
 import forEach from '@basic/forEach';
 import go from '@basic/go';
@@ -32,10 +32,10 @@ import reduceC from '@concurrency/reduceC';
 import rejectC from '@concurrency/rejectC';
 import takeAllC from '@concurrency/takeAllC';
 import takeC from '@concurrency/takeC';
-import _deepFlatL from '@lazy/_deepFlatL';
+import deepFlatL from '@lazy/deepFlatL';
 import _entriesL from '@lazy/_entriesL';
 import filterL from '@lazy/filterL';
-import _flatL from '@lazy/_flatL';
+import flatL from '@lazy/flatL';
 import flatMapL from '@lazy/flatMapL';
 import forEachL from '@lazy/forEachL';
 import _keysL from '@lazy/_keysL';
@@ -221,22 +221,22 @@ import _valuesL from '@lazy/_valuesL';
     console.log('delay', value);
   })();
 
-  // _flat
+  // flat
   (() => {
     const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
 
-    console.log('------- _flat --------');
-    console.log(_flat(data));
-    console.log(_flat(data, 2));
-    console.log('------- _flat --------');
+    console.log('------- flat --------');
+    console.log(flat(data));
+    console.log(flat(data, 2));
+    console.log('------- flat --------');
   })();
 
-  // _deepFlat
+  // deepFlat
   (() => {
     const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
-    const result = _deepFlat(data);
+    const result = deepFlat(data);
 
-    console.log('_deepFlat', result);
+    console.log('deepFlat', result);
   })();
 
   // flatMap
@@ -342,22 +342,22 @@ import _valuesL from '@lazy/_valuesL';
     console.log('------- rangeL --------');
   })();
 
-  // _flatL
+  // flatL
   (() => {
     const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
 
-    console.log('------- _flatL --------');
-    console.log(..._flatL(data));
-    console.log(..._flatL(data, 2));
-    console.log('------- _flatL --------');
+    console.log('------- flatL --------');
+    console.log(...flatL(data));
+    console.log(...flatL(data, 2));
+    console.log('------- flatL --------');
   })();
 
   // deepFlatL
   (() => {
     const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
-    const result = _deepFlatL(data);
+    const result = deepFlatL(data);
 
-    console.log('_deepFlatL', ...result);
+    console.log('deepFlatL', ...result);
   })();
 
   // flatMapL

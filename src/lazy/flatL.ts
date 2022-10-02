@@ -7,6 +7,13 @@ import notPromise from '@internal/notPromise';
 import toIterator from '@internal/toIterator';
 
 interface FlatL {
+  /**
+   * The flat() method creates a Generator with all sub-iterator concatenated into it recursively up to the specified depth.
+   * This function has currying applied. For more information about currying, visit 'https://github.com/mse1520/underbarjs#readme'.
+   * @param iterable conforms to the iterable protocol.
+   * @param depth The depth level specifying how deep a nested array structure should be flattened. Defaults to 1.
+   * @returns Generator
+   */
   (): <T extends Iterable<any>>(iterable: T) => Generator<any, void>;
   (depth: number): <T extends Iterable<any>>(iterable: T) => Generator<any, void>;
   <T extends Iterable<any>>(iterable: T): Generator<any, void>;
@@ -17,7 +24,7 @@ function isIterable(target: any): target is Iterable<any> {
   return target[Symbol.iterator];
 }
 
-function* flatL<T extends Iterable<any>>(iterable: T, depth: number) {
+function* _flatL<T extends Iterable<any>>(iterable: T, depth: number) {
   const stack = [toIterator(iterable)];
   let concur = { start: false, end: false };
 
@@ -50,6 +57,6 @@ function* flatL<T extends Iterable<any>>(iterable: T, depth: number) {
   }
 }
 
-const _flatL: FlatL = curryFlat(flatL);
+const flatL: FlatL = curryFlat(_flatL);
 
-export default _flatL;
+export default flatL;
