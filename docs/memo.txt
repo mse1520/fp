@@ -5,49 +5,69 @@ license는 MIT로 설정해줍니다
 MIT -> 오픈소스
 
 3. babel 설치하기
-npm i -D @babel/core @babel/cli @babel/parser
+npm i -D @babel/core @babel/cli @babel/preset-env @babel/preset-typescript
+npm install core-js@3
 babel은 최신문법으로 작성된 javascript 소스를 안정적인 문법으로 변경하는 transcompiler입니다
-'@babel/core'는 babel 기능을 사용시 필요한 필수 기능들의 집합입니다
-'@babel/cli'는 babel을 커맨드라인으로 사용하기 위함입니다
-'@babel/parser'은 텍스트로 작성된 코드를 ast으로 변환해줍니다
+  - '@babel/core'는 babel 기능을 사용시 필요한 필수 기능들의 집합입니다
+  - '@babel/cli'는 babel을 커맨드라인으로 사용하기 위함입니다
+  - '@babel/preset-env'는 트랜스 파일에 필요한 모든 옵션들의 집합입니다
+  - '@babel/preset-typescript' 타입스크립트 문법을 트랜스파일하는 패키지입니다
+  - 'core-js'는 문법적으로 현재의 문법이 과거에 존재하지 않아 과거의 문법을 토대로 1:1로 대응하도록 생성되어있는 함수 또는 클래스의 집합입니다
 
 4. webpack 설치하기
 npm i -D webpack webpack-cli
 webpack은 여러파일을 하나의 파일로 합쳐주는 번들러입니다
+  - 'webpack'는 webpack 기능을 사용시 필요한 필수 기능들의 집합입니다
+  - 'webpack-cli'는 webpack-cli을 커맨드라인으로 사용하기 위함입니다
 
 5. 웹팩 설정 추가 기능
-npm i -D clean-webpack-plugin
-'clean-webpack-plugin'은 번들링 할때 이전에 번들링된 파일을 삭제한다
+npm i -D babel-loader html-webpack-plugin webpack-dev-server fork-ts-checker-webpack-plugin
+  - 'babel-loader'은 번들링 babel을 이요하여 트랜스파일링과 함께 번들링을 실행합니다
+  - 'html-webpack-plugin'은 베이스가 되는 html파일과 함께 번들링을 실행합니다
+  - 'webpack-dev-server'은 번들링 파일을 만들지 않고 개발서버 상태로 코드작성시 변경상태를 바로 반영합니다
+  - 'fork-ts-checker-webpack-plugin'는 번들링시 typescript 문법을 확인하는 패키지입니다
 
-6. 라이브러리 명령어 정리
-npx babel src --out-dir cjs 
-  > 'src'폴더 하위의 파일들을 'cjs'폴더 하위에 transcompile 한다
+6. typescript
+npm i -D typescript ts-node tsconfig-paths tsc-alias @types/node @types/webpack fork-ts-checker-webpack-plugin
+typescript란 javascript에 타입을 추가한 확장 언어입니다
+  - 'typescript'는 타입스크립트언어를 컴파일하기위한 필수 패키지입니다
+  - 'ts-node'는 node 환경에서 타입스크립트파일을 바로 실행할 수 있게하는 패키지입니다
+  - 'tsconfig-paths'는 타입스크립트 paths 옵션을 ts-node가 읽어내기 위한 확장 패키지입니다
+  - 'tsc-alias'는 컴파일된 타입스크립트 파일의 paths 옵션을 본래의 경로로 한번 더 컴파일 하는 패키지입니다
+  - '@types/node'는 node 환경에서의 타입정의 패키지입니다
+  - '@types/webpack'는 webpack 패키지의 타입정의 패키지입니다
+
+7. 그외 패키지
+npm i -D nodemon concurrently cross-env
+'nodemon'은 파일의 변경사항을 감지하여 특정명령어 등을 실행해주는 자동화 패키지입니다
+'concurrently'은 특정 명령어들을 동시 실행하도록 해주는 패키지입니다
+'cross-env'는 서로다른 환경에서 환경변수 설정 명령어를 통일 시켜주는 패키지입니다
+
+8. 라이브러리 명령어 정리
 npx webpack 
   > 'webpack' 번들링 실행
 npx webpack serve 
   > 'webpack-dev-server' 실행
 
-7. npm 배포
+9. npm 배포
 npm update 
   > pakage.json 내의 모든 패키지들을 samver 표기법에 의해 업데이트합니다
 npm publish 
   > 내 프로젝트를 npm repository에 업로드 합니다
   업로드할 때는 version의 변경이 있어야 합니다
 
-8. 패키지 명령어 정리
-npm test, npm run build 배포에 있어 두 가지의 명령어를 사용하면 됩니다
-  npm test
-    > src 하위 파일의 내용 변경 시 src/index.js 파일을 생성한다
-    test 파일 내의 index.html 파일을 라이브 서버로 바로바로 테스트해 볼 수 있는 환경의 명령어
+10. 패키지 명령어 정리
+해당 패키지를 만들기위한 명령어들을 정리한 내용입니다
+개발자가 직접적으로 사용할 개발과 배포에 필요한 명령어는 npm run dev, npm run build 두가지 명령어 뿐입니다
+  npm run dev
+    > 소스변경시 바로 반영되어 개발서버를 실행합니다
   npm run build
-    > src 폴더를 기준으로 dist 파일과 cjs 파일을 생성한다
+    > 실제로 배포될 파일들을 생성합니다
+  npm run ts-node
+    > node 환경에서 typescript를 바로 실행하기 위한 명령어입니다
   npm run generate-index
-    > src/index.js 파일을 생성한다
-  npm run transpile-cjs
-    > src 폴더를 기준으로 cjs 폴더로 트랜스컴파일 한다
-  npm run bundle-min-js
-    > src 폴더를 기준으로 dist 파일로 번들 파일을 생성한다
-
-9. 참고
-https://astexplorer.net/
-ast 분석할때 유용한 사이트
+    > 모든 파일에 대한 index 파일을 생성합니다
+  npm run build-cjs
+    > cjs 빌드파일을 생성하는 명령어입니다
+  npm run build-mjs
+    > cjs 빌드파일을 생성하는 명령어입니다

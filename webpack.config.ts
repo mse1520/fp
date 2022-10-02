@@ -63,8 +63,14 @@ const config: GameWebpackConfig = {
       // use: [{}, {}],
       loader: 'babel-loader',
       options: {
-        presets: ['@babel/preset-env', '@babel/preset-typescript'],
-        plugins: [['@babel/plugin-transform-runtime', { corejs: 3 }]]
+        presets: [
+          ['@babel/preset-env', {
+            useBuiltIns: 'usage',
+            corejs: 3,
+            debug: true
+          }],
+          '@babel/preset-typescript'
+        ],
       }
     }]
   },

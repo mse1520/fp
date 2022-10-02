@@ -22,12 +22,13 @@
     "url": "https://github.com/mse1520/underbarjs/issues"
   },
   "homepage": "https://github.com/mse1520/underbarjs#readme",
+  "dependencies": {
+    "core-js": "^3.25.3"
+  },
   "devDependencies": {
     "@babel/core": "^7.16.5",
-    "@babel/plugin-transform-runtime": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-typescript": "^7.17.12",
-    "@babel/runtime-corejs3": "^7.18.3",
     "@types/node": "^18.7.14",
     "@types/webpack": "^5.28.0",
     "babel-loader": "^8.2.5",
@@ -45,7 +46,10 @@
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.9.0"
   },
-  "files": [ "lib", "dist" ],
+  "files": [
+    "lib",
+    "dist"
+  ],
   "exports": {
     ".": {
       "require": "./lib/cjs/entry.js",
