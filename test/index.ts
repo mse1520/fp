@@ -1,49 +1,8 @@
-import curry from '@basic/curry';
-import curryRight from '@basic/curryRight';
-import deepFlat from '@basic/deepFlat';
-import delay from '@basic/delay';
-import _entries from '@basic/_entries';
-import filter from '@basic/filter';
-import flat from '@basic/flat';
-import flatMap from '@basic/flatMap';
-import forEach from '@basic/forEach';
-import go from '@basic/go';
-import groupBy from '@basic/groupBy';
-import head from '@basic/head';
-import identity from '@basic/identity';
-import join from '@basic/join';
-import _keys from '@basic/_keys';
-import last from '@basic/last';
-import map from '@basic/map';
-import _object from '@basic/_object';
-import pipe from '@basic/pipe';
-import range from '@basic/range';
-import reduce from '@basic/reduce';
-import reject from '@basic/reject';
-import take from '@basic/take';
-import takeAll from '@basic/takeAll';
-import tap from '@basic/tap';
-import _values from '@basic/_values';
-import filterC from '@concurrency/filterC';
-import _forEachC from '@concurrency/forEachC';
-import mapC from '@concurrency/mapC';
-import _objectC from '@concurrency/_objectC';
-import reduceC from '@concurrency/reduceC';
-import rejectC from '@concurrency/rejectC';
-import takeAllC from '@concurrency/takeAllC';
-import takeC from '@concurrency/takeC';
-import deepFlatL from '@lazy/deepFlatL';
-import _entriesL from '@lazy/_entriesL';
-import filterL from '@lazy/filterL';
-import flatL from '@lazy/flatL';
-import flatMapL from '@lazy/flatMapL';
-import forEachL from '@lazy/forEachL';
-import _keysL from '@lazy/_keysL';
-import mapL from '@lazy/mapL';
-import rangeL from '@lazy/rangeL';
-import rejectL from '@lazy/rejectL';
-import takeL from '@lazy/takeL';
-import _valuesL from '@lazy/_valuesL';
+import {
+  curry, curryRight, deepFlat, deepFlatL, delay, entries, entriesL, filter, filterC, filterL, flat, flatL, flatMap,
+  flatMapL, forEach, forEachC, forEachL, go, groupBy, head, identity, join, keys, keysL, last, map, mapC, mapL, object,
+  objectC, pipe, range, rangeL, reduce, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC, takeC, takeL, tap, values, valuesL
+} from '../src';
 
 (async () => {
   // curry
@@ -247,32 +206,32 @@ import _valuesL from '@lazy/_valuesL';
     console.log('flatMap', result);
   })();
 
-  // _keys
+  // keys
   (() => {
     const data = { arg1: 1, arg2: 2 };
-    const result = _keys(data);
-    console.log('_keys', result);
+    const result = keys(data);
+    console.log('keys', result);
   })();
 
-  // _values
+  // values
   (() => {
     const data = { arg1: 1, arg2: 2 };
-    const result = _values(data);
-    console.log('_values', result);
+    const result = values(data);
+    console.log('values', result);
   })();
 
-  // _entries
+  // entries
   (() => {
     const data = { arg1: 1, arg2: 2 };
-    const result = _entries(data);
-    console.log('_entries', result);
+    const result = entries(data);
+    console.log('entries', result);
   })();
 
-  // _object
+  // object
   (() => {
     const data: [string, number][] = [['arg1', 1], ['arg2', 2]];
-    const result = _object(data);
-    console.log('_object', result);
+    const result = object(data);
+    console.log('object', result);
   })();
 
   // groupBy
@@ -368,25 +327,25 @@ import _valuesL from '@lazy/_valuesL';
     console.log('flatMapL', ...result);
   })();
 
-  // _keysL
+  // keysL
   (() => {
     const data = { arg1: 1, arg2: 2 };
-    const result = _keysL(data);
-    console.log('_keysL', ...result);
+    const result = keysL(data);
+    console.log('keysL', ...result);
   })();
 
-  // _valuesL
+  // valuesL
   (() => {
     const data = { arg1: 1, arg2: 2 };
-    const result = _valuesL(data);
-    console.log('_valuesL', ...result);
+    const result = valuesL(data);
+    console.log('valuesL', ...result);
   })();
 
-  // _entriesL
+  // entriesL
   (() => {
     const data = { arg1: 1, arg2: 2 };
-    const result = _entriesL(data);
-    console.log('_entriesL', ...result);
+    const result = entriesL(data);
+    console.log('entriesL', ...result);
   })();
 
   // takeC
@@ -415,12 +374,12 @@ import _valuesL from '@lazy/_valuesL';
     console.log('------- mapC --------');
   })();
 
-  // _forEachC
+  // forEachC
   await (async () => {
-    console.log('------- _forEachC --------');
+    console.log('------- forEachC --------');
     await testC('forEach', forEach(identity));
-    await testC('_forEachC', _forEachC(identity));
-    console.log('------- _forEachC --------');
+    await testC('forEachC', forEachC(identity));
+    console.log('------- forEachC --------');
   })();
 
   // filterC
@@ -447,7 +406,7 @@ import _valuesL from '@lazy/_valuesL';
     console.log('------- reduceC --------');
   })();
 
-  // _objectC
+  // objectC
   await (async () => {
     function test(key: string, func: Function) {
       console.time(key);
@@ -461,10 +420,10 @@ import _valuesL from '@lazy/_valuesL';
       );
     }
 
-    console.log('------- _objectC --------');
-    await test('_object', _object);
-    await test('_objectC', _objectC);
-    console.log('------- _objectC --------');
+    console.log('------- objectC --------');
+    await test('object', object);
+    await test('objectC', objectC);
+    console.log('------- objectC --------');
   })();
 })();
 
