@@ -39,6 +39,14 @@
   - [valuesL](#valuesl)
   - [entriesL](#entriesl)
 - [Concurrency](#concurrency)
+  - [takeC](#takec)
+  - [takeAllC](#takeallc)
+  - [mapC](#mapc)
+  - [forEachC](#foreachc)
+  - [filterC](#filterc)
+  - [rejectC](#rejectc)
+  - [reduceC](#reducec)
+  - [objectC](#objectc)
 
 ## Basic
 
@@ -428,5 +436,171 @@ console.log(...result); // [['arg1', 1], ['arg2', 2]]
 ```
 
 ## Concurrency
+- 모든 Concurrency 함수는 함수명 뒤에 C자가 붙어있습니다.
+- 내장된 Lazy 함수와 함께 사용시 결과를 도출하는 과정에서 동시성을 갖습니다.
+- 이해를 돕기위해 아래의 함수를 정의하고 다음의 예제를 시작하겠습니다.
+
+### testC 함수
+Concurrency 함수를 정확히 이해하기 위해 함수가 평가되는 시간을 측정하는 예제 함수입니다.
+```javascript
+function testC(key: string, func: Function, time = 500) {
+  console.time(key);
+  return go(
+    rangeL(5),
+    mapL(delay(time)),
+    func,
+    (v: any) => console.log(key, v),
+    () => console.timeEnd(key)
+  );
+}
+```
+
+### takeC
+take 함수의 Concurrency 버전입니다.
+```javascript
+async function excute() {
+  await testC('take', _.take(3));
+  await testC('takeC', _.takeC(3));
+
+  // ----- excute result -----
+  // take [0, 1, 2]
+  // take: 1500 ms
+  // takeC [0, 1, 2]
+  // takeC: 500 ms
+}
+
+excute();
+```
+
+### takeAllC
+takeAll 함수의 Concurrency 버전입니다.
+```javascript
+async function excute() {
+  await testC('takeAll', _.takeAll(Infinity));
+  await testC('takeAllC', _.takeAllC(Infinity));
+
+  // ----- excute result -----
+  // takeAll [0, 1, 2, 3, 4]
+  // takeAll: 2500 ms
+  // takeAllC [0, 1, 2, 3, 4]
+  // takeAllC: 500 ms
+}
+
+excute();
+```
+
+### mapC
+map 함수의 Concurrency 버전입니다.
+```javascript
+async function excute() {
+  await testC('map', map(v => v + 1));
+  await testC('mapC', mapC(v => v + 1));
+
+  // ----- excute result -----
+  // map [1, 2, 3, 4, 5]
+  // map: 2500 ms
+  // mapC [1, 2, 3, 4, 5]
+  // mapC: 500 ms
+}
+
+excute();
+```
+
+### forEachC
+forEach 함수의 Concurrency 버전입니다.
+```javascript
+async function excute() {
+  await testC('forEach', forEach(v => v + 1));
+  await testC('forEachC', forEachC(v => v + 1));
+
+  // ----- excute result -----
+  // forEach [0, 1, 2, 3, 4]
+  // forEach: 2500 ms
+  // forEachC [0, 1, 2, 3, 4]
+  // forEachC: 500 ms
+}
+
+excute();
+```
+
+### filterC
+filter 함수의 Concurrency 버전입니다.
+```javascript
+async function excute() {
+  await testC('filter', filter(v => v % 2));
+  await testC('filterC', filterC(v => v % 2));
+
+  // ----- excute result -----
+  // filter [1, 3]
+  // filter: 2500 ms
+  // filterC [1, 3]
+  // filterC: 500 ms
+}
+
+excute();
+```
+
+### rejectC
+reject 함수의 Concurrency 버전입니다.
+```javascript
+async function excute() {
+  await testC('reject', reject(v => v % 2));
+  await testC('rejectC', rejectC(v => v % 2));
+
+  // ----- excute result -----
+  // reject [0, 2, 4]
+  // reject: 2500 ms
+  // rejectC [0, 2, 4]
+  // rejectC: 500 ms
+}
+
+excute();
+```
+
+### reduceC
+reduce 함수의 Concurrency 버전입니다.
+```javascript
+async function excute() {
+  await testC('reduce', reduce(v => v % 2));
+  await testC('reduceC', reduceC(v => v % 2));
+
+  // ----- excute result -----
+  // reduce 10
+  // reduce: 2500 ms
+  // reduceC 10
+  // reduceC: 500 ms
+}
+
+excute();
+```
+
+### objectC
+object 함수의 Concurrency 버전입니다.
+```javascript
+async function excute() {
+  function test(key: string, func: Function) {
+    console.time(key);
+    return go(
+      rangeL(5),
+      mapL((v: number) => [`arg${v}`, v]),
+      mapL(delay(500)),
+      func,
+      (v: any) => console.log(key, v),
+      () => console.timeEnd(key)
+    );
+  }
+
+  await test('object', object);
+  await test('objectC', objectC);
+
+  // ----- excute result -----
+  // object { arg0: 0, arg1: 1, arg2: 2, arg3: 3, arg4: 4 }
+  // object: 2500 ms
+  // objectC { arg0: 0, arg1: 1, arg2: 2, arg3: 3, arg4: 4 }
+  // objectC: 500 ms
+}
+
+excute();
+```
 
 [목차](#api)
