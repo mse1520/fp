@@ -12,10 +12,10 @@ function isArray<T>(target: Iterable<T>): target is Array<T> {
  */
 function last<T>(iterable: Iterable<T | Promise<T>>) {
   if (isArray(iterable) || isString(iterable)) {
-    const length = iterable.length - 1;
-    if (length < 0) throw new Error('There is no data in the iterator!!');
+    const index = iterable.length - 1;
+    if (index < 0) throw new Error('There is no data in the iterator!!');
 
-    return iterable[length] as T | Promise<T>;
+    return iterable[index] as T | Promise<T>;
   }
 
   return reduce(iterable, (_: T, cur) => cur);

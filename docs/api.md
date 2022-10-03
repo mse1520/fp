@@ -1,39 +1,154 @@
 # API
 - [시작하기](../README.md)
 - [Basic](#basic)
-  - [_go](#go)
-  - [_pipe](#pipe)
-  - [_curry](#curry)
-  - [_curryRight](#curryright)
-  - [_map](#map)
-  - [_filter](#filter)
-  - [_reduce](#reduce)
-  - [_take](#take)
-  - [_takeAll](#takeall)
-  - [_identity](#identity)
-  - [_split](#split)
-  - [_toUpperCase](#touppercase)
-  - [_toUpperCaseFirst](#touppercasefirst)
-  - [_toArray](#toarray)
-  - [_includes](#includes)
-  - [_push](#push)
+  - [curry](#curry)
+  - [curryRight](#curryright)
+  - [take](#take)
+  - [takeAll](#takeall)
+  - [head](#head)
+  - [map](#map)
+  - [forEach](#foreach)
+  - [filter](#filter)
+  - [reject](#reject)
+  - [reduce](#reduce)
+  - [go](#go)
+  - [pipe](#pipe)
+  - [tap](#tap)
+  - [join](#join)
+  - [last](#last)
+  - [identity](#identity)
+  - [flat](#flat)
+  - [deepFlat](#deepFlat)
+  - [flatMap](#flatMap)
+  - [keys](#keys)
+  - [values](#values)
+  - [entries](#entries)
+  - [object](#object)
+  - [groupBy](#groupBy)
 - [Lazy](#lazy)
+  - [takeL](#takel)
+  - [mapL](#mapl)
+  - [forEachL](#foreachl)
+  - [filterL](#filterl)
+  - [rejectL](#rejectl)
+  - [rangeL](#rangel)
+  - [flatL](#flatl)
+  - [deepFlatL](#deepflatl)
+  - [flatMapL](#flatmapl)
+  - [keysL](#keysl)
+  - [valuesL](#valuesl)
+  - [entriesL](#entriesl)
 - [Concurrency](#concurrency)
-- [Utility](#utility)
-  - [ipFormatter](#ipformatter)
-  - [floatFormatter](#floatformatter)
-  - [intFormatter](#intformatter)
-  - [toQueryString](#toquerystring)
 
 ## Basic
-### _go
+
+### curry
+여러 인수을 갖는 함수를 단일 인수를 갖는 함수들의 함수열로 바꾼다. 이를 currying이라 부른다.
+```javascript
+let add = (a, b, c) => `a: ${a}, b: ${b}, c:${c}`;
+add = _.curry(add);
+
+console.log(add(1, 2, 3)); // a: 1, b: 2, c:3
+console.log(add(1, 2)(3)); // a: 1, b: 2, c:3
+console.log(add(1)(2, 3)); // a: 1, b: 2, c:3
+console.log(add(1)(2)(3)); // a: 1, b: 2, c:3
+```
+
+### curryRight
+currying이 되어 인자를 입력받는 순서가 오른쪽부터 입력받는다.
+```javascript
+let add = (a, b, c) => `a: ${a}, b: ${b}, c:${c}`;
+add = _.curryRight(add);
+
+console.log(add(1, 2, 3)); // a: 1, b: 2, c:3
+console.log(add(2, 3)(1)); // a: 1, b: 2, c:3
+console.log(add(3)(1, 2)); // a: 1, b: 2, c:3
+console.log(add(3)(2)(1)); // a: 1, b: 2, c:3
+```
+
+### take
+첫 번째 인자로 iterable한 값을 받으며, 각 값중 두 번째 인자의 개수만큼 구성된 배열을 반환한다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.take(data, 3);
+
+console.log(result); // [1, 2, 3]
+```
+
+### takeAll
+인자의 모든 값을 반환합니다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.takeAll(data);
+
+console.log(result); // [1, 2, 3, 4, 5]
+```
+
+### head
+인자의 모든 값중 첫번째 값을 반환합니다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.head(data);
+
+console.log(result); // 1
+```
+
+### map
+첫 번째 인자의 각 값을 모두 순회하면서 두 번째 인자의 함수를 실행한 결과값으로 구성된 배열을 반환한다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.map(data, v => v + 1);
+
+console.log(result); // [2, 3, 4, 5, 6]
+```
+
+### forEach
+첫 번째 인자의 각 값을 모두 순회하면서 두 번째 인자의 함수를 실행하고 첫 번째 인자를 반환한다.
+```javascript
+const data = [1, 2, 3];
+// 2
+// 3
+// 4
+const result = forEach(data, v => console.log(v + 1));
+
+console.log(result); // [1, 2, 3]
+```
+
+### filter
+첫 번째 인자의 각 값을 모두 순회하면서 두 번째 인자의 함수를 실행하여 반환된 값이 참인 값으로 구성된 배열을 반환한다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.filter(data, v => v % 2);
+
+console.log(result); // [1, 3, 5]
+```
+
+### reject
+첫 번째 인자의 각 값을 모두 순회하면서 두 번째 인자의 함수를 실행하여 반환된 값이 거짓인 값으로 구성된 배열을 반환한다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.reject(data, v => v % 2);
+
+console.log(result); // [2, 4]
+```
+
+### reduce
+첫 번째 인자의 각 값을 모두 순회하면서 두 번째 인자의 함수를 실행한 리턴값을 누적한다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.reduce(data, (acc, val) => acc + val);
+
+console.log(result); // 15
+```
+
+### go
 첫 번째 인자로 데이터를 받고, 두 번째 인자부터 함수를 받는다. 첫 번째 인자로 받은 값을 두 번째 인자 함수에 대입하여 실행하며 실행한 결과값을 다음 함수의 인자로 계속해서 전달한다.
 ```javascript
 const add1 = data => data + 1;
 const add2 = data => data + 2;
 const add3 = data => data + 3;
 
-const result = _go(
+const result = _.go(
   1,
   add1,
   add2,
@@ -43,14 +158,14 @@ const result = _go(
 console.log(result); // 7
 ```
 
-### _pipe
-인자로 함수들을 받으며 결과값으로 첫 번째 인자로 받은 함수의 인자를 받는 함수를 리턴한다. 리턴된 함수를 실행하면 인자로 받아두었던 함수를 차례로 실행하며 각 함수의 리턴값을 다음 함수의 인자로 부여한다.
+### pipe
+하나의 인자를 받는 함수들을 인자로 받으며 결과값을 다음 함수의 인자값으로 연속해서 전달합니다. 첫번째 인자로 받은 함수의 인자를 받는 함수를 리턴합니다.
 ```javascript
 const add1 = data => data + 1;
 const add2 = data => data + 2;
 const add3 = data => data + 3;
 
-const result = _pipe(
+const result = _.pipe(
   add1,
   add2,
   add3
@@ -59,162 +174,259 @@ const result = _pipe(
 console.log(result(1)); // 7
 ```
 
-### _curry
-여러 인수을 갖는 함수를 단일 인수를 갖는 함수들의 함수열로 바꾼다. 이를 currying이라 부른다.
+### tap
+pipe와 같은 기능을 하지만 차이점은 전달받은 인자의 값을 그대로 반환합니다.
 ```javascript
-let add = (a, b, c) => `a: ${a}, b: ${b}, c:${c}`;
-add = _curry(add);
+// 7
+const result = _.tap(
+  add1,
+  add2,
+  add3,
+  v => (console.log(v), v)
+);
 
-console.log(add(1, 2, 3)); // a: 1, b: 2, c:3
-console.log(add(1, 2)(3)); // a: 1, b: 2, c:3
-console.log(add(1)(2, 3)); // a: 1, b: 2, c:3
-console.log(add(1)(2)(3)); // a: 1, b: 2, c:3
+console.log(result(1)) // 1
+
 ```
 
-### _curryRight
-currying이 되어 인자를 입력받는 순서가 오른쪽부터 입력받는다.
-```javascript
-let add = (a, b, c) => `a: ${a}, b: ${b}, c:${c}`;
-add = _curryRight(add);
-
-console.log(add(1, 2, 3)); // a: 1, b: 2, c:3
-console.log(add(2, 3)(1)); // a: 1, b: 2, c:3
-console.log(add(3)(1, 2)); // a: 1, b: 2, c:3
-console.log(add(3)(2)(1)); // a: 1, b: 2, c:3
-```
-### _map
-첫 번째 인자의 각 값을 모두 순회하면서 두 번째 인자의 함수를 실행한 결과값을 반환한다.
+### join
+첫 번째 인자의 각 값을 모두 순회하면서 두 번째 인자의 값으로 결합한 문자열을 리턴합니다.
 ```javascript
 const data = [1, 2, 3, 4, 5];
-const result = _map(data, v => v + 1);
+const result = _.join(data, ',');
 
-console.log(result); // [2, 3, 4, 5, 6]
+console.log(result); // '1,2,3,4,5'
 ```
 
-### _filter
-첫 번째 인자의 각 값을 모두 순회하면서 두 번째 인자의 함수를 실행하여 참인 값만을 리턴한다.
+### last
+인자의 모든 값중 마지막 값을 반환합니다.
 ```javascript
 const data = [1, 2, 3, 4, 5];
-const result = _filter(data, v => v % 2);
+const result = _.last(data);
 
-console.log(result); // [1, 3, 5]
+console.log(result); // 5
 ```
 
-### _reduce
-첫 번째 인자의 각 값을 모두 순회하면서 두 번째 인자의 함수를 실행한 리턴값을 누적한다.
-```javascript
-const data = [1, 2, 3, 4, 5];
-const result = _reduce(data, (acc, val) => acc + val);
-
-console.log(result); // 15
-```
-
-### _take
-첫 번째 인자의 각 값중 두 번째 인자의 개수만큼 리턴합니다.
-```javascript
-const data = [1, 2, 3, 4, 5];
-const result = _take(data, 3);
-
-console.log(result); // [1, 2, 3]
-```
-
-### _takeAll
-인자의 모든 값을 리턴합니다.
-```javascript
-const data = [1, 2, 3, 4, 5];
-const result = _takeAll(data);
-
-console.log(result); // [1, 2, 3, 4, 5]
-```
-
-### _identity
+### identity
 인자로 받은 값을 리턴합니다.
 ```javascript
 const data = [1, 2, 3, 4, 5];
-const result = _identity(data);
+const result = _.identity(data);
 
 console.log(result); // [1, 2, 3, 4, 5]
 ```
 
-### _range
-첫 번째 인자 값부터 두 번째 인자 값까지 세 번째 인자 값의 단계만큼 이동하면서 범위 값을 리턴합니다.
+### range
+첫 번째 인자 값부터 두 번째 인자 값까지 세 번째 인자 값의 단계만큼 이동하면서 범위 값을 배열로 리턴합니다.
 ```javascript
-console.log(_range(5)); // [0, 1, 2, 3, 4]
-console.log(_range(-5)); // [0, -1, -2, -3, -4]
-console.log(_range(5, 10)); // [5, 6, 7, 8, 9]
-console.log(_range(10, 5)); // [10, 9, 8, 7, 6]
-console.log(_range(0, 5, 2)); // [0, 2, 4]
+console.log(_.range(5)); // [0, 1, 2, 3, 4]
+console.log(_.range(-5)); // [0, -1, -2, -3, -4]
+console.log(_.range(5, 10)); // [5, 6, 7, 8, 9]
+console.log(_.range(10, 5)); // [10, 9, 8, 7, 6]
+console.log(_.range(0, 5, 2)); // [0, 2, 4]
 ```
 
-### _split
-첫 번째 인자를 두 번째 인자 값을 기준으로 나눈 배열을 리턴합니다.
+### delay
+첫 변째로 받은 인자를 두 번째로 받은 인자의 시간(ms)만큼 뒤에 반환한다.
 ```javascript
-console.log(_split('1-2-3', '-')); // [1, 2, 3]
+async function excute() {
+  const value = await _.delay('data', 1000);
+
+  console.log('delay', value); // data
+}
+
+excute();
 ```
 
-### _toUpperCase
-첫 번째 인자로 들어온 문자열을 모두 대문자로 변환하여 리턴한다.
+### flat
+첫 번째 인자로 받은 값을 두 번째 인자 값의 깊이만큼 flat하게 만든 새로운 배열을 반환합니다.
 ```javascript
-console.log(_toUpperCase('abc'));
+const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
+
+console.log(_.flat(data)); // [1, 2, 3, 4, 5, 6, 7, [8, 9], 10]
+console.log(_.flat(data, 2)); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ```
 
-### _toUpperCaseFirst
-첫 번째 인자로 들어온 문자열의 첫번째 문자만을 대문자로 변환하여 리턴한다.
+### deepFlat
+첫 번째 인자로 받은 값을 모든 깊이만큼 flat하게 만든 새로운 배열을 반환합니다.
 ```javascript
-console.log(_toUpperCaseFirst('abc'));
+const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
+const result = _.deepFlat(data);
+
+console.log(result); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ```
 
-### _toArray
-첫 번째 인자로 들어온 iterator를 배열로 리턴한다.
+### flatMap
+map 함수와 flat 함수가 결함한 형태.
 ```javascript
-console.log(_toArray('abc')); // ['a', 'b', 'c']
-console.log(_toArray(123)); // []
-console.log(_toArray()); // []
+const data = [1, 2, 3];
+const result = _.flatMap(data, v => [v, v * 2]);
+
+console.log(result); // [1, 2, 2, 4, 3, 6]
 ```
 
-### _includes
-첫 번째 인자로 들어온 값에 두 번째 인자로 들어온 값이 있는지를 판단하여 true, false를 리턴한다.
+### keys
+[key, value] 형태의 object에서 key 값을 배열로 반환합니다.
 ```javascript
-console.log('_includes:', _includes('abc', 'ab')); // true
-console.log('_includes:', _includes('abc', 'd')); // false
-console.log('_includes:', _includes(['abc', 'd', 'fg'], 'fg')); // true
-console.log('_includes:', _includes(['abc', 'd', 'fg'], 'z')); // false
+const data = { arg1: 1, arg2: 2 };
+const result = _.keys(data);
+console.log(result); // ['arg1', 'arg2']
 ```
 
-### _push
-첫 번째 인자로 들어온 배열에 두 번째 인자로 들어온 값을 첫번째 인자의 배열뒤에 추가합니다.
+### values
+[key, value] 형태의 object에서 value 값을 배열로 반환합니다.
 ```javascript
-console.log(_push([1, 2, 3], [4, 5, 6])); // [1, 2, 3, 4, 5, 6]
+const data = { arg1: 1, arg2: 2 };
+const result = keys(data);
+console.log(result); // [1, 2]
+```
+
+### entries
+[key, value] 형태의 object에서 [key, value]의 배열로 반환합니다.
+```javascript
+const data = { arg1: 1, arg2: 2 };
+const result = _.entries(data);
+console.log(result); // [['arg1', 1], ['arg2', 2]]
+```
+
+### object
+[key, value]의 배열에서 [key, value] 형태의 object로 반환합니다.
+```javascript
+const data = [['arg1', 1], ['arg2', 2]];
+const result = _.object(data);
+console.log(result); // { arg1: 1, arg2: 2 }
+```
+
+### groupBy
+첫 번째 인자를 두 번째 인자로 받은 함수를 실행하여 반환된 값을 key로하는 그룹을 생성합니다.
+```javascript
+const data = [
+  { name: 'a', value: 1 }, 
+  { name: 'b', value: 2 }, 
+  { name: 'c', value: 2 }
+];
+const result = _.groupBy(data, ({_, v}) => v);
+// { 
+//   1: [{ name: 'a', value: 1 }], 
+//   2: [{ name: 'b', value: 2 }, { name: 'c', value: 2 }] 
+// }
+console.log(result); 
 ```
 
 ## Lazy
+모든 Lazy 함수는 함수명 뒤에 L자가 붙어있으며, Generator 타입을 리턴합니다. 내장된 take 함수를 통해 배열로 받을 수 있습니다.
+
+### takeL
+take 함수의 Lazy 버전입니다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.takeL(data, 3);
+
+console.log(...result); // 1 2 3
+```
+
+### mapL
+map 함수의 Lazy 버전입니다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.mapL(data, v => v + 1);
+
+console.log(result.next()); // { value: 2, done: false }
+console.log(result.next()); // { value: 3, done: false }
+console.log(...result); // 4 5 6
+```
+
+### forEachL
+forEach 함수의 Lazy 버전입니다.
+```javascript
+const data = [1, 2, 3];
+
+const result = _.forEachL(data, v => console.log(v + 1));
+result.next(); // 1
+result.next(); // 2
+console.log(result); // Generator
+```
+
+### filterL
+filter 함수의 Lazy 버전입니다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.filterL(data, v => v % 2);
+
+console.log(...result); // 1 3 5
+```
+
+### rejectL
+reject 함수의 Lazy 버전입니다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.rejectL(data, v => v % 2);
+
+console.log(...result); // 2 4
+```
+
+### rangeL
+range 함수의 Lazy 버전입니다.
+```javascript
+console.log(..._.rangeL(10)); // 0 1 2 3 4 5 6 7 8 9
+console.log(..._.rangeL(0, 10)); // 0 1 2 3 4 5 6 7 8 9
+console.log(..._.rangeL(0, 10, 2)); // 0 2 4 6 8
+console.log(..._.rangeL(-10)); // 0 -1 -2 -3 -4 -5 -6 -7 -8 -9
+console.log(..._.rangeL(0, -10)); // 0 -1 -2 -3 -4 -5 -6 -7 -8 -9
+console.log(..._.rangeL(0, -10, 2)); // 0 -2 -4 -6 -8
+```
+
+### flatL
+flat 함수의 Lazy 버전입니다.
+```javascript
+const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
+
+console.log(..._.flatL(data)); // 1 2 3 4 5 6 7 [8, 9] 10
+console.log(..._.flatL(data, 2)); // 1 2 3 4 5 6 7 8 9 10
+```
+
+### deepFlatL
+deepFlat 함수의 Lazy 버전입니다.
+```javascript
+const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
+const result = _.deepFlatL(data);
+
+console.log(...result); // 1 2 3 4 5 6 7 8 9 10
+```
+
+### flatMapL
+flatMap 함수의 Lazy 버전입니다.
+```javascript
+const data = [1, 2, 3];
+const result = _.flatMapL(data, v => [v, v * 2]);
+
+console.log(...result); // 1 2 2 4 3 6
+```
+
+### keysL
+keys 함수의 Lazy 버전입니다.
+```javascript
+const data = { arg1: 1, arg2: 2 };
+const result = _.keysL(data);
+console.log(...result); // arg1 arg2
+```
+
+### valuesL
+values 함수의 Lazy 버전입니다.
+```javascript
+const data = { arg1: 1, arg2: 2 };
+const result = _.valuesL(data);
+console.log(...result); // 1 2
+```
+
+### entriesL
+entries 함수의 Lazy 버전입니다.
+```javascript
+const data = { arg1: 1, arg2: 2 };
+const result = _.entriesL(data);
+console.log(...result); // [['arg1', 1], ['arg2', 2]]
+```
+
 ## Concurrency
-
-## Utility
-### ipFormatter
-첫 번째 인자로 입력된 값을 IP의 형태를 벗어나지 않는 값으로 리턴합니다.
-```javascript
-console.log(ipFormatter('12323.23.23ddd2222323')); // 123.23.232.
-console.log(ipFormatter('12323.23.23ddd.22223.23')); // 123.23.23.222
-```
-
-### floatFormatter
-첫 번째 인자로 입력된 값을 실수의 형태를 벗어나지 않는 값으로 리턴합니다.
-```javascript
-console.log(floatFormatter('+++---.12323.23.23ddd.22223.23')); // +12323.23232222323
-console.log(floatFormatter('---+12323.')); // -12323.
-```
-
-### intFormatter
-첫 번째 인자로 입력된 값을 정수의 형태를 벗어나지 않는 값으로 리턴합니다.
-```javascript
-console.log(intFormatter('+++---.12323.23.23ddd.22223.23')); // +1232323232222323
-```
-
-### toQueryString
-인자로 받은 객체를 URL query string 파라미터로 변경한 값을 리턴합니다.
-```javascript
-console.log(toQueryString({ arg1: 1, arg2: 2, arg3: 3 })); // arg1=1&arg2=2&arg3=3
-```
 
 [목차](#api)
