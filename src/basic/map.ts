@@ -10,8 +10,8 @@ interface Map {
    * @param predicate Function that is called for every element of iterable. Each time callbackFn executes, the returned value is added to new array.
    * @returns new array.
    */
-  <T, U>(predicate: (value: T, index: number) => U): (iterable: Iterable<T | Promise<T>>) => U[] | Promise<U[]>;
-  <T, U = any>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => U): U[] | Promise<U[]>;
+  <T, U>(predicate: (value: Awaited<T>, index: number) => U): (iterable: Iterable<T>) => T extends Promise<any> ? Promise<U[]> : U[];
+  <T, U = any>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => U): T extends Promise<any> ? Promise<U[]> : U[];
 }
 
 function _map<T, U>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => U) {

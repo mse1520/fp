@@ -6,7 +6,7 @@ import reduce from './reduce';
  * @param funcs Listed functions that will receive arguments
  * @returns The result of executing all functions
  */
-function go(value: any, ...funcs: Function[]) {
+function go<T = any>(value: any, ...funcs: Function[]): T {
   return reduce(funcs, (acc, func) => func(acc), value);
 }
 

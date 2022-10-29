@@ -9,8 +9,8 @@ interface MapL {
    * @param predicate Function that is called for every element of iterable. Each time callbackFn executes, the returned value is added to new Generator.
    * @returns Generator
    */
-  <T, U>(predicate: (value: T, index: number) => U): (iterable: Iterable<T | Promise<T>>) => Generator<U | Promise<U>, void>;
-  <T, U = any>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => U): Generator<U | Promise<U>, void>;
+  <T, U>(predicate: (value: Awaited<T>, index: number) => U): (iterable: Iterable<T>) => T extends Promise<any> ? Generator<Promise<U>, void> : Generator<U, void>;
+  <T, U = any>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => U): T extends Promise<any> ? Generator<Promise<U>, void> : Generator<U, void>;
 }
 
 function* _mapL<T, U>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => U) {

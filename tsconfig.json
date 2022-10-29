@@ -3,7 +3,7 @@
     // 컴파일 파일의 버전
     "target": "ESNext",
     // 컴파일 모듈시스템 정의
-    "module": "CommonJS",
+    "module": "ESNext",
     // 타입 라이브러리 사용 목록
     "lib": [ "ESNext" ],
     // 엄격모드
@@ -20,6 +20,12 @@
       "@lazy/*": [ "src/lazy/*" ],
       "@concurrency/*": [ "src/concurrency/*" ],
       "@internal/*": [ "src/internal/*" ]
+    }
+  },
+  // ts-node 옵션
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
     }
   }
 }
