@@ -7,8 +7,8 @@ import reduce from './reduce';
  * @param funcs Listed functions.
  * @returns A function that receives the parameters of the first function.
  */
-function tap(func: Function, ...funcs: Function[]) {
-  return (arg: any) => (reduce(funcs, (acc, func) => func(acc), func(arg)), arg);
+function tap<T = any>(func: Function, ...funcs: Function[]) {
+  return (arg: any): T => (reduce(funcs, (acc, func) => func(acc), func(arg)), arg);
 }
 
 export default tap;

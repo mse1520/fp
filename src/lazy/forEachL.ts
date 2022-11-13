@@ -9,8 +9,8 @@ interface ForEachL {
    * @param predicate Function that is called for every element of iterable. Each time callbackFn executes.
    * @returns Generator
    */
-  <T>(predicate: (value: T, index: number) => any): (iterable: Iterable<T | Promise<T>>) => Generator<T | Promise<T>, void>;
-  <T>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => any): Generator<T | Promise<T>, void>;
+  <T>(predicate: (value: Awaited<T>, index: number) => any): (iterable: Iterable<T>) => Generator<T, void>;
+  <T>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => any): Generator<T, void>;
 }
 
 function _forEachL<T>(iterable: Iterable<T | Promise<T>>, predicate: (value: T, index: number) => any) {

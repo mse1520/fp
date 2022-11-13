@@ -6,8 +6,8 @@ import reduce from './reduce';
  * @param funcs Listed functions that will receive arguments.
  * @returns A function that receives the parameters of the first function.
  */
-function pipe(func: Function, ...funcs: Function[]) {
-  return (...args: any[]) => reduce(funcs, (acc, func) => func(acc), func(...args));
+function pipe<T = any>(func: Function, ...funcs: Function[]) {
+  return (...args: any[]): T => reduce(funcs, (acc, func) => func(acc), func(...args));
 }
 
 export default pipe;
