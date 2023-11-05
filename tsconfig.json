@@ -22,6 +22,8 @@
       "@internal/*": [ "src/internal/*" ]
     }
   },
+  // 임시용
+  "exclude": [ "old" ],
   // ts-node 옵션
   "ts-node": {
     "compilerOptions": {
