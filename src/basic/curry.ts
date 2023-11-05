@@ -5,7 +5,7 @@
  * @param arity [arity = func.length] The arity of func.
  * @returns curried function.
  */
-function curry(func: Function, arity = func.length) {
+const curry = (func: Function, arity = func.length) => {
   const curried = (...args: any[]) => args.length >= arity
     ? func(...args)
     : (...args2: any[]) => curried(...args, ...args2);
