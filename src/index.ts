@@ -44,3 +44,5 @@ export { default as rangeL } from '@lazy/rangeL';
 // export { default as rejectL } from '@lazy/rejectL';
 export { default as takeL } from '@lazy/takeL';
 // export { default as valuesL } from '@lazy/valuesL';
+export { default as chain } from '@basic/chain';
+export { default as chainA } from '@basic/chainA';

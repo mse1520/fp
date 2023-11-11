@@ -1,15 +1,14 @@
-import { delay, filter, filterL, head, map, mapL, range, rangeL, reduce, take, takeAll, takeC, takeL } from '../src';
+import { chain, delay, filter, filterL, head, map, mapL, range, rangeL, reduce, take, takeAll, takeC, takeL } from '../src';
 
-// const testC = (key: string, func: Function, time = 500) => {
-//   console.time(key);
-//   return go(
-//     rangeL(5),
-//     mapL(delay(time)),
-//     func,
-//     (v: any) => console.log(key, v),
-//     () => console.timeEnd(key)
-//   );
-// };
+const testC = (key: string, func: (value: any) => any, time = 500) => {
+  console.time(key);
+  return chain(5)
+    .pipe(rangeL)
+    .pipe(mapL(delay(time)))
+    .pipe(func)
+    .pipe((v: any) => console.log(key, v))
+    .pipe(() => console.timeEnd(key))
+};
 
 (async () => {
   // takeL
@@ -120,12 +119,12 @@ import { delay, filter, filterL, head, map, mapL, range, rangeL, reduce, take, t
   })();
 
   // takeC
-  // await (async () => {
-  //   console.log('------- takeC --------');
-  //   await testC('take', take(Infinity));
-  //   await testC('takeC', takeC(Infinity));
-  //   console.log('------- takeC --------');
-  // })();
+  await (async () => {
+    console.log('------- takeC --------');
+    await testC('take', take(Infinity));
+    await testC('takeC', takeC(Infinity));
+    console.log('------- takeC --------');
+  })();
 
   // reduceC
   // await (async () => {
@@ -135,21 +134,4 @@ import { delay, filter, filterL, head, map, mapL, range, rangeL, reduce, take, t
   //   console.log('------- reduceC --------');
   // })();
 
-
-  // const chain = <T>(iterable: Iterable<T>) => {
-  //   const chain = Promise.resolve(iterable);
-
-  //   return {
-  //     mapL<U>(predicate: (value: T, index: number) => U) {
-  //       chain.then(mapL(predicate));
-  //       return this;
-  //     },
-  //     then: (pred: any) => chain.then(pred),
-  //   }
-  // };
-
-  // chain([1, 2, 3, 4, 5])
-  //   .mapL(v => v + 1)
-  //   .mapL(v => v + 1)
-  //   .then((v: any) => console.log([...v]))
 })();

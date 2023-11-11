@@ -1,30 +1,18 @@
-// /**
-//  * Executes a function whose return value is passed as a parameter to the next function.
-//  * @param value The first parameter to run the function
-//  * @param funcs Listed functions that will receive arguments
-//  * @returns The result of executing all functions
-//  */
-// function go<T = any>(value: any, ...funcs: Function[]): T {
-//   return reduce(funcs, (acc, func) => func(acc), value);
-// }
+interface Chain<T> {
+  pipe<U>(func: (value: Awaited<T>) => U): Chain<U>;
+  value(): T;
+}
 
-// export default go;
-
-import mapL from '@lazy/mapL';
-
-// class Chain<T> extends Promise<T> {
-//   _<TResult1 = T>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null) {
-//     return this.then(onfulfilled);
-//   }
-// }
-
-const chain = <T>(iterable: Iterable<T>) => {
-  const chain = Promise.resolve(iterable);
+const chain = <T>(value: T): Chain<T> => {
+  if (value instanceof Promise) {
+    console.warn('The chain function does not accept Promise.');
+    return chain(undefined as T);
+  }
 
   return {
-    mapL: <U>(predicate: (value: T, index: number) => U) => chain.then(mapL(predicate)),
-    value: () => chain
-  }
+    pipe: <U>(func: (value: Awaited<T>) => U) => chain(func(value as Awaited<T>)),
+    value: () => value as T
+  };
 };
 
 export default chain;

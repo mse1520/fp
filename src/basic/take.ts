@@ -10,7 +10,7 @@ interface Take {
    * @returns Returns the slice of array.
    */
   (length: number): <T>(iterable: Iterable<T>) => T[];
-  <T>(iterable: Iterable<T | Promise<T>>, length: number): T[];
+  <T>(iterable: Iterable<T>, length: number): T[];
 }
 
 const _take = <T>(iterable: Iterable<T>, length: number) => [...takeL(iterable, length)];
