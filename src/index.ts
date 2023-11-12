@@ -10,7 +10,7 @@ export { default as filter } from '@basic/filter';
 // export { default as go } from '@basic/go';
 // export { default as groupBy } from '@basic/groupBy';
 export { default as head } from '@basic/head';
-// export { default as identity } from '@basic/identity';
+export { default as identity } from '@basic/identity';
 // export { default as join } from '@basic/join';F
 // export { default as keys } from '@basic/keys';
 // export { default as last } from '@basic/last';

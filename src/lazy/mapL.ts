@@ -1,4 +1,5 @@
 import curryRight from '@basic/curryRight';
+import sync from '@internal/sync';
 
 interface MapL {
   /**
@@ -10,12 +11,15 @@ interface MapL {
    */
   <T, U>(predicate: (value: T, index: number) => U): (iterable: Iterable<T>) => Generator<U, void>;
   <T, U = any>(iterable: Iterable<T>, predicate: (value: T, index: number) => U): Generator<U, void>;
+
+  <T, U>(predicate: (value: T, index: number) => U): (iterable: Iterable<T>) => Generator<U, void>;
+  <T, U = any>(iterable: Iterable<Promise<T>>, predicate: (value: T, index: number) => U): Generator<U, void>;
 }
 
-function* _mapL<T, U>(iterable: Iterable<T>, predicate: (value: T, index: number) => U) {
+function* _mapL<T, U>(iterable: Iterable<T extends Promise<infer V> ? Promise<V> : T>, predicate: (value: T extends Promise<infer V> ? Awaited<V> : T, index: number) => U) {
   let index = 0;
   for (const value of iterable) {
-    yield predicate(value, index);
+    yield sync(value, predicate, index);
     index++;
   }
 }

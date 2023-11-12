@@ -1,5 +1,5 @@
-type ChainValue<T> = T extends Promise<infer R> ? Promise<R> : T;
-type ChainPipeValue<T> = T extends Promise<infer R> ? Awaited<R> : T;
+type ChainValue<T> = T extends Promise<infer U> ? Promise<U> : T;
+type ChainPipeValue<T> = T extends Promise<infer U> ? Awaited<U> : T;
 
 const chainA = <T>(value: ChainValue<T>) => {
   return {
