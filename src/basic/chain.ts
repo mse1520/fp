@@ -1,6 +1,6 @@
 interface Chain<T> {
-  pipe<U>(func: (value: Awaited<T>) => U): Chain<U>;
   value(): T;
+  pipe<U>(func: (value: Awaited<T>) => U): Chain<U>;
 }
 
 const chain = <T>(value: T): Chain<T> => {
@@ -10,8 +10,8 @@ const chain = <T>(value: T): Chain<T> => {
   }
 
   return {
-    pipe: <U>(func: (value: Awaited<T>) => U) => chain(func(value as Awaited<T>)),
-    value: () => value as T
+    value: () => value as T,
+    pipe: func => chain(func(value as Awaited<T>))
   };
 };
 

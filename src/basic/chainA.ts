@@ -1,15 +1,19 @@
-interface ChainAsync<T> {
-  pipe<U>(func: (value: Awaited<T>) => U): ChainAsync<U>;
-  value(): Promise<T>;
-}
+type ChainValue<T> = T extends Promise<infer R> ? Promise<R> : T;
+type ChainPipeValue<T> = T extends Promise<infer R> ? Awaited<R> : T;
 
-const chainA = <T>(value: T): ChainAsync<T> => {
+const chainA = <T>(value: ChainValue<T>) => {
   return {
-    pipe<U>(func: (value: Awaited<T>) => U): ChainAsync<U> {
-      const _value = value instanceof Promise ? value.then(func) : func(value as Awaited<T>);
-      return chainA(_value as U);
+    value: () => value instanceof Promise ? value as Promise<Awaited<T>> : Promise.resolve(value),
+    pipe<U>(func: (value: ChainPipeValue<T>) => U) {
+      const _value = value instanceof Promise ? value.then(func) : func(value as ChainPipeValue<T>);
+      return chainA(_value as ChainValue<U>);
     },
-    value: () => Promise.resolve(value)
+    catch<U>(reject: (error: any) => U) {
+      return chainA(this.value().catch(reject));
+    },
+    finally(onfinally: () => void) {
+      return chainA(this.value().finally(onfinally));
+    }
   };
 };
 
