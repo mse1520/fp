@@ -1,5 +1,6 @@
+import noopHandler from '@internal/noopHandler';
+import toIterator from '@internal/toIterator';
 import curryRight from './curryRight';
-import takeL from '@lazy/takeL';
 
 interface Take {
   /**
@@ -9,12 +10,32 @@ interface Take {
    * @param length The number of elements to take.
    * @returns Returns the slice of array.
    */
-  (length: number): <T>(iterable: Iterable<T>) => T[];
-  <T>(iterable: Iterable<T>, length: number): T[];
+  (length: number): (iterable: Iterable<any>) => any;
+  (iterable: Iterable<any>, length: number): any;
 }
 
-const _take = <T>(iterable: Iterable<T>, length: number) => [...takeL(iterable, length)];
+const take: Take = curryRight((iterable: Iterable<any>, length: number) => {
+  const result: any[] = [];
+  const iter = toIterator(iterable);
+  let next: IteratorResult<any>;
 
-const take: Take = curryRight(_take);
+  const recur = (): any[] | Promise<any[]> => {
+    while (!(next = iter.next()).done) {
+      if (next.value instanceof Promise) {
+        return next.value
+          .then(value => (result.push(value), result))
+          .then(result => result.length === length ? result : recur())
+          .catch(noopHandler(recur));
+      }
+
+      result.push(next.value);
+      if (result.length === length) return result;
+    }
+
+    return result;
+  };
+
+  return recur();
+});
 
 export default take;

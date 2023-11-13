@@ -1,5 +1,5 @@
+import passParam from '@internal/passParam';
 import curryRight from '@basic/curryRight';
-import sync from '@internal/sync';
 
 interface MapL {
   /**
@@ -9,21 +9,16 @@ interface MapL {
    * @param predicate Function that is called for every element of iterable. Each time callbackFn executes, the returned value is added to new Generator.
    * @returns Generator
    */
-  <T, U>(predicate: (value: T, index: number) => U): (iterable: Iterable<T>) => Generator<U, void>;
-  <T, U = any>(iterable: Iterable<T>, predicate: (value: T, index: number) => U): Generator<U, void>;
-
-  <T, U>(predicate: (value: T, index: number) => U): (iterable: Iterable<T>) => Generator<U, void>;
-  <T, U = any>(iterable: Iterable<Promise<T>>, predicate: (value: T, index: number) => U): Generator<U, void>;
+  <T, U>(predicate: (value: Awaited<T>, index: number) => U): (iterable: Iterable<T>) => Generator<U | Promise<U>, void>;
+  <T, U>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => U): Generator<U | Promise<U>, void>;
 }
 
-function* _mapL<T, U>(iterable: Iterable<T extends Promise<infer V> ? Promise<V> : T>, predicate: (value: T extends Promise<infer V> ? Awaited<V> : T, index: number) => U) {
+const mapL: MapL = curryRight(function* (iterable: Iterable<any>, predicate: (value: any, index: number) => any) {
   let index = 0;
   for (const value of iterable) {
-    yield sync(value, predicate, index);
+    yield passParam(value, predicate, index);
     index++;
   }
-}
-
-const mapL: MapL = curryRight(_mapL);
+});
 
 export default mapL;

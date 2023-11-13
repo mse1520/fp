@@ -14,6 +14,6 @@ const curryRight = (func: Function, arity = func.length) => {
     };
 
   return curried;
-}
+};
 
 export default curryRight;

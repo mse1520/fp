@@ -11,6 +11,6 @@ const curry = (func: Function, arity = func.length) => {
     : (...args2: any[]) => curried(...args, ...args2);
 
   return curried;
-}
+};
 
 export default curry;

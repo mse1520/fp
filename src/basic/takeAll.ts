@@ -6,6 +6,6 @@ import take from './take';
  * @param iterable conforms to the iterable protocol.
  * @returns new array
  */
-const takeAll = <T>(iterable: Iterable<T>) => take(iterable, Infinity);
+const takeAll = take(Infinity);
 
 export default takeAll;

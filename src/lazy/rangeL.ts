@@ -13,7 +13,7 @@ interface RangeL {
   (start: number, end: number, step: number): Generator<number, void>;
 }
 
-function* _rangeL(start: number, end: number, step: number) {
+const rangeL: RangeL = curryRange(function* (start: number, end: number, step: number) {
   if (step < 1) {
     console.warn('In rangeL function, step parameter is not allowed to be less than 1!!');
     step = 1;
@@ -25,8 +25,6 @@ function* _rangeL(start: number, end: number, step: number) {
     step *= -1;
     while (start > end) yield start, start += step;
   }
-}
-
-const rangeL: RangeL = curryRange(_rangeL);
+});
 
 export default rangeL;

@@ -7,7 +7,7 @@
   "main": "lib/cjs/entry.js",
   "scripts": {
     "dev.old": "cross-env NODE_ENV=dev concurrently \"npm run watch:generate-index\" \"webpack serve\"",
-    "dev": "cross-env NODE_ENV=dev concurrently \"webpack serve\"",
+    "dev": "cross-env NODE_ENV=dev webpack serve",
     "build": "npm run build-cjs & npm run build-mjs & webpack",
     "ts-node": "ts-node -r tsconfig-paths/register",
     "generate-index": "npm run ts-node ./scripts/indexGenerator.ts",

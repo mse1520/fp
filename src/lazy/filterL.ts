@@ -1,4 +1,6 @@
+import nop from '@internal/nop';
 import curryRight from '@basic/curryRight';
+import catchNoop from '@internal/catchNoop';
 
 interface FilterL {
   /**
@@ -8,20 +10,20 @@ interface FilterL {
    * @param predicate the function invoked per iteration.
    * @returns Returns the new filtered Generator.
    */
-  <T>(predicate: (value: T, index: number) => any): (iterable: Iterable<T>) => Generator<T, void>;
-  <T>(iterable: Iterable<T>, predicate: (value: T, index: number) => any): Generator<T, void>;
+  <T>(predicate: (value: Awaited<T>, index: number) => any): (iterable: Iterable<T>) => Generator<T, void>;
+  <T>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => any): Generator<T, void>;
 }
 
-function* _filterL<T>(iterable: Iterable<T>, predicate: (value: T, index: number) => any) {
+const filterL: FilterL = curryRight(function* (iterable: Iterable<any>, predicate: (value: any, index: number) => any) {
   let index = 0;
   for (const value of iterable) {
-    if (predicate(value, index))
+    if (value instanceof Promise)
+      yield catchNoop(value.then(value => !predicate(value, index) ? Promise.reject(nop) : value));
+    else if (predicate(value, index))
       yield value;
 
     index++;
   }
-}
-
-const filterL: FilterL = curryRight(_filterL);
+});
 
 export default filterL;

@@ -12,15 +12,13 @@ interface TakeL {
   <T>(iterable: Iterable<T>, length: number): Generator<T, void>;
 }
 
-function* _takeL<T>(iterable: Iterable<T>, length: number) {
+const takeL: TakeL = curryRight(function* (iterable: Iterable<any>, length: number) {
   if (length < 1) return console.warn('In takeL function, length parameter is not allowed to be less than 1!!');
 
   for (const value of iterable) {
     yield value;
     if (!--length) return;
   }
-}
-
-const takeL: TakeL = curryRight(_takeL);
+});
 
 export default takeL;

@@ -1,16 +1,69 @@
-import { chain, delay, filter, filterL, head, map, mapL, range, rangeL, reduce, take, takeAll, takeC, takeL } from '../src';
-
-const testC = (key: string, func: (value: any) => any, time = 500) => {
-  console.time(key);
-  return chain(5)
-    .pipe(rangeL)
-    .pipe(mapL(delay(time)))
-    .pipe(func)
-    .pipe((v: any) => console.log(key, v))
-    .pipe(() => console.timeEnd(key))
-};
+import { curry, curryRight, filterL, map, mapL, range, rangeL, take, takeAll, takeL } from '../src';
 
 (async () => {
+
+  // curry
+  (() => {
+    const add = (a: number, b: number, c: number) => `a: ${a}, b: ${b}, c:${c}`;
+    const curring = curry(add);
+
+    console.log('------- curry --------');
+    console.log(curring(1, 2, 3));
+    console.log(curring(1, 2)(3));
+    console.log(curring(1)(2, 3));
+    console.log(curring(1)(2)(3));
+    console.log('------- curry --------');
+  })();
+
+  // curryRight
+  (() => {
+    const add = (a: number, b: number, c: number) => `a: ${a}, b: ${b}, c:${c}`;
+    const curring = curryRight(add);
+
+    console.log('------- curryRight --------');
+    console.log(curring(1, 2, 3));
+    console.log(curring(2, 3)(1));
+    console.log(curring(3)(1, 2));
+    console.log(curring(3)(2)(1));
+    console.log('------- curryRight --------');
+  })();
+
+  // take
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result: number[] = take(data, 3);
+
+    console.log('take', result);
+  })();
+
+  // takeAll
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result: number[] = takeAll(filterL(data, v => v % 2));
+
+    console.log('takeAll', result);
+  })();
+
+  // range
+  (() => {
+    console.log('------- range --------');
+    console.log(range(10));
+    console.log(range(0, 10));
+    console.log(range(0, 10, 2));
+    console.log(range(-10));
+    console.log(range(0, -10));
+    console.log(range(0, -10, 2));
+    console.log('------- range --------');
+  })();
+
+  // map
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result = map(data, v => v + 1);
+
+    console.log('map:', result);
+  })();
+
   // takeL
   (() => {
     const data = [1, 2, 3, 4, 5];
@@ -34,7 +87,7 @@ const testC = (key: string, func: (value: any) => any, time = 500) => {
   // mapL
   (() => {
     const data = [1, 2, 3, 4, 5];
-    const result = mapL(data, v => v + 1);
+    const result = mapL(data, (v: number) => v + 1);
 
     console.log('------- mapL --------');
     console.log(result.next());
@@ -42,96 +95,5 @@ const testC = (key: string, func: (value: any) => any, time = 500) => {
     console.log(...result);
     console.log('------- mapL --------');
   })();
-
-  // filterL
-  (() => {
-    const data = [1, 2, 3, 4, 5];
-    const result = filterL(data, v => v % 2);
-
-    console.log('filterL', ...result);
-  })();
-
-  // take
-  (() => {
-    const data = [1, 2, 3, 4, 5];
-    const result = take(data, 3);
-
-    console.log('take', result);
-  })();
-
-  // takeAll
-  (() => {
-    const data = [1, 2, 3, 4, 5];
-    const result = takeAll(filterL(data, v => v % 2));
-
-    console.log('takeAll', result);
-  })();
-
-  // head
-  (() => {
-    const data = [1, 2, 3, 4, 5];
-    const result = head(data);
-
-    console.log('head', result);
-  })();
-
-  // range
-  (() => {
-    console.log('------- range --------');
-    console.log(range(10));
-    console.log(range(0, 10));
-    console.log(range(0, 10, 2));
-    console.log(range(-10));
-    console.log(range(0, -10));
-    console.log(range(0, -10, 2));
-    console.log('------- range --------');
-  })();
-
-  // delay
-  await (async () => {
-    const value = await delay('data!!', 500);
-
-    console.log('delay', value);
-  })();
-
-  // map
-  (() => {
-    const data = [1, 2, 3, 4, 5];
-    const result = map(data, v => v + 1);
-
-    console.log('map:', result);
-  })();
-
-  // filter
-  (() => {
-    const data = [1, 2, 3, 4, 5];
-    const result = filter(data, v => v % 2);
-
-    console.log('filter', result);
-  })();
-
-  // reduce
-  (() => {
-    const data = [1, 2, 3, 4, 5];
-    const result = reduce(data, (acc: number, cur) => acc + cur);
-
-    console.log('reduce', result);
-  })();
-
-  // takeC
-  await (async () => {
-    console.log('------- takeC --------');
-    await testC('take', take(Infinity));
-    await testC('takeC', takeC(Infinity));
-    console.log('------- takeC --------');
-  })();
-
-  // reduceC
-  // await (async () => {
-  //   console.log('------- reduceC --------');
-  //   await testC('reduce', reduce((acc: number, cur: number) => acc + cur));
-  //   await testC('reduceC', reduceC((acc: number, cur: number) => acc + cur));
-  //   console.log('------- reduceC --------');
-  // })();
 
 })();
