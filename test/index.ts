@@ -1,6 +1,25 @@
-import { curry, curryRight, filterL, map, mapL, range, rangeL, take, takeAll, takeL } from '../src';
+import reduce from '@basic/reduce';
+import { curry, curryRight, delay, filterL, head, map, mapL, range, rangeL, take, takeAll, takeL } from '../src';
+
+// const testC = (key: string, func: Function, time = 500) => {
+//   console.time(key);
+//   return go(
+//     rangeL(5),
+//     mapL(delay(time)),
+//     func,
+//     (v: any) => console.log(key, v),
+//     () => console.timeEnd(key)
+//   );
+// };
 
 (async () => {
+
+  // delay
+  await (async () => {
+    const value = await delay(Promise.resolve('data!!'), 500);
+
+    console.log('delay', value);
+  })();
 
   // curry
   (() => {
@@ -44,6 +63,14 @@ import { curry, curryRight, filterL, map, mapL, range, rangeL, take, takeAll, ta
     console.log('takeAll', result);
   })();
 
+  // head
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result: number = head(data);
+
+    console.log('head', result);
+  })();
+
   // range
   (() => {
     console.log('------- range --------');
@@ -62,6 +89,14 @@ import { curry, curryRight, filterL, map, mapL, range, rangeL, take, takeAll, ta
     const result = map(data, v => v + 1);
 
     console.log('map:', result);
+  })();
+
+  // reduce
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result: number = reduce(data, (acc: number, cur) => acc + cur);
+
+    console.log('reduce', result);
   })();
 
   // takeL
