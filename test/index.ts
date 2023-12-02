@@ -1,18 +1,26 @@
 import reduce from '@basic/reduce';
-import { curry, curryRight, delay, filterL, head, map, mapL, range, rangeL, take, takeAll, takeL } from '../src';
+import { curry, curryRight, delay, filter, filterL, forEach, forEachC, forEachL, go, head, identity, last, map, mapC, mapL, pipe, range, rangeL, reduceC, take, takeAll, takeAllC, takeC, takeL, tap } from '../src';
 
-// const testC = (key: string, func: Function, time = 500) => {
-//   console.time(key);
-//   return go(
-//     rangeL(5),
-//     mapL(delay(time)),
-//     func,
-//     (v: any) => console.log(key, v),
-//     () => console.timeEnd(key)
-//   );
-// };
+const testC = (key: string, func: Function, time = 500) => {
+  console.time(key);
+  return go(
+    rangeL(5),
+    mapL(delay(time)),
+    func,
+    (v: any) => console.log(key, v),
+    () => console.timeEnd(key)
+  );
+};
 
 (async () => {
+
+  // identity
+  (() => {
+    const data = 'data!!';
+    const result = identity(data);
+
+    console.log('identity', result);
+  })();
 
   // delay
   await (async () => {
@@ -71,6 +79,14 @@ import { curry, curryRight, delay, filterL, head, map, mapL, range, rangeL, take
     console.log('head', result);
   })();
 
+  // last
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result: number = last(data);
+
+    console.log('last', result);
+  })();
+
   // range
   (() => {
     console.log('------- range --------');
@@ -88,7 +104,25 @@ import { curry, curryRight, delay, filterL, head, map, mapL, range, rangeL, take
     const data = [1, 2, 3, 4, 5];
     const result = map(data, v => v + 1);
 
-    console.log('map:', result);
+    console.log('map', result);
+  })();
+
+  // forEach
+  (() => {
+    const data = [1, 2, 3];
+
+    console.log('------- forEach --------');
+    const result: number[] = forEach(data, v => console.log(v + 1));
+    console.log(result);
+    console.log('------- forEach --------');
+  })();
+
+  // filter
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result: number[] = filter(data, v => v % 2);
+
+    console.log('filter', result);
   })();
 
   // reduce
@@ -98,6 +132,46 @@ import { curry, curryRight, delay, filterL, head, map, mapL, range, rangeL, take
 
     console.log('reduce', result);
   })();
+
+  // go
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result: string[] = go(
+      data,
+      filterL((v: number) => v % 2),
+      map((v: number) => v.toString())
+    );
+
+    console.log('go', result);
+  })();
+
+  // pipe
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result: (data: number[]) => string[] = pipe(
+      filterL((v: number) => v % 2),
+      map((v: number) => v.toString())
+    );
+
+    console.log('pipe', result(data));
+  })();
+
+  // tap
+  // (() => {
+  //   const data = [1, 2, 3, 4, 5];
+
+  //   console.log('------- tap --------');
+  //   go(
+  //     data,
+  //     tap(
+  //       filter((v: number) => v % 2),
+  //       (v: any) => console.log(v)
+  //     ),
+  //     reject((v: number) => v % 2),
+  //     (v: any) => console.log(v)
+  //   );
+  //   console.log('------- tap --------');
+  // })();
 
   // takeL
   (() => {
@@ -129,6 +203,66 @@ import { curry, curryRight, delay, filterL, head, map, mapL, range, rangeL, take
     console.log(result.next());
     console.log(...result);
     console.log('------- mapL --------');
+  })();
+
+  // forEachL
+  (() => {
+    const data = [1, 2, 3];
+
+    console.log('------- forEachL --------');
+    const result = forEachL(data, v => console.log(v + 1));
+    console.log(...result);
+    console.log('------- forEachL --------');
+  })();
+
+  // filterL
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result = filterL(data, v => v % 2);
+
+    console.log('filterL', ...result);
+  })();
+
+  // takeC
+  await (async () => {
+    console.log('------- takeC --------');
+    await testC('take', take(Infinity));
+    await testC('takeC', takeC(Infinity));
+    console.log('------- takeC --------');
+  })();
+
+  // takeAllC
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+
+    console.log('------- takeAllC --------');
+    console.log('takeC', takeC(data, 3));
+    console.log('takeAllC', takeAllC(data));
+    console.log('------- takeAllC --------');
+  })();
+
+  // mapC
+  await (async () => {
+    console.log('------- mapC --------');
+    await testC('map', map((v: number) => v + 1));
+    await testC('mapC', mapC((v: number) => v + 1));
+    console.log('------- mapC --------');
+  })();
+
+  // forEachC
+  await (async () => {
+    console.log('------- forEachC --------');
+    await testC('forEach', forEach(identity));
+    await testC('forEachC', forEachC(identity));
+    console.log('------- forEachC --------');
+  })();
+
+  // reduceC
+  await (async () => {
+    console.log('------- reduceC --------');
+    await testC('reduce', reduce((acc: number, cur: number) => acc + cur));
+    await testC('reduceC', reduceC((acc: number, cur: number) => acc + cur));
+    console.log('------- reduceC --------');
   })();
 
 })();

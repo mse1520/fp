@@ -7,8 +7,6 @@ import take from '@basic/take';
  * @param iterable conforms to the iterable protocol.
  * @returns new array
  */
-function takeAllC<T>(iterable: Iterable<T | Promise<T>>) {
-  return take([...iterable], Infinity);
-}
+const takeAllC = (iterable: Iterable<any>) => take([...iterable], Infinity);
 
 export default takeAllC;
