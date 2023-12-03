@@ -1,10 +1,13 @@
 import reduce from '@basic/reduce';
-import { curry, curryRight, delay, filter, filterL, forEach, forEachC, forEachL, go, head, identity, last, map, mapC, mapL, pipe, range, rangeL, reduceC, take, takeAll, takeAllC, takeC, takeL, tap } from '../src';
+import {
+  curry, curryRight, delay, entries, entriesL, filter, filterC, filterL, forEach, forEachC, forEachL, fromEntries, fromEntriesC, go, head, identity, keys, keysL, last, map,
+  mapC, mapL, pipe, range, rangeL, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC, takeC, takeL, tap, values, valuesL
+} from '../src';
 
-const testC = (key: string, func: Function, time = 500) => {
+const testC = (key: string, func: Function, data?: any, time = 500) => {
   console.time(key);
   return go(
-    rangeL(5),
+    !data ? rangeL(5) : data,
     mapL(delay(time)),
     func,
     (v: any) => console.log(key, v),
@@ -125,6 +128,14 @@ const testC = (key: string, func: Function, time = 500) => {
     console.log('filter', result);
   })();
 
+  // reject
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result: number[] = reject(data, v => v % 2);
+
+    console.log('reject', result);
+  })();
+
   // reduce
   (() => {
     const data = [1, 2, 3, 4, 5];
@@ -157,21 +168,53 @@ const testC = (key: string, func: Function, time = 500) => {
   })();
 
   // tap
-  // (() => {
-  //   const data = [1, 2, 3, 4, 5];
+  (() => {
+    const data = [1, 2, 3, 4, 5];
 
-  //   console.log('------- tap --------');
-  //   go(
-  //     data,
-  //     tap(
-  //       filter((v: number) => v % 2),
-  //       (v: any) => console.log(v)
-  //     ),
-  //     reject((v: number) => v % 2),
-  //     (v: any) => console.log(v)
-  //   );
-  //   console.log('------- tap --------');
-  // })();
+    console.log('------- tap --------');
+    go(
+      data,
+      tap(
+        filter((v: number) => v % 2),
+        (v: any) => console.log(v)
+      ),
+      reject((v: number) => v % 2),
+      (v: any) => console.log(v)
+    );
+    console.log('------- tap --------');
+  })();
+
+  // entries
+  (() => {
+    const data = { arg1: 1, arg2: 2 };
+    const result = entries(data);
+    console.log('entries', result);
+  })();
+
+  // fromEntries
+  (() => {
+    const data = [
+      ['arg1', 1],
+      ['arg2', 2],
+    ];
+
+    const result: Record<string, number> = fromEntries(data);
+    console.log('fromEntries', result);
+  })();
+
+  // keys
+  (() => {
+    const data = { arg1: 1, arg2: 2 };
+    const result: string[] = keys(data);
+    console.log('keys', result);
+  })();
+
+  // values
+  (() => {
+    const data = { arg1: 1, arg2: 2 };
+    const result: number[] = values(data);
+    console.log('values', result);
+  })();
 
   // takeL
   (() => {
@@ -223,6 +266,35 @@ const testC = (key: string, func: Function, time = 500) => {
     console.log('filterL', ...result);
   })();
 
+  // rejectL
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result = rejectL(data, v => v % 2);
+
+    console.log('rejectL', ...result);
+  })();
+
+  // entriesL
+  (() => {
+    const data = { arg1: 1, arg2: 2 };
+    const result = entriesL(data);
+    console.log('entriesL', ...result);
+  })();
+
+  // keysL
+  (() => {
+    const data = { arg1: 1, arg2: 2 };
+    const result = keysL(data);
+    console.log('keysL', ...result);
+  })();
+
+  // valuesL
+  (() => {
+    const data = { arg1: 1, arg2: 2 };
+    const result = valuesL(data);
+    console.log('valuesL', ...result);
+  })();
+
   // takeC
   await (async () => {
     console.log('------- takeC --------');
@@ -249,6 +321,22 @@ const testC = (key: string, func: Function, time = 500) => {
     console.log('------- mapC --------');
   })();
 
+  // filterC
+  await (async () => {
+    console.log('------- filterC --------');
+    await testC('filter', filter((v: number) => v % 2));
+    await testC('filterC', filterC((v: number) => v % 2));
+    console.log('------- filterC --------');
+  })();
+
+  // rejectC
+  await (async () => {
+    console.log('------- rejectC --------');
+    await testC('reject', reject((v: number) => v % 2));
+    await testC('rejectC', rejectC((v: number) => v % 2));
+    console.log('------- rejectC --------');
+  })();
+
   // forEachC
   await (async () => {
     console.log('------- forEachC --------');
@@ -263,6 +351,22 @@ const testC = (key: string, func: Function, time = 500) => {
     await testC('reduce', reduce((acc: number, cur: number) => acc + cur));
     await testC('reduceC', reduceC((acc: number, cur: number) => acc + cur));
     console.log('------- reduceC --------');
+  })();
+
+  // fromEntriesC
+  await (async () => {
+    const data = [
+      ['arg1', 1],
+      ['arg2', 2],
+      ['arg3', 3],
+      ['arg4', 4],
+      ['arg5', 5],
+    ];
+
+    console.log('------- fromEntriesC --------');
+    await testC('fromEntries', fromEntries, data);
+    await testC('fromEntriesC', fromEntriesC, data);
+    console.log('------- fromEntriesC --------');
   })();
 
 })();
