@@ -1,7 +1,8 @@
 import reduce from '@basic/reduce';
 import {
-  curry, curryRight, delay, entries, entriesL, filter, filterC, filterL, forEach, forEachC, forEachL, fromEntries, fromEntriesC, go, head, identity, keys, keysL, last, map,
-  mapC, mapL, pipe, range, rangeL, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC, takeC, takeL, tap, values, valuesL
+  curry, curryRight, delay, entries, entriesL, filter, filterC, filterL, forEach, forEachC, forEachL, fromEntries, fromEntriesC, go, groupBy, groupByC, head,
+  identity, join, joinC, keys, keysL, last, map, mapC, mapL, pipe, range, rangeL, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC, takeC, takeL, tap, values,
+  valuesL
 } from '../src';
 
 const testC = (key: string, func: Function, data?: any, time = 500) => {
@@ -184,6 +185,25 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
     console.log('------- tap --------');
   })();
 
+  // groupBy
+  (() => {
+    const data = [
+      ['arg1', 1],
+      ['arg2', 1],
+      ['arg3', 2],
+    ];
+    const result: Record<number, [string, number][]> = groupBy(data, ([, v]) => v);
+    console.log('groupBy', result);
+  })();
+
+  // join
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result = join(data, ',');
+
+    console.log('join', result);
+  })();
+
   // entries
   (() => {
     const data = { arg1: 1, arg2: 2 };
@@ -351,6 +371,30 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
     await testC('reduce', reduce((acc: number, cur: number) => acc + cur));
     await testC('reduceC', reduceC((acc: number, cur: number) => acc + cur));
     console.log('------- reduceC --------');
+  })();
+
+  // groupByC
+  await (async () => {
+    const data = [
+      ['arg1', 1],
+      ['arg2', 1],
+      ['arg3', 2],
+      ['arg4', 2],
+      ['arg5', 3],
+    ];
+
+    console.log('------- groupByC --------');
+    await testC('groupBy', groupBy(([, v]: [string, number]) => v), data);
+    await testC('groupByC', groupByC(([, v]: [string, number]) => v), data);
+    console.log('------- groupByC --------');
+  })();
+
+  // joinC
+  await (async () => {
+    console.log('------- joinC --------');
+    await testC('join', join(','));
+    await testC('joinC', joinC(','));
+    console.log('------- joinC --------');
   })();
 
   // fromEntriesC
