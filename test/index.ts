@@ -1,8 +1,8 @@
 import reduce from '@basic/reduce';
 import {
-  curry, curryRight, delay, entries, entriesL, filter, filterC, filterL, forEach, forEachC, forEachL, fromEntries, fromEntriesC, go, groupBy, groupByC, head,
-  identity, join, joinC, keys, keysL, last, map, mapC, mapL, pipe, range, rangeL, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC, takeC, takeL, tap, values,
-  valuesL
+  curry, curryRight, deepFlat, deepFlatL, delay, entries, entriesL, filter, filterC, filterL, flat, flatL, forEach, forEachC, forEachL, fromEntries, fromEntriesC, go, groupBy,
+  groupByC, head, identity, join, joinC, keys, keysL, last, map, mapC, mapL, pipe, range, rangeL, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC,
+  takeC, takeL, tap, values, valuesL
 } from '../src';
 
 const testC = (key: string, func: Function, data?: any, time = 500) => {
@@ -236,6 +236,24 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
     console.log('values', result);
   })();
 
+  // flat
+  (() => {
+    const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
+
+    console.log('------- flat --------');
+    console.log(flat(data));
+    console.log(flat(data, 2));
+    console.log('------- flat --------');
+  })();
+
+  // deepFlat
+  (() => {
+    const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
+    const result = deepFlat(data);
+
+    console.log('deepFlat', result);
+  })();
+
   // takeL
   (() => {
     const data = [1, 2, 3, 4, 5];
@@ -313,6 +331,24 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
     const data = { arg1: 1, arg2: 2 };
     const result = valuesL(data);
     console.log('valuesL', ...result);
+  })();
+
+  // flatL
+  (() => {
+    const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
+
+    console.log('------- flatL --------');
+    console.log(...flatL(data));
+    console.log(...flatL(data, 2));
+    console.log('------- flatL --------');
+  })();
+
+  // deepFlatL
+  (() => {
+    const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
+    const result = deepFlatL(data);
+
+    console.log('deepFlatL', ...result);
   })();
 
   // takeC
