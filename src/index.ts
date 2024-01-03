@@ -23,6 +23,7 @@ export { default as keys } from '@basic/keys';
 export { default as values } from '@basic/values';
 export { default as flat } from '@basic/flat';
 export { default as deepFlat } from '@basic/deepFlat';
+export { default as flatMap } from '@basic/flatMap';
 
 export { default as takeL } from '@lazy/takeL';
 export { default as rangeL } from '@lazy/rangeL';
@@ -35,6 +36,7 @@ export { default as keysL } from '@lazy/keysL';
 export { default as valuesL } from '@lazy/valuesL';
 export { default as flatL } from '@lazy/flatL';
 export { default as deepFlatL } from '@lazy/deepFlatL';
+export { default as flatMapL } from '@lazy/flatMapL';
 
 export { default as takeC } from '@concurrency/takeC';
 export { default as takeAllC } from '@concurrency/takeAllC';

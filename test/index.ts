@@ -1,6 +1,6 @@
 import reduce from '@basic/reduce';
 import {
-  curry, curryRight, deepFlat, deepFlatL, delay, entries, entriesL, filter, filterC, filterL, flat, flatL, forEach, forEachC, forEachL, fromEntries, fromEntriesC, go, groupBy,
+  curry, curryRight, deepFlat, deepFlatL, delay, entries, entriesL, filter, filterC, filterL, flat, flatL, flatMap, flatMapL, forEach, forEachC, forEachL, fromEntries, fromEntriesC, go, groupBy,
   groupByC, head, identity, join, joinC, keys, keysL, last, map, mapC, mapL, pipe, range, rangeL, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC,
   takeC, takeL, tap, values, valuesL
 } from '../src';
@@ -199,7 +199,7 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
   // join
   (() => {
     const data = [1, 2, 3, 4, 5];
-    const result = join(data, ',');
+    const result: string = join(data, ',');
 
     console.log('join', result);
   })();
@@ -207,7 +207,7 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
   // entries
   (() => {
     const data = { arg1: 1, arg2: 2 };
-    const result = entries(data);
+    const result: Record<string, number> = entries(data);
     console.log('entries', result);
   })();
 
@@ -249,9 +249,17 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
   // deepFlat
   (() => {
     const data = [1, 2, [3, 4, 5], 6, [7, [8, 9], 10]];
-    const result = deepFlat(data);
+    const result: number[] = deepFlat(data);
 
     console.log('deepFlat', result);
+  })();
+
+  // flatMap
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result: number[] = flatMap(data, v => [v, v * 2]);
+
+    console.log('flatMap', result);
   })();
 
   // takeL
@@ -349,6 +357,14 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
     const result = deepFlatL(data);
 
     console.log('deepFlatL', ...result);
+  })();
+
+  // flatMapL
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result = flatMapL(data, v => [v, v * 2]);
+
+    console.log('flatMapL', ...result);
   })();
 
   // takeC
