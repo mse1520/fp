@@ -23,7 +23,7 @@
   - [keys](#keys)
   - [values](#values)
   - [entries](#entries)
-  - [object](#object)
+  - [fronEntries](#fronEntries)
   - [groupBy](#groupBy)
 - [Lazy](#lazy)
   - [takeL](#takel)
@@ -46,7 +46,7 @@
   - [filterC](#filterc)
   - [rejectC](#rejectc)
   - [reduceC](#reducec)
-  - [objectC](#objectc)
+  - [fronEntriesC](#fronEntriesc)
 
 ## Basic
 
@@ -297,11 +297,11 @@ const result = _.entries(data);
 console.log(result); // [['arg1', 1], ['arg2', 2]]
 ```
 
-### object
+### fromEntries
 [key, value]의 배열에서 [key, value] 형태의 object로 반환합니다.
 ```javascript
 const data = [['arg1', 1], ['arg2', 2]];
-const result = _.object(data);
+const result = _.fromEntries(data);
 console.log(result); // { arg1: 1, arg2: 2 }
 ```
 
@@ -574,8 +574,8 @@ async function excute() {
 excute();
 ```
 
-### objectC
-object 함수의 Concurrency 버전입니다.
+### fromEntriesC
+fromEntriesC 함수의 Concurrency 버전입니다.
 ```javascript
 async function excute() {
   function test(key: string, func: Function) {
@@ -590,14 +590,14 @@ async function excute() {
     );
   }
 
-  await test('object', object);
-  await test('objectC', objectC);
+  await test('fromEntries', fromEntries);
+  await test('fromEntriesC', fromEntriesC);
 
   // ----- excute result -----
-  // object { arg0: 0, arg1: 1, arg2: 2, arg3: 3, arg4: 4 }
-  // object: 2500 ms
-  // objectC { arg0: 0, arg1: 1, arg2: 2, arg3: 3, arg4: 4 }
-  // objectC: 500 ms
+  // fromEntries { arg0: 0, arg1: 1, arg2: 2, arg3: 3, arg4: 4 }
+  // fromEntries: 2500 ms
+  // fromEntriesC { arg0: 0, arg1: 1, arg2: 2, arg3: 3, arg4: 4 }
+  // fromEntriesC: 500 ms
 }
 
 excute();

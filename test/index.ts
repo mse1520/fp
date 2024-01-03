@@ -1,8 +1,7 @@
-import reduce from '@basic/reduce';
 import {
-  curry, curryRight, deepFlat, deepFlatL, delay, entries, entriesL, filter, filterC, filterL, flat, flatL, flatMap, flatMapL, forEach, forEachC, forEachL, fromEntries, fromEntriesC, go, groupBy,
-  groupByC, head, identity, join, joinC, keys, keysL, last, map, mapC, mapL, pipe, range, rangeL, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC,
-  takeC, takeL, tap, values, valuesL
+  curry, curryRight, deepFlat, deepFlatL, delay, entries, entriesL, filter, filterC, filterL, flat, flatL, flatMap, flatMapL, forEach, forEachC, forEachL,
+  fromEntries, fromEntriesC, go, groupBy, groupByC, head, identity, join, joinC, keys, keysL, last, map, mapC, mapL, pipe, range, rangeL, reduce, reduceC,
+  reject, rejectC, rejectL, take, takeAll, takeAllC, takeC, takeL, tap, values, valuesL
 } from '../src';
 
 const testC = (key: string, func: Function, data?: any, time = 500) => {
