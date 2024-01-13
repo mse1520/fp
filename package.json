@@ -1,17 +1,16 @@
 {
   "name": "underbarjs",
-  "version": "2.0.1-beta.0",
+  "version": "2.1.0",
   "author": "kyh",
   "license": "MIT",
   "description": "",
   "main": "lib/cjs/entry.js",
   "scripts": {
-    "dev.old": "cross-env NODE_ENV=dev concurrently \"npm run watch:generate-index\" \"webpack serve\"",
-    "dev": "cross-env NODE_ENV=dev webpack serve",
+    "dev": "cross-env NODE_ENV=dev concurrently \"npm run watch:gen-index\" \"webpack serve\"",
     "build": "npm run build-cjs & npm run build-mjs & webpack",
     "ts-node": "ts-node -r tsconfig-paths/register",
-    "generate-index": "npm run ts-node ./scripts/indexGenerator.ts",
-    "watch:generate-index": "nodemon -i src/index.ts -w src/ -e ts -x npm run generate-index",
+    "gen-index": "npm run ts-node ./scripts/indexGenerator.ts",
+    "watch:gen-index": "nodemon -i src/index.ts -w src/ -e ts -x npm run gen-index",
     "build-cjs": "tsc -p ./tsconfig.cjs.json & tsc-alias -p ./tsconfig.cjs.json",
     "build-mjs": "tsc -p ./tsconfig.mjs.json & tsc-alias -p ./tsconfig.mjs.json"
   },
