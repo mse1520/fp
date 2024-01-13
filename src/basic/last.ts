@@ -1,5 +1,5 @@
-import isString from '@internal/isString';
-import isArray from '@internal/isArray';
+import isString from './isString';
+import isArray from './isArray';
 import reduce from './reduce';
 
 /**

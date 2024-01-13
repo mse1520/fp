@@ -1,6 +1,11 @@
 # API
 - [시작하기](../README.md)
 - [Basic](#basic)
+  - [isString](#isString)
+  - [isArray](#isArray)
+  - [isIterable](#isIterable)
+  - [toIterator](#toIterator)
+  - [noop](#noop)
   - [curry](#curry)
   - [curryRight](#curryright)
   - [take](#take)
@@ -50,8 +55,67 @@
 
 ## Basic
 
+### isString
+입력값의 타입이 String인지 체크한 결과를 반환힙니다.
+```javascript
+const num = 1;
+const str = 'string';
+const arr = [1, 2, 3];
+
+console.log('------- isString --------');
+console.log(isString(num)); // false
+console.log(isString(str)); // true
+console.log(isString(arr)); // false
+console.log('------- isString --------');
+```
+### isArray
+입력값의 타입이 Array인지 체크한 결과를 반환힙니다.
+```javascript
+const num = 1;
+const str = 'string';
+const arr = [1, 2, 3];
+
+console.log('------- isArray --------');
+console.log(isArray(num)); // false
+console.log(isArray(str)); // false
+console.log(isArray(arr)); // true
+console.log('------- isArray --------');
+```
+### isIterable
+입력값의 타입이 Iterable인지 체크한 결과를 반환힙니다.
+```javascript
+const num = 1;
+const str = 'string';
+const arr = [1, 2, 3];
+
+console.log('------- isIterable --------');
+console.log(isIterable(num)); // false
+console.log(isIterable(str)); // true
+console.log(isIterable(arr)); // true
+console.log('------- isIterable --------');
+```
+### toIterator
+입력값을 Iterator 타입으로 변환합니다.
+```javascript
+const num = 1;
+const str = 'string';
+const arr = [1, 2, 3];
+
+console.log('------- toIterator --------');
+console.log(toIterator(num)); // Generator
+console.log(toIterator(str)); // StringIterator
+console.log(toIterator(arr)); // Array Iterator
+console.log('------- toIterator --------');
+```
+
+### noop
+아무것도 실행하지 않습니다.
+```javascript
+console.log('noop', noop()); // undefined
+```
+
 ### curry
-여러 인수을 갖는 함수를 단일 인수를 갖는 함수들의 함수열로 바꾼다. 이를 currying이라 부른다.
+입력값의 타입이 String인지 체크한 결과를 반환힙니다.
 ```javascript
 let add = (a, b, c) => `a: ${a}, b: ${b}, c:${c}`;
 add = _.curry(add);

@@ -1,7 +1,7 @@
 import curryReduce from '@internal/curryReduce';
 import noopHandler from '@internal/noopHandler';
 import passParam from '@internal/passParam';
-import toIterator from '@internal/toIterator';
+import toIterator from './toIterator';
 
 interface Reduce {
   /**

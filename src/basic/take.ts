@@ -1,5 +1,5 @@
 import noopHandler from '@internal/noopHandler';
-import toIterator from '@internal/toIterator';
+import toIterator from './toIterator';
 import curryRight from './curryRight';
 
 interface Take {

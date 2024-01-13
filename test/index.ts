@@ -1,7 +1,7 @@
 import {
   curry, curryRight, deepFlat, deepFlatL, delay, entries, entriesL, filter, filterC, filterL, flat, flatL, flatMap, flatMapL, forEach, forEachC, forEachL,
-  fromEntries, fromEntriesC, go, groupBy, groupByC, head, identity, join, joinC, keys, keysL, last, map, mapC, mapL, pipe, range, rangeL, reduce, reduceC,
-  reject, rejectC, rejectL, take, takeAll, takeAllC, takeC, takeL, tap, values, valuesL
+  fromEntries, fromEntriesC, go, groupBy, groupByC, head, identity, isArray, isIterable, isString, join, joinC, keys, keysL, last, map, mapC, mapL, noop, pipe,
+  range, rangeL, reduce, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC, takeC, takeL, tap, toIterator, values, valuesL
 } from '../src';
 
 const testC = (key: string, func: Function, data?: any, time = 500) => {
@@ -16,6 +16,63 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
 };
 
 (async () => {
+
+  // isString
+  (() => {
+    const num = 1;
+    const str = 'string';
+    const arr = [1, 2, 3];
+
+    console.log('------- isString --------');
+    console.log(isString(num));
+    console.log(isString(str));
+    console.log(isString(arr));
+    console.log('------- isString --------');
+  })();
+
+  // isArray
+  (() => {
+    const num = 1;
+    const str = 'string';
+    const arr = [1, 2, 3];
+
+    console.log('------- isArray --------');
+    console.log(isArray(num));
+    console.log(isArray(str));
+    console.log(isArray(arr));
+    console.log('------- isArray --------');
+  })();
+
+  // isIterable
+  (() => {
+    const num = 1;
+    const str = 'string';
+    const arr = [1, 2, 3];
+
+    console.log('------- isIterable --------');
+    console.log(isIterable(num));
+    console.log(isIterable(str));
+    console.log(isIterable(arr));
+    console.log('------- isIterable --------');
+  })();
+
+  // toIterator
+  (() => {
+    const num = 1;
+    const str = 'string';
+    const arr = [1, 2, 3];
+
+    console.log('------- toIterator --------');
+    console.log(toIterator(num).next());
+    console.log(toIterator(str).next());
+    console.log(toIterator(arr).next());
+    console.log('------- toIterator --------');
+  })();
+
+  // noop
+  (() => {
+    console.log('noop', noop());
+  })();
 
   // identity
   (() => {

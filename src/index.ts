@@ -1,3 +1,8 @@
+export { default as isString } from '@basic/isString';
+export { default as isArray } from '@basic/isArray';
+export { default as isIterable } from '@basic/isIterable';
+export { default as toIterator } from '@basic/toIterator';
+export { default as noop } from '@basic/noop';
 export { default as identity } from '@basic/identity';
 export { default as delay } from '@basic/delay';
 export { default as curry } from '@basic/curry';

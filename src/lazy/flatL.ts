@@ -1,10 +1,10 @@
 import last from '@basic/last';
 import catchNoop from '@internal/catchNoop';
 import curryFlat from '@internal/curryFlat';
-import isIterable from '@internal/isIterable';
-import isString from '@internal/isString';
+import isIterable from '@basic/isIterable';
+import isString from '@basic/isString';
 import nop from '@internal/nop';
-import toIterator from '@internal/toIterator';
+import toIterator from '@basic/toIterator';
 
 interface FlatL {
   /**

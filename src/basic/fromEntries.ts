@@ -1,4 +1,4 @@
-import isArray from '@internal/isArray';
+import isArray from './isArray';
 import reduce from './reduce';
 
 /**

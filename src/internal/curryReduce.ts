@@ -1,5 +1,5 @@
 import head from '@basic/head';
-import toIterator from './toIterator';
+import toIterator from '@basic/toIterator';
 
 const curryReduce = (reduce: Function) => (...args: any[]) => {
   switch (args.length) {
