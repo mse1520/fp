@@ -14,11 +14,9 @@ interface MapL {
 }
 
 const mapL: MapL = curryRight(function* (iterable: Iterable<any>, predicate: (value: any, index: number) => any) {
-  let index = 0;
-  for (const value of iterable) {
-    yield passParam(value, predicate, index);
-    index++;
-  }
+  let index = -1;
+  for (const value of iterable)
+    yield passParam(value, (value: any) => (index++, predicate(value, index)));
 });
 
 export default mapL;
