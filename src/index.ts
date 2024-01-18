@@ -18,7 +18,6 @@ export { default as isString } from '@basic/isString';
 export { default as join } from '@basic/join';
 export { default as keys } from '@basic/keys';
 export { default as last } from '@basic/last';
-export { default as leave } from '@basic/leave';
 export { default as map } from '@basic/map';
 export { default as noop } from '@basic/noop';
 export { default as pipe } from '@basic/pipe';

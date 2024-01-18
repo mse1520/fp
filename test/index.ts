@@ -1,6 +1,6 @@
 import {
   curry, curryRight, deepFlat, deepFlatL, delay, entries, entriesL, filter, filterC, filterL, flat, flatL, flatMap, flatMapL, forEach, forEachC, forEachL,
-  fromEntries, fromEntriesC, go, groupBy, groupByC, head, identity, isArray, isIterable, isString, join, joinC, keys, keysL, last, leave, map, mapC, mapL, noop, pipe,
+  fromEntries, fromEntriesC, go, groupBy, groupByC, head, identity, isArray, isIterable, isString, join, joinC, keys, keysL, last, map, mapC, mapL, noop, pipe,
   range, rangeL, reduce, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC, takeC, takeL, tap, toIterator, values, valuesL
 } from '../src';
 
@@ -522,25 +522,3 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
   })();
 
 })();
-
-// (async () => {
-//   console.log('------- leave --------');
-//   console.time('leave')
-//   await go(
-//     rangeL(Infinity),
-//     mapL(delay(0)),
-//     // filterL((v: number) => v % 2),
-//     forEachL((v: number, i) => {
-//       // console.log(v, i)
-//       const body = document.querySelector('body');
-//       if (body instanceof HTMLBodyElement) {
-//         body.innerHTML = v + '';
-//       }
-//       // if (i === 4) console.timeEnd('leave')
-//     }),
-//     takeAll,
-//     // leave,
-//     // console.log
-//   )
-//   console.log('------- leave --------');
-// })();
