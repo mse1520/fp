@@ -9,17 +9,38 @@ interface GroupBy {
    * @param predicate Function to execute on each element of iterable.
    * @returns the composed aggregate object.
    */
-  <T, K extends keyof any>(predicate: (value: Awaited<T>, index: number) => K): (iterable: Iterable<T>) => any;
-  <T, K extends keyof any>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => K): any;
+  <T>(predicate: (value: Awaited<T>, index: number) => keyof any): (iterable: Iterable<T>) => any;
+  <T>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => keyof any): any;
+  <T>(predicate: ((value: Awaited<T>, index: number) => keyof any)[]): (iterable: Iterable<T>) => any;
+  <T>(iterable: Iterable<T>, predicate: ((value: Awaited<T>, index: number) => keyof any)[]): any;
 }
 
-const groupByC: GroupBy = curryRight(<T, K extends keyof any>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => K) =>
-  reduceC(iterable, (acc, cur, index) => {
-    const key = predicate(cur, index);
-    if (!(key in acc)) acc[key] = [];
-    acc[key].push(cur);
+interface Predicate<T> {
+  (value: Awaited<T>, index: number): keyof any;
+}
+
+const groupByC: GroupBy = curryRight(<T>(iterable: Iterable<T>, predicate: Predicate<T> | Predicate<T>[]) => {
+  let preds = !(predicate instanceof Array) ? [predicate] : predicate;
+
+  return reduceC(iterable, (acc, cur, idx) => {
+    let temp = acc;
+
+    for (let i = 0; i < preds.length; i++) {
+      const pred = preds[i];
+      const key = pred(cur, idx);
+
+      if (i === preds.length - 1) {
+        if (!(key in temp)) temp[key] = [];
+        temp[key].push(cur);
+        continue;
+      }
+
+      if (!(key in temp)) temp[key] = {};
+      temp = temp[key];
+    }
 
     return acc;
-  }, {}));
+  }, {});
+});
 
 export default groupByC;
