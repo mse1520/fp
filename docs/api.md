@@ -374,15 +374,54 @@ console.log(result); // { arg1: 1, arg2: 2 }
 ```javascript
 const data = [
   { name: 'a', value: 1 }, 
+  { name: 'a', value: 1 }, 
+  { name: 'a', value: 2 }, 
+  { name: 'a', value: 2 }, 
+  { name: 'a', value: 3 }, 
   { name: 'b', value: 2 }, 
   { name: 'c', value: 2 }
 ];
-const result = _.groupBy(data, ({_, v}) => v);
+const result1 = _.groupBy(data, name => v.name);
+const result2 = _.groupBy(data, [name => v.name, name => v.value]);
+
+console.log(result1);
 // { 
-//   1: [{ name: 'a', value: 1 }], 
-//   2: [{ name: 'b', value: 2 }, { name: 'c', value: 2 }] 
+//   a: [
+//     { name: 'a', value: 1 }, 
+//     { name: 'a', value: 1 },
+//     { name: 'a', value: 2 }, 
+//     { name: 'a', value: 2 },
+//     { name: 'a', value: 3 }
+//   ], 
+//   b: [
+//     { name: 'b', value: 2 }
+//   ]
+//   c: [
+//     { name: 'c', value: 2 }
+//   ]
 // }
-console.log(result); 
+console.log(result2); 
+// { 
+//   a: {
+//     1: [
+//       { name: 'a', value: 1 }, 
+//       { name: 'a', value: 1 }
+//     ],
+//     2: [
+//       { name: 'a', value: 2 }, 
+//       { name: 'a', value: 2 }
+//     ],
+//     3: [
+//       { name: 'a', value: 3 }
+//     ]
+//   }, 
+//   b: {
+//     2: { name: 'b', value: 2 }
+//   } 
+//   c: {
+//     2: { name: 'c', value: 2 }
+//   }
+// }
 ```
 
 ## Lazy
