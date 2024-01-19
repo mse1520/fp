@@ -56,7 +56,7 @@ npm update [-S|--save]
 npm publish [--tag beta]
   > 내 프로젝트를 npm repository에 업로드 합니다
   > 업로드할 때는 version의 변경이 있어야 합니다
-  > --tag 옵션은 베타버전등을 npm repository에 업로드 가능합니다
+  > --tag 옵션은 베타버전 등을 npm repository에 업로드 가능합니다
 
 10. 패키지 명령어 정리
 해당 패키지를 만들기위한 명령어들을 정리한 내용입니다
