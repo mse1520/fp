@@ -4,10 +4,11 @@ import {
   range, rangeL, reduce, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC, takeC, takeL, takeWhile, takeWhileL, tap, toIterator, values, valuesL
 } from '../src';
 
-const data = [Promise.resolve(0), 1, 2, 3, 4, 5, 6, 7, 8, 9];
+const data = [0, Promise.resolve(-1), Promise.resolve(2), Promise.resolve(-1), 4, 5, 6, 7, 8, 9];
 
-const result = takeWhileL(data, (v: any) => v < 6);
-console.log(...result);
+const result = takeWhileL(data, (v: any) => v < 1);
+console.log(takeAllC(result));
+// console.log(...result);
 
 // go(
 //   data,
