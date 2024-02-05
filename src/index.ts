@@ -40,6 +40,7 @@ export { default as reduceC } from '@concurrency/reduceC';
 export { default as rejectC } from '@concurrency/rejectC';
 export { default as takeAllC } from '@concurrency/takeAllC';
 export { default as takeC } from '@concurrency/takeC';
+export { default as takeWhileC } from '@concurrency/takeWhileC';
 export { default as deepFlatL } from '@lazy/deepFlatL';
 export { default as entriesL } from '@lazy/entriesL';
 export { default as filterL } from '@lazy/filterL';

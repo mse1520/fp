@@ -1,9 +1,22 @@
+import curryRight from '@basic/curryRight';
 import catchNoop from '@internal/catchNoop';
 import nop from '@internal/nop';
 import passParam from '@internal/passParam';
 
-const takeWhileL = function* (iterable: any, predicate: any) {
-  let prev = Promise.resolve();
+interface TakeWhileL {
+  /**
+   * Creates a Generator with n elements taken from the beginning. Elements are taken until predicate returns falsey.
+   * This function has currying applied. For more information about currying, visit 'https://github.com/mse1520/underbarjs#readme'.
+   * @param iterable conforms to the iterable protocol.
+   * @param predicate the function invoked per iteration.
+   * @returns Generator
+   */
+  <T>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => any): Generator<T, void>;
+  <T>(predicate: (value: Awaited<T>, index: number) => any): (iterable: Iterable<T>) => Generator<T, void>;
+}
+
+const takeWhileL: TakeWhileL = curryRight(function* <T>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => any) {
+  let prev: Promise<any> = Promise.resolve();
   let index = -1;
 
   for (const value of iterable) {
@@ -21,25 +34,6 @@ const takeWhileL = function* (iterable: any, predicate: any) {
 
     yield value;
   }
-};
-
-// const resolved = Promise.resolve();
-// const takeWhileL = function* takeWhileL(iter: any, f: any) {
-//   let prev = resolved,
-//     ok = true;
-//   for (const a of iter) {
-//     const _ok: any = ok && passParam(a, f);
-//     if (_ok instanceof Promise) {
-//       _ok.catch(noop);
-//       yield (prev = prev
-//         .then((_) => _ok)
-//         .then((_ok) => ((ok = _ok) ? a : Promise.reject(nop))));
-//       prev = prev.catch(noop);
-//     } else if ((ok = _ok)) {
-//       yield a;
-//     }
-//     if (!ok) break;
-//   }
-// };
+});
 
 export default takeWhileL;

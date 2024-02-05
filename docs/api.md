@@ -10,6 +10,7 @@
   - [curryRight](#curryright)
   - [take](#take)
   - [takeAll](#takeall)
+  - [takeWhile](#takewhile)
   - [head](#head)
   - [map](#map)
   - [forEach](#foreach)
@@ -32,6 +33,7 @@
   - [groupBy](#groupBy)
 - [Lazy](#lazy)
   - [takeL](#takel)
+  - [takeWhileL](#takewhilel)
   - [mapL](#mapl)
   - [forEachL](#foreachl)
   - [filterL](#filterl)
@@ -154,6 +156,15 @@ const data = [1, 2, 3, 4, 5];
 const result = _.takeAll(data);
 
 console.log(result); // [1, 2, 3, 4, 5]
+```
+
+### takeWhile
+첫 번째 인자로 iterable한 값을 받으며, 두번째 인자로 받은 함수를 반복마다 실행하여 falsy한 값이 나올때까지의 값을 배열로 반환합니다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.takeWhile(data, v => v < 4);
+
+console.log(result); // [1, 2, 3]
 ```
 
 ### head
@@ -432,6 +443,15 @@ take 함수의 Lazy 버전입니다.
 ```javascript
 const data = [1, 2, 3, 4, 5];
 const result = _.takeL(data, 3);
+
+console.log(...result); // 1 2 3
+```
+
+### takeWhileL
+takeWhile 함수의 Lazy 버전입니다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.takeWhileL(data, v => v < 4);
 
 console.log(...result); // 1 2 3
 ```

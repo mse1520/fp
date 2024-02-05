@@ -27,8 +27,7 @@ const takeWhile: TakeWhile = curryRight(<T>(iterable: Iterable<T>, predicate: (v
 
       if (cond instanceof Promise)
         return Promise.all([cond, next.value])
-          .then(([cond, value]) => !cond ? result.push(value) : undefined)
-          .then(recur)
+          .then(([cond, value]) => cond ? (result.push(value), recur()) : result)
           .catch(noopHandler(recur));
 
       if (!cond) return result;
