@@ -48,6 +48,7 @@
 - [Concurrency](#concurrency)
   - [takeC](#takec)
   - [takeAllC](#takeallc)
+  - [takeWhileC](#takewhilec)
   - [mapC](#mapc)
   - [forEachC](#foreachc)
   - [filterC](#filterc)
@@ -599,14 +600,31 @@ excute();
 takeAll 함수의 Concurrency 버전입니다.
 ```javascript
 async function excute() {
-  await testC('takeAll', _.takeAll(Infinity));
-  await testC('takeAllC', _.takeAllC(Infinity));
+  await testC('takeAll', _.takeAll);
+  await testC('takeAllC', _.takeAllC);
 
   // ----- excute result -----
   // takeAll [0, 1, 2, 3, 4]
   // takeAll: 2500 ms
   // takeAllC [0, 1, 2, 3, 4]
   // takeAllC: 500 ms
+}
+
+excute();
+```
+
+### takeWhileC
+takeWhile 함수의 Concurrency 버전입니다.
+```javascript
+async function excute() {
+  await testC('takeWhile', _.takeWhile(v => v < 4));
+  await testC('takeWhileC', _.takeWhileC(v => v < 4));
+
+  // ----- excute result -----
+  // takeWhile [0, 1, 2, 3, 4]
+  // takeWhile: 2500 ms
+  // takeWhileC [0, 1, 2, 3, 4]
+  // takeWhileC: 500 ms
 }
 
 excute();
