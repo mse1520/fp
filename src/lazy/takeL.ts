@@ -1,4 +1,5 @@
 import curryRight from '@basic/curryRight';
+import toIterator from '@basic/toIterator';
 
 interface TakeL {
   /**
@@ -15,8 +16,11 @@ interface TakeL {
 const takeL: TakeL = curryRight(function* (iterable: Iterable<any>, length: number) {
   if (length < 1) return console.warn('In takeL function, length parameter is not allowed to be less than 1!!');
 
-  for (const value of iterable) {
-    yield value;
+  const iter = toIterator(iterable);
+  let next;
+
+  while (!(next = iter.next()).done) {
+    yield next.value;
     if (!--length) return;
   }
 });

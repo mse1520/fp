@@ -6,19 +6,15 @@ import {
   valuesL
 } from '../src';
 
-const data = [0, 1, Promise.resolve(2), Promise.resolve(3), 4, 5, 6, 7, 8, 9];
-
-// console.time('test')
-// go(
-//   rangeL(10),
-//   mapL(delay(500)),
-//   (v: any) => chunkL(v, 3),
-//   takeAllC,
-//   console.log,
-//   () => console.timeEnd('test')
-// )
-const test = chunkL(data, 3);
-console.log(...test);
+console.time('test')
+go(
+  rangeL(10),
+  mapL(delay(500)),
+  chunkL(3),
+  takeAllC,
+  console.log,
+  () => console.timeEnd('test')
+)
 
 // const testC = (key: string, func: Function, data?: any, time = 500) => {
 //   console.time(key);
