@@ -11,6 +11,7 @@
   - [take](#take)
   - [takeAll](#takeall)
   - [takeWhile](#takewhile)
+  - [chunk](#chunk)
   - [head](#head)
   - [map](#map)
   - [forEach](#foreach)
@@ -34,6 +35,7 @@
 - [Lazy](#lazy)
   - [takeL](#takel)
   - [takeWhileL](#takewhilel)
+  - [chunkL](#chunkl)
   - [mapL](#mapl)
   - [forEachL](#foreachl)
   - [filterL](#filterl)
@@ -49,6 +51,7 @@
   - [takeC](#takec)
   - [takeAllC](#takeallc)
   - [takeWhileC](#takewhilec)
+  - [chunkC](#chunkc)
   - [mapC](#mapc)
   - [forEachC](#foreachc)
   - [filterC](#filterc)
@@ -166,6 +169,15 @@ const data = [1, 2, 3, 4, 5];
 const result = _.takeWhile(data, v => v < 4);
 
 console.log(result); // [1, 2, 3]
+```
+
+### chunk
+첫번째 인자로 iterable한 값을 받으며, 두번째 인잘 받은 길이로 분할된 새로운 배열을 반환합니다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.chunk(data, 2);
+
+console.log(result); // [[1, 2], [3, 4], [5]]
 ```
 
 ### head
@@ -457,6 +469,15 @@ const result = _.takeWhileL(data, v => v < 4);
 console.log(...result); // 1 2 3
 ```
 
+### chunkL
+chunk 함수의 Lazy 버전입니다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.chunkL(data, 2);
+
+console.log(...result); // [1, 2] [2, 4] [5]
+```
+
 ### mapL
 map 함수의 Lazy 버전입니다.
 ```javascript
@@ -608,6 +629,23 @@ async function excute() {
   // takeAll: 2500 ms
   // takeAllC [0, 1, 2, 3, 4]
   // takeAllC: 500 ms
+}
+
+excute();
+```
+
+### chunkC
+chunk 함수의 Concurrency 버전입니다.
+```javascript
+async function excute() {
+  await testC('chunk', _.chunk(2));
+  await testC('chunkC', _.chunkC(2));
+
+  // ----- excute result -----
+  // chunk [[0, 1] , [2, 3], [4]]
+  // chunk: 1500 ms
+  // chunkC [[0, 1], [2, 3], [4]]
+  // chunkC: 500 ms
 }
 
 excute();

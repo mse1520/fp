@@ -9,14 +9,14 @@ import curryRight from '@basic/curryRight';
 
 interface ChunkL {
   /**
-   * Creates a Generator with n elements taken from the beginning. Elements are taken until predicate returns falsey.
+   * Creates a Generator of elements split into groups the length of size. If array can't be split evenly, the final chunk will be the remaining elements.
    * This function has currying applied. For more information about currying, visit 'https://github.com/mse1520/underbarjs#readme'.
    * @param iterable conforms to the iterable protocol.
-   * @param predicate the function invoked per iteration.
+   * @param length the length of each chunk.
    * @returns Generator
    */
   <T>(iterable: Iterable<T>, length: number): Generator<Awaited<T>[] | Promise<Awaited<T>[]>, void>;
-  <T>(length: number): (iterable: Iterable<T>) => Generator<Awaited<T>[] | Promise<Awaited<T>[]>, void>;
+  (length: number): <T>(iterable: Iterable<T>) => Generator<Awaited<T>[] | Promise<Awaited<T>[]>, void>;
 }
 
 const chunkL: ChunkL = curryRight(<T>(iterable: Iterable<T>, length: number) => {

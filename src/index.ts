@@ -1,3 +1,4 @@
+export { default as chunk } from '@basic/chunk';
 export { default as curry } from '@basic/curry';
 export { default as curryRight } from '@basic/curryRight';
 export { default as deepFlat } from '@basic/deepFlat';
@@ -30,6 +31,7 @@ export { default as takeWhile } from '@basic/takeWhile';
 export { default as tap } from '@basic/tap';
 export { default as toIterator } from '@basic/toIterator';
 export { default as values } from '@basic/values';
+export { default as chunkC } from '@concurrency/chunkC';
 export { default as filterC } from '@concurrency/filterC';
 export { default as forEachC } from '@concurrency/forEachC';
 export { default as fromEntriesC } from '@concurrency/fromEntriesC';
