@@ -1,6 +1,7 @@
 import nop from '@internal/nop';
 import curryRight from '@basic/curryRight';
 import catchNoop from '@internal/catchNoop';
+import toIterator from '@basic/toIterator';
 
 interface FilterL {
   /**
@@ -16,7 +17,7 @@ interface FilterL {
 
 const filterL: FilterL = curryRight(function* (iterable: Iterable<any>, predicate: (value: any, index: number) => any) {
   let index = 0;
-  for (const value of iterable) {
+  for (const value of toIterator(iterable)) {
     if (value instanceof Promise)
       yield catchNoop(value.then(value => !predicate(value, index) ? Promise.reject(nop) : value));
     else if (predicate(value, index))

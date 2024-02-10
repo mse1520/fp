@@ -1,11 +1,8 @@
 import {
-  chunk,
-  chunkC,
-  chunkL,
-  curry, curryRight, deepFlat, deepFlatL, delay, entries, entriesL, filter, filterC, filterL, flat, flatL, flatMap, flatMapL, forEach, forEachC, forEachL,
-  fromEntries, fromEntriesC, go, groupBy, groupByC, head, identity, isArray, isIterable, isString, join, joinC, keys, keysL, last, map, mapC, mapL, noop, pipe,
-  range, rangeL, reduce, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC, takeC, takeL, takeWhile, takeWhileC, takeWhileL, tap, toIterator, values,
-  valuesL
+  chunk, chunkC, chunkL, curry, curryRight, deepFlat, deepFlatL, delay, entries, entriesL, filter, filterC, filterL, flat, flatL, flatMap, flatMapL, forEach,
+  forEachC, forEachL, fromEntries, fromEntriesC, go, groupBy, groupByC, head, identity, isArray, isIterable, isString, join, joinC, keys, keysL, last, map,
+  mapC, mapL, noop, pipe, range, rangeL, reduce, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC, takeC, takeL, takeWhile, takeWhileC, takeWhileL,
+  tap, toIterator, values, valuesL
 } from '../src';
 
 const testC = (key: string, func: Function, data?: any, time = 500) => {

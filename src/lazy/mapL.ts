@@ -1,5 +1,6 @@
 import passParam from '@internal/passParam';
 import curryRight from '@basic/curryRight';
+import toIterator from '@basic/toIterator';
 
 interface MapL {
   /**
@@ -15,7 +16,7 @@ interface MapL {
 
 const mapL: MapL = curryRight(function* (iterable: Iterable<any>, predicate: (value: any, index: number) => any) {
   let index = -1;
-  for (const value of iterable)
+  for (const value of toIterator(iterable))
     yield passParam(value, (value: any) => (index++, predicate(value, index)));
 });
 

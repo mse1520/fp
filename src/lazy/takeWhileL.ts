@@ -1,4 +1,5 @@
 import curryRight from '@basic/curryRight';
+import toIterator from '@basic/toIterator';
 import catchNoop from '@internal/catchNoop';
 import nop from '@internal/nop';
 import passParam from '@internal/passParam';
@@ -16,10 +17,13 @@ interface TakeWhileL {
 }
 
 const takeWhileL: TakeWhileL = curryRight(function* <T>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => any) {
+  const iter = toIterator(iterable);
   let prev: Promise<any> = Promise.resolve();
   let index = -1;
+  let next: IteratorResult<any, any>;
 
-  for (const value of iterable) {
+  while (!(next = iter.next()).done) {
+    const value = next.value;
     const cond = passParam(value, (value: any) => (index++, predicate(value, index)));
 
     if (cond instanceof Promise) {
