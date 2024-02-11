@@ -3,17 +3,17 @@ import toIterator from './toIterator';
 import curryRight from './curryRight';
 
 interface Take {
-  /**
-   * Creates a slice of array with n elements taken from the beginning.
-   * This function has currying applied. For more information about currying, visit 'https://github.com/mse1520/underbarjs#readme'.
-   * @param iterable conforms to the iterable protocol.
-   * @param length The number of elements to take.
-   * @returns Returns the slice of array.
-   */
   (length: number): (iterable: Iterable<any>) => any;
   (iterable: Iterable<any>, length: number): any;
 }
 
+/**
+ * Creates a slice of array with n elements taken from the beginning.
+ * This function has currying applied. For more information about currying, visit 'https://github.com/mse1520/underbarjs#readme'.
+ * @param iterable conforms to the iterable protocol.
+ * @param length The number of elements to take.
+ * @returns Returns the slice of array.
+ */
 const take: Take = curryRight((iterable: Iterable<any>, length: number) => {
   const result: any[] = [];
   const iter = toIterator(iterable);
