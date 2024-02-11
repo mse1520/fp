@@ -1,8 +1,8 @@
-import takeWhileL from '@lazy/takeWhileL';
 import takeAllC from './takeAllC';
 import curryRight from '@basic/curryRight';
+import takeUntilL from '@lazy/takeUntilL';
 
-interface TakeWhileC {
+interface TakeUntilC {
   <T>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => any): any;
   <T>(predicate: (value: Awaited<T>, index: number) => any): (iterable: Iterable<T>) => any;
 }
@@ -15,7 +15,7 @@ interface TakeWhileC {
  * @param predicate the function invoked per iteration.
  * @returns Returns the slice of array.
  */
-const takeWhileC: TakeWhileC = curryRight(<T>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => any) =>
-  takeAllC(takeWhileL(iterable, predicate)));
+const takeUntilC: TakeUntilC = curryRight(<T>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => any) =>
+  takeAllC(takeUntilL(iterable, predicate)));
 
-export default takeWhileC;
+export default takeUntilC;

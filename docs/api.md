@@ -11,6 +11,7 @@
   - [take](#take)
   - [takeAll](#takeall)
   - [takeWhile](#takewhile)
+  - [takeUntil](#takeuntil)
   - [chunk](#chunk)
   - [head](#head)
   - [map](#map)
@@ -35,6 +36,7 @@
 - [Lazy](#lazy)
   - [takeL](#takel)
   - [takeWhileL](#takewhilel)
+  - [takeUntilL](#takeuntill)
   - [chunkL](#chunkl)
   - [mapL](#mapl)
   - [forEachL](#foreachl)
@@ -51,6 +53,7 @@
   - [takeC](#takec)
   - [takeAllC](#takeallc)
   - [takeWhileC](#takewhilec)
+  - [takeUntilC](#takeuntilc)
   - [chunkC](#chunkc)
   - [mapC](#mapc)
   - [forEachC](#foreachc)
@@ -167,6 +170,15 @@ console.log(result); // [1, 2, 3, 4, 5]
 ```javascript
 const data = [1, 2, 3, 4, 5];
 const result = _.takeWhile(data, v => v < 4);
+
+console.log(result); // [1, 2, 3]
+```
+
+### takeUntil
+첫 번째 인자로 iterable한 값을 받으며, 두번째 인자로 받은 함수를 반복마다 실행하여 truthy한 값이 나올때까지의 값을 배열로 반환합니다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.takeUntil(data, v => v > 3);
 
 console.log(result); // [1, 2, 3]
 ```
@@ -469,6 +481,15 @@ const result = _.takeWhileL(data, v => v < 4);
 console.log(...result); // 1 2 3
 ```
 
+### takeUntilL
+takeUntil 함수의 Lazy 버전입니다.
+```javascript
+const data = [1, 2, 3, 4, 5];
+const result = _.takeUntilL(data, v => v > 3);
+
+console.log(...result); // 1 2 3
+```
+
 ### chunkL
 chunk 함수의 Lazy 버전입니다.
 ```javascript
@@ -663,6 +684,23 @@ async function excute() {
   // takeWhile: 2500 ms
   // takeWhileC [0, 1, 2, 3, 4]
   // takeWhileC: 500 ms
+}
+
+excute();
+```
+
+### takeUntilC
+takeUntil 함수의 Concurrency 버전입니다.
+```javascript
+async function excute() {
+  await testC('takeUntil', _.takeUntil(v => v > 3));
+  await testC('takeUntilC', _.takeUntilC(v => v > 3));
+
+  // ----- excute result -----
+  // takeUntil [0, 1, 2, 3, 4]
+  // takeUntil: 2500 ms
+  // takeUntilC [0, 1, 2, 3, 4]
+  // takeUntilC: 500 ms
 }
 
 excute();

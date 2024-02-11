@@ -5,17 +5,17 @@ import nop from '@internal/nop';
 import passParam from '@internal/passParam';
 
 interface TakeWhileL {
-  /**
-   * Creates a Generator with n elements taken from the beginning. Elements are taken until predicate returns falsey.
-   * This function has currying applied. For more information about currying, visit 'https://github.com/mse1520/underbarjs#readme'.
-   * @param iterable conforms to the iterable protocol.
-   * @param predicate the function invoked per iteration.
-   * @returns Generator
-   */
   <T>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => any): Generator<T, void>;
   <T>(predicate: (value: Awaited<T>, index: number) => any): (iterable: Iterable<T>) => Generator<T, void>;
 }
 
+/**
+ * Creates a Generator with n elements taken from the beginning. Elements are taken until predicate returns falsey.
+ * This function has currying applied. For more information about currying, visit 'https://github.com/mse1520/underbarjs#readme'.
+ * @param iterable conforms to the iterable protocol.
+ * @param predicate the function invoked per iteration.
+ * @returns Generator
+ */
 const takeWhileL: TakeWhileL = curryRight(function* <T>(iterable: Iterable<T>, predicate: (value: Awaited<T>, index: number) => any) {
   const iter = toIterator(iterable);
   let prev: Promise<any> = Promise.resolve();

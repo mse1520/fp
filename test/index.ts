@@ -1,8 +1,8 @@
 import {
   chunk, chunkC, chunkL, curry, curryRight, deepFlat, deepFlatL, delay, entries, entriesL, filter, filterC, filterL, flat, flatL, flatMap, flatMapL, forEach,
   forEachC, forEachL, fromEntries, fromEntriesC, go, groupBy, groupByC, head, identity, isArray, isIterable, isString, join, joinC, keys, keysL, last, map,
-  mapC, mapL, noop, pipe, range, rangeL, reduce, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC, takeC, takeL, takeWhile, takeWhileC, takeWhileL,
-  tap, toIterator, values, valuesL
+  mapC, mapL, noop, pipe, range, rangeL, reduce, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC, takeC, takeL, takeUntil, takeUntilC, takeUntilL,
+  takeWhile, takeWhileC, takeWhileL, tap, toIterator, values, valuesL
 } from '../src';
 
 const testC = (key: string, func: Function, data?: any, time = 500) => {
@@ -85,7 +85,7 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
 
   // delay
   await (async () => {
-    const value = await delay(Promise.resolve('data!!'), 500);
+    const value = await delay('data!!', 500);
 
     console.log('delay', value);
   })();
@@ -138,6 +138,14 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
     const result: number[] = takeWhile(data, v => v < 4);
 
     console.log('takeWhile', result);
+  })();
+
+  // takeUntil
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result: number[] = takeUntil(data, v => v > 3);
+
+    console.log('takeUntil', result);
   })();
 
   // chunk
@@ -365,6 +373,14 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
     console.log('takeWhileL', ...result);
   })();
 
+  // takeUntilL
+  (() => {
+    const data = [1, 2, 3, 4, 5];
+    const result = takeUntilL(data, v => v > 3);
+
+    console.log('takeUntilL', ...result);
+  })();
+
   // chunkL
   (() => {
     const data = [1, 2, 3, 4, 5];
@@ -480,8 +496,6 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
 
   // takeAllC
   await (async () => {
-    const data = [1, 2, 3, 4, 5];
-
     console.log('------- takeAllC --------');
     await testC('takeAll', takeAll);
     await testC('takeAllC', takeAllC);
@@ -490,12 +504,18 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
 
   // takeWhileC
   await (async () => {
-    const data = [1, 2, 3, 4, 5];
-
     console.log('------- takeWhileC --------');
     await testC('takeWhile', takeWhile((v: number) => v < 4));
     await testC('takeWhileC', takeWhileC((v: number) => v < 4));
     console.log('------- takeWhileC --------');
+  })();
+
+  // takeUntilC
+  await (async () => {
+    console.log('------- takeUntilC --------');
+    await testC('takeUntil', takeUntil((v: number) => v > 3));
+    await testC('takeUntilC', takeUntilC((v: number) => v > 3));
+    console.log('------- takeUntilC --------');
   })();
 
   // chunkC
