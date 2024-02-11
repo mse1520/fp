@@ -32,7 +32,8 @@
   - [values](#values)
   - [entries](#entries)
   - [fronEntries](#fronEntries)
-  - [groupBy](#groupBy)
+  - [groupBy](#groupby)
+  - [sortBy](#sortby)
 - [Lazy](#lazy)
   - [takeL](#takel)
   - [takeWhileL](#takewhilel)
@@ -61,6 +62,8 @@
   - [rejectC](#rejectc)
   - [reduceC](#reducec)
   - [fronEntriesC](#fronEntriesc)
+  - [groupByC](#groupbyc)
+  - [sortByC](#sortbyc)
 
 ## Basic
 
@@ -460,6 +463,20 @@ console.log(result2);
 // }
 ```
 
+### sortBy
+반복자의 각 요소에 비교 함수를 실행하여 나온 결과가 0보다 작으면 a를 낮은 인덱스로, 0이면 그대로, 0보다 크면 b를 낮은 인덱스로 정렬합니다.
+```javascript
+const data = [2, 5, 3, 1, 4];
+
+const result1 = _.sortBy(data, (a, b) => a - b);
+const result2 = _.sortBy(data, (a, b) => b - a);
+const result3 = _.sortBy(data, (a, b) => 0);
+
+console.log(result1); // [1, 2, 3, 4, 5]
+console.log(result2); // [5, 4, 3, 2, 1]
+console.log(result3); // [2, 5, 3, 1, 4]
+```
+
 ## Lazy
 모든 Lazy 함수는 함수명 뒤에 L자가 붙어있으며, Generator 타입을 리턴합니다. 내장된 take 함수를 통해 배열로 받을 수 있습니다.
 
@@ -792,7 +809,7 @@ excute();
 ```
 
 ### fromEntriesC
-fromEntriesC 함수의 Concurrency 버전입니다.
+fromEntries 함수의 Concurrency 버전입니다.
 ```javascript
 async function excute() {
   function test(key: string, func: Function) {
@@ -818,6 +835,34 @@ async function excute() {
 }
 
 excute();
+```
+
+### sortByC
+sortBy 함수의 Concurrency 버전입니다.
+```javascript
+const data = [2, 5, 3, 1, 4];
+
+async function excute() {
+  function test(key: string, func: Function) {
+    console.time(key);
+    return go(
+      data,
+      mapL(delay(500)),
+      func,
+      (v: any) => console.log(key, v),
+      () => console.timeEnd(key)
+    );
+  }
+}
+
+await test('sortBy', sortBy((a, b) => a - b));
+await test('sortByC', sortByC((a, b) => a - b));
+
+// ----- excute result -----
+// sortBy [1, 2, 3, 4, 5]
+// sortBy: 2500 ms
+// sortByC [1, 2, 3, 4, 5]
+// sortByC: 500 ms
 ```
 
 [목차](#api)

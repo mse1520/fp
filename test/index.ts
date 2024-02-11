@@ -1,8 +1,8 @@
 import {
   chunk, chunkC, chunkL, curry, curryRight, deepFlat, deepFlatL, delay, entries, entriesL, filter, filterC, filterL, flat, flatL, flatMap, flatMapL, forEach,
   forEachC, forEachL, fromEntries, fromEntriesC, go, groupBy, groupByC, head, identity, isArray, isIterable, isString, join, joinC, keys, keysL, last, map,
-  mapC, mapL, noop, pipe, range, rangeL, reduce, reduceC, reject, rejectC, rejectL, take, takeAll, takeAllC, takeC, takeL, takeUntil, takeUntilC, takeUntilL,
-  takeWhile, takeWhileC, takeWhileL, tap, toIterator, values, valuesL
+  mapC, mapL, noop, pipe, range, rangeL, reduce, reduceC, reject, rejectC, rejectL, sortBy, sortByC, take, takeAll, takeAllC, takeC, takeL, takeUntil,
+  takeUntilC, takeUntilL, takeWhile, takeWhileC, takeWhileL, tap, toIterator, values, valuesL
 } from '../src';
 
 const testC = (key: string, func: Function, data?: any, time = 500) => {
@@ -357,6 +357,20 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
     console.log('flatMap', result);
   })();
 
+  // sortBy
+  (() => {
+    const data = [2, 5, 3, 1, 4];
+    const result1: number[] = sortBy(data, (a, b) => a - b);
+    const result2: number[] = sortBy(data, (a, b) => b - a);
+    const result3: number[] = sortBy(data, () => 0);
+
+    console.log('------- sortBy --------');
+    console.log(result1);
+    console.log(result2);
+    console.log(result3);
+    console.log('------- sortBy --------');
+  })();
+
   // takeL
   (() => {
     const data = [1, 2, 3, 4, 5];
@@ -606,6 +620,16 @@ const testC = (key: string, func: Function, data?: any, time = 500) => {
     await testC('fromEntries', fromEntries, data);
     await testC('fromEntriesC', fromEntriesC, data);
     console.log('------- fromEntriesC --------');
+  })();
+
+  // sortByC
+  await (async () => {
+    const data = [2, 5, 3, 1, 4];
+
+    console.log('------- sortByC --------');
+    await testC('sortBy', sortBy((a: number, b: number) => a - b), data);
+    await testC('sortByC', sortByC((a: number, b: number) => a - b), data);
+    console.log('------- sortByC --------');
   })();
 
 })();
