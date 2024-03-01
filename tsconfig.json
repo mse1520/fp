@@ -20,10 +20,10 @@
       "@lazy/*": [ "src/lazy/*" ],
       "@concurrency/*": [ "src/concurrency/*" ],
       "@internal/*": [ "src/internal/*" ]
-    }
+    },
+    // 실제 컴파일을 하지 않는 옵션
+    "noEmit": true
   },
-  // 임시용
-  "exclude": [ "old" ],
   // ts-node 옵션
   "ts-node": {
     "compilerOptions": {

@@ -1,6 +1,6 @@
 {
   "name": "underbarjs",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "author": "kyh",
   "license": "MIT",
   "description": "",
@@ -10,9 +10,10 @@
     "build": "npm run build-cjs & npm run build-mjs & webpack",
     "ts-node": "ts-node -r tsconfig-paths/register",
     "gen-index": "npm run ts-node ./scripts/indexGenerator.ts",
+    "gen-mjs": "npm run ts-node ./scripts/makeTypeModule.ts",
     "watch:gen-index": "nodemon -i src/index.ts -w src/ -e ts -x npm run gen-index",
     "build-cjs": "tsc -p ./tsconfig.cjs.json & tsc-alias -p ./tsconfig.cjs.json",
-    "build-mjs": "tsc -p ./tsconfig.mjs.json & tsc-alias -p ./tsconfig.mjs.json"
+    "build-mjs": "tsc -p ./tsconfig.mjs.json & tsc-alias -p ./tsconfig.mjs.json & npm run gen-mjs"
   },
   "repository": {
     "type": "git",
