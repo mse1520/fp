@@ -2,8 +2,8 @@ import curryRight from './curryRight';
 import reduce from './reduce';
 
 interface Join {
-  (separator: string): <T>(iterable: Iterable<T>) => any;
-  <T>(iterable: Iterable<T>, separator: string): any;
+  (separator: string): <T>(iterable: Iterable<T>) => string;
+  <T>(iterable: Iterable<T>, separator: string): string;
 }
 
 /**
@@ -13,6 +13,6 @@ interface Join {
  * @param separator separator
  * @returns new string
  */
-const join: Join = curryRight(<T>(iterable: Iterable<T>, separator: string) => reduce(iterable, (acc, cur) => `${acc}${separator}${cur}`));
+const join: Join = curryRight(<T>(iterable: Iterable<T>, separator: string) => reduce(iterable, (acc, cur) => `${acc}${separator}${cur}`) || '');
 
 export default join;
